@@ -4,8 +4,10 @@ import Footer from './Footer';
 
 const Home = ()=> {
   return (
-    <Header />
-    <Footer />
+    <div>
+        <Header />
+        <Footer />
+    </div>
   );
 };
 

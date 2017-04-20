@@ -15,10 +15,11 @@ const ProductList = ({ products, destroyProduct})=> (
     {
       products.map( product => {
         return (
-          <ProductListItem  key={ product.id} product={ product } destroyProduct={()=> destroyProduct(product)} /> 
+          <ProductListItem  key={ product.id} product={ product } destroyProduct={()=> destroyProduct(product)} />
         );
       })
     }
+    <li> Snickers bar</li>
     </ul>
 );
 
