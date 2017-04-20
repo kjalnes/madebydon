@@ -3,8 +3,11 @@ import Header from './Header';
 
 const Home = ()=> {
   return (
-    <Header />
-  );
+    <div>
+        oompa loompa
+        <Header />
+    </div>
+    );
 };
 
 export default Home;

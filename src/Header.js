@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = (
+const Header = () => (
   <h1>Made by Don</h1>
 );
 
