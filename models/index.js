@@ -1,30 +1,15 @@
-const Sequelize = require('sequelize');
+const conn = require('./db');
+const Product = require('./Product');
+const User = require('./User');
+const Order = require('./Order');
+const OrderLine = require('./OrderLine');
 
-const conn = new Sequelize(process.env.DATABASE_URL);
 
-const User = conn.define('user', {
-  firstName: conn.Sequelize.STRING,
-  lastName: conn.Sequelize.STRING,
-  email: conn.Sequelize.STRING,
-  password: conn.Sequelize.STRING,
-});
-
-const Product = conn.define('product', {
-  name: conn.Sequelize.STRING,
-  price: conn.Sequelize.FLOAT,
-  description: conn.Sequelize.TEXT,
-  imgURL: conn.Sequelize.STRING
-});
-
-const Order = conn.define('order', {
-      status: conn.Sequelize.ENUM('complete', 'pending')
-});
-
-// relationships
 Order.belongsTo(User); // creates userId
 User.hasMany(Order);
 
-
+OrderLine.belongsTo(Order); // creates orderId
+OrderLine.belongsTo(Product); // creates productId
 
 const sync = ()=> conn.sync({ force: true });
 
@@ -69,23 +54,28 @@ const seed = ()=> {
       password: 'kdog'
     }];
 
-
-
   return sync()
     .then(()=> {
       const productPromises = products.map( product => Product.create(product));
       const userPromises = users.map( user => User.create(user));
-      // Order.create({ userId: 4, status: 'pending' });
-      Order.create({ userId: 2, status: 'pending' });
-      return Promise.all(promises);
-    });
+      Order.create({ userId: 3, status: 'pending' });
+      Order.create({ userId: 1, status: 'pending' });
+      return Promise.all([productPromises, userPromises])
+    })
+    .then( () => {
+      return OrderLine.create({ qty: 2, productId: 1, orderId: 1 })
+    })
+    .catch( e => console.log(e))
 };
 
 module.exports = {
   models: {
     Product,
-    User
+    User,
+    Order,
+    OrderLine
   },
   sync,
   seed
 };
+

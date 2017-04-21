@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('path');
-const db = require('./db');
-
+const sessionRoutes = require('./api/session');
+const productRoutes = require('./api/products');
+const orderRoutes = require('./api/order');
+const db = require('./models');
 
 const app = express();
 app.use(require('body-parser').json());
@@ -11,10 +13,13 @@ app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
 
-app.use('/api', require('./routes'));
+app.use('/api/products', productRoutes);
+app.use('/api/session', sessionRoutes);
+app.use('/api/order', orderRoutes);
+
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, ()=> console.log(`listening on port ${port}`));
+app.listen(port, ()=> console.log(`Port ${port} is a beautiful port`));
 
 db.seed();

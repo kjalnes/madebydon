@@ -12,6 +12,7 @@
     "body-parser": "^1.17.1",
     "bootstrap": "^3.3.7",
     "express": "^4.15.2",
+    "jwt-simple": "^0.5.1",
     "pg": "^6.1.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
