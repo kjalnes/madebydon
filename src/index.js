@@ -2,10 +2,11 @@ import React, { Component} from 'react';
 import { render } from 'react-dom';
 import App from './App';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import ProductsPage from './ProductsPage'; 
+import ProductsPage from './ProductsPage';
 import { Provider } from 'react-redux';
 import store from './store';
 import Home from './Home';
+import LoginPage from './LoginPage';
 
 
 
@@ -17,6 +18,7 @@ const routes = (
       <Route path='/' component={ App }>
         <IndexRoute component={ Home } />
         <Route path='products' component={ProductsPage} />
+        <Route path='login' component={LoginPage} />
       </Route>
     </Router>
   </Provider>

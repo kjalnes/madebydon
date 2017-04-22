@@ -30,23 +30,21 @@ app.get('/:token', (req, res, next) => {
         const token = jwt.decode(req.params.token, secret);
         models.User.findOne({
           where: { id: token.id },
-          include: [
-          {
-            model: models.Product,
-            as: 'favoriteProduct'
-          },
-          {
-            model: models.Product,
-            as: 'worstProduct'
+          include: [{
+            model: models.Order,
+            where: {
+              userId: token.id,
+              status: 'pending'
+            }
           }]
         })
-            .then( user => {
-                if(!user) {
-                    return res.sendStatus(401)
-                }
-                res.send(user)
-            })
-
+        .then( user => {
+            if(!user) {
+                return res.sendStatus(401)
+            }
+            console.log(user)
+            res.send(user)
+        })
     }
     catch(err) {
         res.sendStatus(500)
