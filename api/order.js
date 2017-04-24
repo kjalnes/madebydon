@@ -13,6 +13,12 @@ app.post('/:orderId', (req, res, next) => {
 
 });
 
+app.delete('/:orderId', (req, res, next) => {
+    const productId = req.body.productId;
+    console.log('productId', productId)
+    console.log('req.body', req.body)
+});
+
 
 app.get('/:orderId', (req, res, next) => {
     models.Order.findAll(
