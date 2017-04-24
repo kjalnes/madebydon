@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import productsReducer, { loadProducts} from './productsReducer';
-import authReducer from './authReducer';
+import authReducer from './reducers/authReducer';
 import cartReducer, { loadCart } from './reducers/cartReducer';
 
 const combined = combineReducers({
@@ -12,8 +12,6 @@ const combined = combineReducers({
 
 const store = createStore(combined, applyMiddleware(thunk));
 
-
 store.dispatch(loadProducts());
-// store.dispatch(loadCart());
 
 export default store;
