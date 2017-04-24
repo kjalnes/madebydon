@@ -42,7 +42,6 @@ app.get('/:token', (req, res, next) => {
             if(!user) {
                 return res.sendStatus(401)
             }
-            console.log(user)
             res.send(user)
         })
     }

@@ -14,6 +14,6 @@ const store = createStore(combined, applyMiddleware(thunk));
 
 
 store.dispatch(loadProducts());
-store.dispatch(loadCart());
+// store.dispatch(loadCart());
 
 export default store;

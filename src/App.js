@@ -11,8 +11,11 @@ const App = ({ children, products, user })=> (
     <Link to='/products'>Products ({ products.length})</Link>
     { ' | ' }
     { user ?
-      <Link to='login'>Your Profile</Link> :
+      <Link to='login'>My profile</Link>
+      :
       <Link to='login'>Login</Link> }
+    { ' | ' }
+    <Link to='cart'>Cart</Link>
     </div>
     { children }
   </div>

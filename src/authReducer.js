@@ -1,19 +1,10 @@
 import axios from 'axios';
+import { loadCart } from './reducers/cartReducer';
+import  store  from './store';
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from './constants/';
+import { loginSuccess, logoutSuccess } from './actions/';
 
-// CONSTANTS
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
-// ACTIONS
-const loginSuccess = (user)=> ({
-  type: LOGIN_SUCCESS,
-  user: user
-});
-
-const logoutSuccess = () => ({
-    type: LOGOUT_SUCCESS,
-    user: null
-});
 
 const login = ( credentials ) => {
     return( dispatcher ) => {
@@ -24,7 +15,10 @@ const login = ( credentials ) => {
             axios.get(`/api/session/${data.token}`)
             .then( response => response.data)
             .then( user => {
+                console.log('loginSuccess', loginSuccess)
+                // console.log('user from login fn ', user)
                 dispatcher(loginSuccess(user))
+                store.dispatch(loadCart(user.orders[0].id))
             })
         })
         .catch( err => console.log(err))

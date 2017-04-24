@@ -40,7 +40,7 @@ const seed = ()=> {
     {
       firstName: 'Mauro',
       lastName: 'Restuccia',
-      email: 'mrestuccia@mac.com',
+      email: 'mauro',
       password: '1234'
     },
     {
@@ -52,7 +52,7 @@ const seed = ()=> {
     {
       firstName: 'Kris',
       lastName: 'Alnes',
-      email: 'kris.alnes@gmail.com',
+      email: 'kris',
       password: 'kdog'
     }];
 

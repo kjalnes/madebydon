@@ -1,19 +1,11 @@
 import axios from 'axios';
+import { loadCartSuccess, removeFromCartSuccess } from '../actions/';
 
 // Constants
-import { LOAD_CART, REMOVE_FROM_CART } from '../constants/actions';
+import { LOAD_CART, REMOVE_FROM_CART } from '../constants/';
 
 
-// Actions Creators
-const loadCartSuccess = (cart) => ({
-    type: LOAD_CART,
-    cart: cart
-});
 
-const removeFromCartSuccess = (order) => ({
-    type: REMOVE_FROM_CART,
-    order: order
-})
 
 
 // Initial State
@@ -22,7 +14,8 @@ const initialState = {
 };
 
 // Methods
-const loadCart = (orderId = 1) => {
+const loadCart = (orderId) => {
+    console.log('orderId', orderId)
     return (dispatcher) => {
         axios.get(`/api/order/${orderId}`)
             .then(response => response.data)
