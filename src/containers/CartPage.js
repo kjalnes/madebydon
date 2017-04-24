@@ -6,7 +6,6 @@ import CartItem from './cartItem';
 
 
 const CartPage = ({ cart }) => {
-
   return (
     (cart.cartItems.length > 0) ?
       <form>

@@ -31,10 +31,7 @@ const loadCart = (orderId = 1) => {
 const cartReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_CART:
-            console.log('Cart loaded', action.cart[0]);
-            state =  Object.assign({}, state, { cartItems: action.cart[0].orderlines });
-            console.log('new+state=',state);
-            return state;
+            return Object.assign({}, state, { cartItems: action.cart[0].orderlines });
         default:
             return state;
     }
