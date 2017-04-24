@@ -26,12 +26,15 @@ const loadCart = (orderId) => {
     };
 };
 
-const removeFromCart = (orderId, product) => {
-    return (dispatcher) => {
-        axios.delete(`/api/order/${orderId}`, product)
+const removeFromCart = (orderId, productId) => {
+    console.log('productId', productId);
+    return (dispatch) => {
+        axios.delete(`/api/order/${orderId}/${productId}`, { productId: productId })
             .then(response => response.data)
             .then(order => {
-                dispatcher(removeFromCartSuccess(order));
+                console.log(order)
+                // dispatch(removeFromCartSuccess(order));
+                dispatch(loadCartSuccess(order));
             })
             .catch(err => console.log('removeFromCart err:', err));
     };

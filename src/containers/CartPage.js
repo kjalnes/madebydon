@@ -21,7 +21,7 @@ const CartPage = ({ cart, removeFromCart }) => {
             </tr>
           </thead>
           <tbody>
-            {cart.cartItems.map((item) => (<CartItem key={item.id} item={item} removeFromCart={ removeFromCart } />))}
+            {cart.cartItems.map((orderLine) => (<CartItem key={orderLine.id} orderLine={orderLine} removeFromCart={ removeFromCart } />))}
           </tbody>
         </table>
       </form> :
