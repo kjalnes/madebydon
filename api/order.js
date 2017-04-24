@@ -12,3 +12,20 @@ app.post('/:orderId', (req, res, next) => {
     .then( result => console.log(result))
 
 });
+
+
+app.get('/:orderId', (req, res, next) => {
+    models.Order.findAll(
+    {
+        where: { id: req.params.orderId },
+        include: [
+            { model: models.OrderLine,
+              include: [{ model: models.Product }]
+            }
+        ]
+    })
+    .then( order => {
+      res.send(order);
+    })
+    .catch(next);
+});

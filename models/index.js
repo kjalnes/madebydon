@@ -10,6 +10,8 @@ User.hasMany(Order);
 
 OrderLine.belongsTo(Order); // creates orderId
 OrderLine.belongsTo(Product); // creates productId
+Order.hasMany(OrderLine); // allow me to include on findAll
+Product.hasMany(OrderLine);
 
 const sync = ()=> conn.sync({ force: true });
 
