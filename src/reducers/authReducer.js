@@ -1,10 +1,8 @@
 import axios from 'axios';
-import { loadCart } from './reducers/cartReducer';
-import  store  from './store';
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from './constants/';
-import { loginSuccess, logoutSuccess } from './actions/';
-
-
+import { loadCart } from './cartReducer';
+import  store  from '../store';
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../constants/';
+import { loginSuccess, logoutSuccess } from '../actions/';
 
 const login = ( credentials ) => {
     return( dispatcher ) => {

@@ -6,9 +6,8 @@ import ProductsPage from './ProductsPage';
 import { Provider } from 'react-redux';
 import store from './store';
 import Home from './Home';
-import LoginPage from './LoginPage';
+import LoginPage from './containers/LoginPage';
 import CartPage from './containers/CartPage';
-
 
 
 const root = document.getElementById('root');

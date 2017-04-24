@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { login, logout } from './authReducer';
+import { login, logout } from '../reducers/authReducer';
 import { connect } from 'react-redux';
 
 class LoginForm extends Component {
