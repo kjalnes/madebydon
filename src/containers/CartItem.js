@@ -1,12 +1,14 @@
 import React from 'react';
 
-const CartItem = (item) => {
+const CartItem = (item, removeFromCart) => {
   if (typeof item === 'undefined') return;
+
+  console.log('item', item);
 
   return (
     <tr>
       <td>
-        <a title="Remove this item">&times;</a>
+        <a title="Remove this item" onClick={ () => removeFromCart(item.id, item.item.product) }>&times;</a>
       </td>
       <td className="product-thumbnail">
         <img src="http://placehold.it/60x60"  />

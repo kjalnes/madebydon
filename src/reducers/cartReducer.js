@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Constants
-import { LOAD_CART } from '../constants/actions';
+import { LOAD_CART, REMOVE_FROM_CART } from '../constants/actions';
 
 
 // Actions Creators
@@ -9,6 +9,12 @@ const loadCartSuccess = (cart) => ({
     type: LOAD_CART,
     cart: cart
 });
+
+const removeFromCartSuccess = (order) => ({
+    type: REMOVE_FROM_CART,
+    order: order
+})
+
 
 // Initial State
 const initialState = {
@@ -27,6 +33,20 @@ const loadCart = (orderId = 1) => {
     };
 };
 
+const removeFromCart = (orderId, product) => {
+    return (dispatcher) => {
+        axios.delete(`/api/order/${orderId}`, product)
+            .then(response => response.data)
+            .then(order => {
+                dispatcher(removeFromCartSuccess(order));
+            })
+            .catch(err => console.log('removeFromCart err:', err));
+    };
+};
+
+
+
+
 // Reducer
 const cartReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -37,5 +57,5 @@ const cartReducer = (state = initialState, action) => {
     }
 };
 
-export { loadCart };
+export { loadCart, removeFromCart };
 export default cartReducer;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { loadCart } from '../reducers/cartReducer';
+import { loadCart, removeFromCart } from '../reducers/cartReducer';
 import CartItem from './cartItem';
 
 
-const CartPage = ({ cart }) => {
+const CartPage = ({ cart, removeFromCart }) => {
   return (
     (cart.cartItems.length > 0) ?
       <form>
@@ -21,7 +21,7 @@ const CartPage = ({ cart }) => {
             </tr>
           </thead>
           <tbody>
-            {cart.cartItems.map((item) => (<CartItem key={item.id} item={item} />))}
+            {cart.cartItems.map((item) => (<CartItem key={item.id} item={item} removeFromCart={ removeFromCart } />))}
           </tbody>
         </table>
       </form> :
@@ -37,7 +37,8 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
   {
-    loadCart: (cartId) => dispatch(loadCart(cartId))
+    loadCart: (orderId) => dispatch(loadCart(orderId)),
+    removeFromCart: (orderId, product) => dispatch(removeFromCart(orderId, product))
   }
 );
 
