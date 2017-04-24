@@ -9,7 +9,7 @@ const login = ( credentials ) => {
         axios.post('/api/session', credentials)
         .then( response => response.data )
         .then( data => {
-            localStorage.setItem('token', data.token)
+            sessionStorage.setItem('token', data.token)
             axios.get(`/api/session/${data.token}`)
             .then( response => response.data)
             .then( user => {
@@ -25,7 +25,8 @@ const login = ( credentials ) => {
 
 const logout = () => {
     return (dispatcher) => {
-        localStorage.clear();
+        // sessionStorage.clear()
+        // localStorage.clear();
         return dispatcher(logoutSuccess())
     }
 }

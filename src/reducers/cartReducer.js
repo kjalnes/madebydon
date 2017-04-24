@@ -29,11 +29,12 @@ const loadCart = (orderId) => {
 const removeFromCart = (orderId, productId) => {
     console.log('productId', productId);
     return (dispatch) => {
-        axios.delete(`/api/order/${orderId}`, { productId: productId })
+        axios.delete(`/api/order/${orderId}/${productId}`, { productId: productId })
             .then(response => response.data)
             .then(order => {
                 console.log(order)
-                dispatch(removeFromCartSuccess(order));
+                // dispatch(removeFromCartSuccess(order));
+                dispatch(loadCartSuccess(order));
             })
             .catch(err => console.log('removeFromCart err:', err));
     };

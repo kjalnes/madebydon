@@ -5,10 +5,16 @@ const CartItem = ({ orderLine, removeFromCart }) => {
 
   console.log('orderLine', orderLine);
 
+  function onDelete(ev, orderLineId, orderLineProductId) {
+    ev.preventDefault()
+    removeFromCart(orderLineId, orderLineProductId)
+  }
+
+
   return (
     <tr>
       <td>
-        <a title="Remove this item" onClick={ () => removeFromCart(orderLine.id, orderLine.productId) }>&times;</a>
+        <a title="Remove this item" onClick={ (ev) => onDelete(ev, orderLine.id, orderLine.productId) }>&times;</a>
       </td>
       <td className="product-thumbnail">
         <img src="http://placehold.it/60x60"  />

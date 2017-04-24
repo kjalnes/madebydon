@@ -13,10 +13,27 @@ app.post('/:orderId', (req, res, next) => {
 
 });
 
-app.delete('/:orderId', (req, res, next) => {
-    const productId = req.body.productId;
+app.delete('/:orderId/:productId', (req, res, next) => {
+    const productId = req.params.productId;
     console.log('productId', productId)
-    console.log('req.body', req.body)
+
+    models.OrderLine.destroy({where: { productId: req.params.productId, orderId: req.params.orderId }})
+    .then( result => {
+        return models.Order.findAll(
+            {
+                where: { id: req.params.orderId },
+                include: [
+                    { model: models.OrderLine,
+                      include: [{ model: models.Product }]
+                    }
+                ]
+            })
+    })
+    .then( updatedOrder => {
+        console.log('updatedOrder', updatedOrder)
+        res.send(updatedOrder)
+    })
+    .catch(next)
 });
 
 

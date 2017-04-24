@@ -65,7 +65,8 @@ const seed = ()=> {
       return Promise.all([productPromises, userPromises])
     })
     .then( () => {
-      return OrderLine.create({ qty: 2, productId: 1, orderId: 1 })
+          OrderLine.create({ qty: 3, productId: 3, orderId: 1 })
+          OrderLine.create({ qty: 2, productId: 1, orderId: 1 })
     })
     .catch( e => console.log(e))
 };
