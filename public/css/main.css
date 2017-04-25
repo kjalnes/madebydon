@@ -1,0 +1,42 @@
+body {
+    /*font-family: 'Helvetica Neue', 'RealMadrid2009', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif';*/
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+
+    font-weight: 300;
+}
+
+
+.logo-title {
+    text-align: center;
+    font-family: 'Helvetica Neue', 'RealMadrid2009', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif' !important;
+    font-weight: 300;
+}
+
+.navigation  {
+    text-align: center;
+    font-family: 'Helvetica Neue', 'RealMadrid2009', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif';
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.navigation a{
+    color: black;
+}
+
+.container {
+    margin-top: 40px;
+}
+
+.content-container {
+    margin-top: 40px;
+}
+
+
+/* CUSTOM TITLES */
+.custom-title-1 {
+    font-family: 'Helvetica Neue', 'RealMadrid2009', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif';
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 16px;
+}
