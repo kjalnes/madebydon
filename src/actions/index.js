@@ -16,9 +16,9 @@ const loadCartSuccess = (cart) => ({
     cart: cart
 });
 
-const removeFromCartSuccess = (order) => ({
+const removeFromCartSuccess = (productId) => ({
     type: REMOVE_FROM_CART,
-    order: order
+    productId: productId
 });
 
 export { loginSuccess, logoutSuccess, loadCartSuccess, removeFromCartSuccess }

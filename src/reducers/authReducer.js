@@ -41,11 +41,10 @@ const logout = () => {
 }
 
 
-const initialState = { session: !!sessionStorage.jwt };
+const initialState = {};
 
 const authReducer = (state = initialState, action) => {
-    console.log('authReducer', state);
-    console.log('token', localStorage.getItem('token'));
+
     switch (action.type) {
         case LOGIN_SUCCESS:
             return Object.assign({}, state, { user: action.user })
