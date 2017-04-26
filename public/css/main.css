@@ -1,5 +1,16 @@
+@font-face {
+    font-family: 'realmadrid2009regular';
+    src: url('realmadrid2009-webfont.eot');
+    src: url('realmadrid2009-webfont.eot?#iefix') format('embedded-opentype'),
+         url('realmadrid2009-webfont.woff2') format('woff2'),
+         url('realmadrid2009-webfont.woff') format('woff'),
+         url('realmadrid2009-webfont.ttf') format('truetype'),
+         url('realmadrid2009-webfont.svg#realmadrid2009regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    /*font-family: 'Helvetica Neue', 'RealMadrid2009', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif';*/
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
 
     font-weight: 300;
@@ -8,7 +19,7 @@ body {
 
 .logo-title {
     text-align: center;
-    font-family: 'Helvetica Neue', 'RealMadrid2009', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif' !important;
+    font-family: 'RealMadrid2009', 'Helvetica Neue', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif' !important;
     font-weight: 300;
 }
 
@@ -39,4 +50,26 @@ body {
     font-weight: 100;
     text-transform: uppercase;
     font-size: 16px;
+}
+
+
+/* CART PAGE */
+td {
+    vertical-align: middle !important;
+}
+
+a.glyphicon.glyphicon-remove {
+    color: red;
+}
+
+/* CUSTOM BUTTONS */
+.custom-button-1 {
+    background-color: #ebe9eb;
+    color: #000;
+    text-decoration: none;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
 }

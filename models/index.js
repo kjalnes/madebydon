@@ -60,15 +60,19 @@ const seed = ()=> {
     .then(()=> {
       const productPromises = products.map( product => Product.create(product));
       const userPromises = users.map( user => User.create(user));
-      Order.create({ userId: 3, status: 'pending' });
-      Order.create({ userId: 1, status: 'pending' });
       return Promise.all([productPromises, userPromises])
     })
     .then( () => {
-          OrderLine.create({ qty: 3, productId: 3, orderId: 1 })
-          OrderLine.create({ qty: 2, productId: 1, orderId: 1 })
+      const orderOne = Order.create({ userId: 3, status: 'pending' });
+      const orderTwo = Order.create({ userId: 1, status: 'pending' });
+      return Promise.all([orderOne, orderTwo])
     })
-    .catch( e => console.log(e))
+    .then( () => {
+      const orderLineOne = OrderLine.create({ qty: 3, productId: 3, orderId: 1 });
+      const orderLineTwo = OrderLine.create({ qty: 2, productId: 1, orderId: 1 });
+      return Promise.all([orderLineOne, orderLineTwo])
+    })
+    .catch( err => console.log(err))
 };
 
 module.exports = {
