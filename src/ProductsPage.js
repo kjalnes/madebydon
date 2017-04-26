@@ -1,9 +1,9 @@
 import React from 'react';
-import ProductList from './ProductList';
+import ProductListContainer from './containers/productListContainer';
 
 const ProductsPage = ()=> (
   <div className='well'>
-    <ProductList />
+    <ProductListContainer />
   </div>
 );
 
