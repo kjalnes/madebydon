@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Header from './Header';
 
 const App = ({ children, products, user })=> (
-  <div className='container'>
+  <div className=''>
     <Header user={user}/>
     <div className='content-container'>
       { children }

@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import Home from './Home';
 import LoginPage from './containers/LoginPage';
-import CartPage from './containers/CartPage';
+import CartContainer from './containers/CartContainer';
 import AddProduct from './containers/AddProduct';
 
 
@@ -20,7 +20,7 @@ const routes = (
         <IndexRoute component={ Home } />
         <Route path='products' component={ProductsPage} />
         <Route path='login' component={LoginPage} />
-        <Route path='cart' component={CartPage} />
+        <Route path='cart' component={CartContainer} />
         <Route path='product' component={AddProduct} />
       </Route>
     </Router>
