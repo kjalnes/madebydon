@@ -13,6 +13,7 @@ const loadUser = (token) => {
                 .then(response => response.data)
                 .then(user => {
                     dispatcher(loginSuccess(user));
+                    console.log('user cart id ',user.orders[0].id );
                     store.dispatch(loadCart(user.orders[0].id));
                 });
         }

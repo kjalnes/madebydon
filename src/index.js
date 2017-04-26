@@ -2,11 +2,12 @@ import React, { Component} from 'react';
 import { render } from 'react-dom';
 import App from './App';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import ProductsPage from './ProductsPage';
 import { Provider } from 'react-redux';
 import store from './store';
 import Home from './Home';
+
 import LoginPage from './containers/LoginPage';
+import ProductListContainer from './containers/productListContainer';
 import CartContainer from './containers/CartContainer';
 import AddProduct from './containers/AddProduct';
 
@@ -18,7 +19,7 @@ const routes = (
     <Router history={ hashHistory }>
       <Route path='/' component={ App }>
         <IndexRoute component={ Home } />
-        <Route path='products' component={ProductsPage} />
+        <Route path='products' component={ProductListContainer} />
         <Route path='login' component={LoginPage} />
         <Route path='cart' component={CartContainer} />
         <Route path='product' component={AddProduct} />

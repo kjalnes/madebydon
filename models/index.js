@@ -67,9 +67,9 @@ const seed = ()=> {
       const orderTwo = Order.create({ userId: 1, status: 'pending' });
       return Promise.all([orderOne, orderTwo])
     })
-    .then( () => {
-      const orderLineOne = OrderLine.create({ qty: 3, productId: 3, orderId: 1 });
-      const orderLineTwo = OrderLine.create({ qty: 2, productId: 1, orderId: 1 });
+    .then( ([orderOne, orderTwo]) => {
+      const orderLineOne = OrderLine.create({ qty: 3, productId: 3, orderId: orderOne.id });
+      const orderLineTwo = OrderLine.create({ qty: 2, productId: 1, orderId: orderOne.id });
       return Promise.all([orderLineOne, orderLineTwo])
     })
     .catch( err => console.log(err))
