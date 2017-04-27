@@ -4,7 +4,6 @@ import store from '../store';
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../constants/';
 import { loginSuccess, logoutSuccess } from '../actions/';
 
-
 // Load the user from the token
 const loadUser = (token) => {
     return (dispatcher) => {
@@ -14,12 +13,12 @@ const loadUser = (token) => {
                 .then(user => {
                     dispatcher(loginSuccess(user));
                     console.log('user cart id ',user.orders[0].id );
+                    // is this ok ?
                     store.dispatch(loadCart(user.orders[0].id));
                 });
         }
     };
 };
-
 
 const login = (credentials) => {
     return (dispatcher) => {
