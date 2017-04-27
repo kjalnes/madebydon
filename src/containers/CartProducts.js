@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loadCart, removeFromCart } from '../reducers/cartReducer';
+// import { loadCart, removeFromCart } from '../reducers/cartReducer';
 import CartItem from './cartItem';
 
 
@@ -39,17 +39,4 @@ const CartProducts = ({ cart, removeFromCart }) => {
   );
 };
 
-const mapStateToProps = (state) => (
-  {
-    cart: state.cart
-  }
-);
-
-const mapDispatchToProps = (dispatch) => (
-  {
-    loadCart: (orderId) => dispatch(loadCart(orderId)),
-    removeFromCart: (orderId, product) => dispatch(removeFromCart(orderId, product))
-  }
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartProducts);
+export default CartProducts;
