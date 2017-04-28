@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS, LOAD_CART, REMOVE_FROM_CART } from '../constants/';
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS, LOAD_CART, REMOVE_FROM_CART, ADD_TO_CART } from '../constants/';
 // authReducer
 const loginSuccess = (user)=> ({
   type: LOGIN_SUCCESS,
@@ -21,4 +21,11 @@ const removeFromCartSuccess = (productId) => ({
     productId: productId
 });
 
-export { loginSuccess, logoutSuccess, loadCartSuccess, removeFromCartSuccess }
+const addToCartSuccess = (orderId, product, qty) => ({
+    type: ADD_TO_CART,
+    orderId: orderId,
+    product: product,
+    qty: qty
+});
+
+export { loginSuccess, logoutSuccess, loadCartSuccess, removeFromCartSuccess, addToCartSuccess }

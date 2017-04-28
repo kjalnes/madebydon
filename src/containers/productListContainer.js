@@ -7,7 +7,7 @@ import { addToCart } from '../reducers/cartReducer';
 
 const mapDispatchToProps = (dispatch)=> (
   {
-		addtoCart: (orderId, productId, qty) => dispatch(addToCart(orderId, productId, qty)),
+	addtoCart: (orderId, product, qty) => dispatch(addToCart(orderId, product, qty)),
     filterProduct: (productVal)=>dispatch(filterProduct(productVal))
   }
 );
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch)=> (
 const mapStateToProps = (state)=> {
 	return (
  		{
-			  cart: state.cart,
+			cart: state.cart,
     		products: state.products
  		}
 	);

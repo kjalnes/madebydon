@@ -5,11 +5,9 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import store from './store';
 import Home from './Home';
-
-import LoginPage from './containers/LoginPage';
+import LoginContainer from './containers/LoginContainer';
 import ProductListContainer from './containers/productListContainer';
 import CartContainer from './containers/CartContainer';
-import AddProduct from './containers/AddProduct';
 
 
 const root = document.getElementById('root');
@@ -20,9 +18,8 @@ const routes = (
       <Route path='/' component={ App }>
         <IndexRoute component={ Home } />
         <Route path='products' component={ProductListContainer} />
-        <Route path='login' component={LoginPage} />
+        <Route path='login' component={LoginContainer} />
         <Route path='cart' component={CartContainer} />
-        <Route path='product' component={AddProduct} />
       </Route>
     </Router>
   </Provider>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { login, logout } from '../reducers/authReducer';
 import { connect } from 'react-redux';
 
-class LoginForm extends Component {
+class LoginContainer extends Component {
     constructor({ login, logout, activeUser }) {
         super();
         this.state = { email: '', password: '' };
@@ -99,4 +99,4 @@ const mapDispatchToProps = (dispatch) => (
    }
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

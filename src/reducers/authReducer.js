@@ -12,8 +12,8 @@ const loadUser = (token) => {
                 .then(response => response.data)
                 .then(user => {
                     dispatcher(loginSuccess(user));
-                    console.log('user cart id ',user.orders[0].id );
-                    // is this ok ?
+                    // console.log('user cart id ',user.orders[0].id );
+                    // fix this
                     store.dispatch(loadCart(user.orders[0].id));
                 });
         }
@@ -40,16 +40,14 @@ const logout = () => {
     }
 }
 
-
 const initialState = {};
 
 const authReducer = (state = initialState, action) => {
-
     switch (action.type) {
         case LOGIN_SUCCESS:
-            return Object.assign({}, state, { user: action.user })
+            return {...state, user: action.user }
         case LOGOUT_SUCCESS:
-            return Object.assign({}, state, { user: null })
+            return {...state, user: null }
     }
     return state
 }

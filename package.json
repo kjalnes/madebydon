@@ -23,7 +23,9 @@
     "sequelize": "^3.30.2",
     "webpack": "^2.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.23.0"
+  },
   "scripts": {
     "db-init": "pg-init grace_shopper",
     "postinstall": "npm run webpack",

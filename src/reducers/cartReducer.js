@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { loadCartSuccess, removeFromCartSuccess } from '../actions/';
+import { loadCartSuccess, removeFromCartSuccess, addToCartSuccess } from '../actions/';
 
 // Constants
-import { LOAD_CART, REMOVE_FROM_CART } from '../constants/';
+import { LOAD_CART, REMOVE_FROM_CART, ADD_TO_CART } from '../constants/';
 
 
 // Initial State
 const initialState = {
-    order: 0,
-    cartItems: []
+    orderId: 0,
+    cartItems: [] // array of orderline objects
 };
 
 // Methods
@@ -24,7 +24,6 @@ const loadCart = (orderId) => {
 };
 
 const removeFromCart = (orderId, productId) => {
-    console.log('remove', orderId, productId)
     return (dispatch) => {
         axios.delete(`/api/order/${orderId}/${productId}`)
             .then(() => {
@@ -35,32 +34,33 @@ const removeFromCart = (orderId, productId) => {
 };
 
 
-const addToCart = (orderId, productId, qty = 1) => {
-    console.log('addToCart', orderId);
+const addToCart = (orderId, product, qty = 1) => {
     return (dispatch) => {
-        console.log(`POST to /api/order/${orderId}/`);
-        axios.post(`/api/order/${orderId}/`, { qty: qty, productId: productId })
+        axios.post(`/api/order/${orderId}/`, { qty: qty, product })
             .then(response => response.data)
-            .then(order => {
-                dispatch(loadCartSuccess(order));
+            .then( () => {
+                dispatch(addToCartSuccess(orderId, product, qty))
+                // dispatch(loadCartSuccess(order));
             })
             .catch(err => console.log('Error: addToCart', err));
     };
 };
 
 
-
-
 // Reducer
 const cartReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_CART:
-            return Object.assign({}, state, { order: action.cart[0].id, cartItems: action.cart[0].orderlines });
+            return {...state, orderId: action.cart[0].id, cartItems: action.cart[0].orderlines }
         case REMOVE_FROM_CART:
-            return Object.assign({}, state,
-                {
-                    cartItems: state.cartItems.filter(item => item.productId !== action.productId)
-                });
+            return {...state, cartItems: state.cartItems.filter(item => item.productId !== action.productId)}
+        case ADD_TO_CART:
+            const item = {  orderId: action.orderId,
+                            qty: action.qty,
+                            product: action.product,
+                            productId: action.product.id
+                        }
+            return {...state, cartItems: state.cartItems.concat(item) }
         default:
             return state;
     }
