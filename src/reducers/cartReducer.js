@@ -7,23 +7,73 @@ import { LOAD_CART, REMOVE_FROM_CART, ADD_TO_CART } from '../constants/';
 
 // Initial State
 const initialState = {
-    orderId: 0,
     cartItems: [] // array of orderline objects
 };
 
+
 // Methods
+
+// Load the state of
+// the cart from localstorage
+const loadState = () => {
+    try {
+        const serializedState = localStorage.getItem('cart');
+        if (serializedState === null) {
+            return undefined;
+        }
+        return JSON.parse(serializedState);
+    } catch (err) {
+        return undefined;
+    }
+
+}
+
+// Save the cart state 
+// to localStorage
+const saveState = (state) => {
+    try {
+        const serializeState = JSON.stringify(state);
+        localStorage.setItem('cart', serializeState)
+    } catch (err) {
+        //do nothing
+    }
+}
+
+// Load Cart
+// from localStorage
 const loadCart = (orderId) => {
-    return (dispatcher) => {
+
+    if (orderId === 0) {
+        return (dispatch) => {
+            const cart = loadState();
+            dispatch(loadCartSuccess(cart));
+            return Promise.resolve();
+        }
+    }
+
+    return (dispatch) => {
         axios.get(`/api/order/${orderId}`)
             .then(response => response.data)
             .then(order => {
-                dispatcher(loadCartSuccess(order));
+                dispatch(loadCartSuccess(order));
             })
             .catch(err => console.log('Error loadCart:', err));
     };
 };
 
+
+// Remove items 
+// from the cart
 const removeFromCart = (orderId, productId) => {
+    // Check if Anonymous
+    if (orderId === 0) {
+        // Run local
+        return (dispatch) => {
+            dispatch(removeFromCartSuccess(productId));
+            return Promise.resolve(); 
+        };
+    }
+    // Load logged user cart
     return (dispatch) => {
         axios.delete(`/api/order/${orderId}/${productId}`)
             .then(() => {
@@ -33,25 +83,35 @@ const removeFromCart = (orderId, productId) => {
     };
 };
 
-
+// Add items to 
+// the cart
 const addToCart = (orderId, product, qty = 1) => {
+    // Check if Anonymous
+    if (orderId === 0) {
+        // Run local
+        return (dispatch) => {
+            dispatch(addToCartSuccess(orderId, product, qty));
+            return Promise.resolve();
+        };
+    }
+    // Load logged user cart
     return (dispatch) => {
         axios.post(`/api/order/${orderId}/`, { qty: qty, product })
             .then(response => response.data)
             .then( () => {
                 dispatch(addToCartSuccess(orderId, product, qty))
-                // dispatch(loadCartSuccess(order));
             })
             .catch(err => console.log('Error: addToCart', err));
     };
 };
 
 
+
 // Reducer
-const cartReducer = (state = initialState, action) => {
+const cartReducer = (state = loadState() || initialState, action) => {
     switch (action.type) {
         case LOAD_CART:
-            return {...state, orderId: action.cart[0].id, cartItems: action.cart[0].orderlines }
+            return {...state, cartItems: action.cart[0].orderlines }
         case REMOVE_FROM_CART:
             return {...state, cartItems: state.cartItems.filter(item => item.productId !== action.productId)}
         case ADD_TO_CART:
@@ -78,5 +138,5 @@ const cartReducer = (state = initialState, action) => {
     }
 };
 
-export { loadCart, removeFromCart, addToCart };
+export { loadCart, removeFromCart, addToCart, loadState, saveState };
 export default cartReducer;

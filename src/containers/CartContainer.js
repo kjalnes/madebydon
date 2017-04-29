@@ -6,7 +6,7 @@ import { loadCart, removeFromCart } from '../reducers/cartReducer';
 
 const CartContainer = ({ activeUser, cart, removeFromCart, cartTotal }) => (
     <div className='container'>
-        { activeUser ?
+        { cart ?
             <div>
                 <CartProducts cart={ cart } removeFromCart={ removeFromCart } />
                 <hr />

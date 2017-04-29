@@ -13,8 +13,11 @@ const loadUser = (token) => {
                 .then(user => {
                     dispatcher(loginSuccess(user))
                     // console.log('user cart id ',user.orders[0].id );
-                    // fix this
-                    dispatcher(loadCart(user.orders[0].id));
+                    return user.orders[0].id
+                })
+                .then((orderId)=>{
+                    console.log('orderid', orderId)
+                    dispatcher(loadCart(orderId));
                 });
         }
     };
@@ -34,8 +37,7 @@ const login = (credentials) => {
 
 const logout = () => {
     return (dispatcher) => {
-        console.assert('localStorage clear');
-        localStorage.clear();
+        localStorage.removeItem('token');
         return dispatcher(logoutSuccess())
     }
 }
