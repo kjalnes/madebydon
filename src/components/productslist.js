@@ -10,7 +10,7 @@ export default class ProductList extends React.Component{
 	}
 
 	render(){
-		console.log('add to cart', this.props.addtoCart);
+		// console.log('add to cart', this.props.addtoCart);
 		return(
 		<div>
 				<SearchProduct filterProduct={(prodVal)=>{filterProducts(prodVal);}}/>

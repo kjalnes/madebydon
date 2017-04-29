@@ -10,8 +10,17 @@ const combined = combineReducers({
   cart: cartReducer
 });
 
-const store = createStore(combined, applyMiddleware(thunk));
+/*
+ * download the redux devtools chrome extension for this to work - https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
+*/
+const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+let store;
 
+if (reduxDevtools) {
+    store = createStore(combined, reduxDevtools(applyMiddleware(thunk)));
+} else {
+    store = createStore(combined, applyMiddleware(thunk));
+}
 
 // Initial Load of data
 // Products

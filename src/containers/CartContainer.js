@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import CartProducts from './CartProducts';
-import CartTotals from './CartTotals';
+import CartProducts from '../CartProducts';
+import CartTotals from '../CartTotals';
 import { connect } from 'react-redux';
 import { loadCart, removeFromCart } from '../reducers/cartReducer';
-
 
 const CartContainer = ({ activeUser, cart, removeFromCart, cartTotal }) => (
     <div className='container'>
@@ -24,11 +23,9 @@ const CartContainer = ({ activeUser, cart, removeFromCart, cartTotal }) => (
     </div>
 );
 
-
 const calculateTotal = (cartItems) => {
-    return cartItems.reduce( (total, item) => total + item.product.price *1, 0);
+    return cartItems.reduce( (total, item) => total + item.product.price * item.qty, 0);
 }
-
 
 const mapStateToProps = (state) => (
   {
@@ -44,6 +41,5 @@ const mapDispatchToProps = (dispatch) => (
     removeFromCart: (orderId, product) => dispatch(removeFromCart(orderId, product))
   }
 );
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);

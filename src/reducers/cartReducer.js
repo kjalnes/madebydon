@@ -55,12 +55,24 @@ const cartReducer = (state = initialState, action) => {
         case REMOVE_FROM_CART:
             return {...state, cartItems: state.cartItems.filter(item => item.productId !== action.productId)}
         case ADD_TO_CART:
-            const item = {  orderId: action.orderId,
-                            qty: action.qty,
-                            product: action.product,
-                            productId: action.product.id
-                        }
-            return {...state, cartItems: state.cartItems.concat(item) }
+            let cartItems;
+            let productExistsInCart = state.cartItems.some(item => item.productId === action.product.id) // boolean
+            if(productExistsInCart) {
+                cartItems = state.cartItems.map(_item => {
+                   if(_item.productId === action.product.id) {
+                        _item.qty += action.qty
+                    }
+                    return _item
+                })
+            } else {
+                 cartItems = state.cartItems.concat([{
+                    orderId: action.orderId,
+                    qty: action.qty,
+                    product: action.product,
+                    productId: action.product.id
+                }])
+            }
+            return {...state, cartItems }
         default:
             return state;
     }
