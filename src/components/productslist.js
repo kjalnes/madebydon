@@ -5,7 +5,7 @@ import ProductListItem from './productitem';
 import SearchProduct from './searchProduct';
 
 export default class ProductList extends React.Component{
-	constructor({ cart, products, addtoCart, filterProducts}){
+	constructor({ products, addtoCart, filterProducts}){
 		super();
 	}
 
@@ -24,7 +24,7 @@ export default class ProductList extends React.Component{
 				        	<ProductListItem
                                 key={ product.id}
                                 product={ product }
-                                addtoCart={()=> this.props.addtoCart(this.props.cart.orderId, product, 1)}
+                                addtoCart={()=> this.props.addtoCart((this.props.activeUser) ? this.props.activeUser.orders[0].id : 0, product, 1)}
                             />
 				        </div>
 				 </div>)

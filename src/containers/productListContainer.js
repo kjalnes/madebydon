@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch)=> (
 const mapStateToProps = (state)=> {
 	return (
  		{
-			cart: state.cart,
+				activeUser: state.auth.user, //changed to activeUser
     		products: state.products
  		}
 	);

@@ -70,7 +70,7 @@ const removeFromCart = (orderId, productId) => {
         // Run local
         return (dispatch) => {
             dispatch(removeFromCartSuccess(productId));
-            return Promise.resolve(); 
+            return Promise.resolve();
         };
     }
     // Load logged user cart
@@ -86,6 +86,7 @@ const removeFromCart = (orderId, productId) => {
 // Add items to 
 // the cart
 const addToCart = (orderId, product, qty = 1) => {
+    console.log('addToCart', orderId)
     // Check if Anonymous
     if (orderId === 0) {
         // Run local
@@ -98,7 +99,8 @@ const addToCart = (orderId, product, qty = 1) => {
     return (dispatch) => {
         axios.post(`/api/order/${orderId}/`, { qty: qty, product })
             .then(response => response.data)
-            .then( () => {
+            .then((response) => {
+                console.log('response from the server', response);
                 dispatch(addToCartSuccess(orderId, product, qty))
             })
             .catch(err => console.log('Error: addToCart', err));
@@ -111,28 +113,28 @@ const addToCart = (orderId, product, qty = 1) => {
 const cartReducer = (state = loadState() || initialState, action) => {
     switch (action.type) {
         case LOAD_CART:
-            return {...state, cartItems: action.cart[0].orderlines }
+            return { ...state, cartItems: action.cart[0].orderlines }
         case REMOVE_FROM_CART:
-            return {...state, cartItems: state.cartItems.filter(item => item.productId !== action.productId)}
+            return { ...state, cartItems: state.cartItems.filter(item => item.productId !== action.productId) }
         case ADD_TO_CART:
             let cartItems;
             let productExistsInCart = state.cartItems.some(item => item.productId === action.product.id) // boolean
-            if(productExistsInCart) {
+            if (productExistsInCart) {
                 cartItems = state.cartItems.map(_item => {
-                   if(_item.productId === action.product.id) {
+                    if (_item.productId === action.product.id) {
                         _item.qty += action.qty
                     }
                     return _item
                 })
             } else {
-                 cartItems = state.cartItems.concat([{
+                cartItems = state.cartItems.concat([{
                     orderId: action.orderId,
                     qty: action.qty,
                     product: action.product,
                     productId: action.product.id
                 }])
             }
-            return {...state, cartItems }
+            return { ...state, cartItems }
         default:
             return state;
     }
