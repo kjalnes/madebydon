@@ -11,10 +11,10 @@ const loadUser = (token) => {
             axios.get(`/api/session/${token}`)
                 .then(response => response.data)
                 .then(user => {
-                    dispatcher(loginSuccess(user));
+                    dispatcher(loginSuccess(user))
                     // console.log('user cart id ',user.orders[0].id );
                     // fix this
-                    store.dispatch(loadCart(user.orders[0].id));
+                    dispatcher(loadCart(user.orders[0].id));
                 });
         }
     };
