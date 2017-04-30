@@ -1,8 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import productsReducer, { loadProducts } from './reducers/productsReducer';
-import authReducer, {loadUser} from './reducers/authReducer';
-import cartReducer from './reducers/cartReducer';
+import authReducer, { loadUser } from './reducers/authReducer';
+import cartReducer, { saveState } from './reducers/cartReducer';
 
 const combined = combineReducers({
   products: productsReducer,
@@ -32,6 +32,10 @@ if (token) {
   store.dispatch(loadUser(token))
 }
 
+// Cart
+store.subscribe(() => {
+  saveState(store.getState().cart);
+});
 
 
 

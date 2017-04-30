@@ -6,7 +6,7 @@ app.post('/:orderId', (req, res, next) => {
         {
             where: {
                 orderId: req.params.orderId,
-                productId: req.body.productId
+                productId: req.body.product.id
             }
         })
         .then(orderline => {
@@ -19,25 +19,13 @@ app.post('/:orderId', (req, res, next) => {
                 return models.OrderLine.create(
                     {
                         qty: req.body.qty,
-                        productId: req.body.productId,
+                        productId: req.body.product.id,
                         orderId: req.params.orderId
                     });
             }
         })
-        .then(() => {
-            return models.Order.findAll(
-                {
-                    where: { id: req.params.orderId },
-                    include: [
-                        {
-                            model: models.OrderLine,
-                            include: [{ model: models.Product }]
-                        }
-                    ]
-                });
-        })
-        .then(updatedOrder => {
-            res.send(updatedOrder);
+        .then((created) => {
+            res.send(created);
         })
         .catch(next);
 });

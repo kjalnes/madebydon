@@ -4,9 +4,11 @@ import CartTotals from '../CartTotals';
 import { connect } from 'react-redux';
 import { loadCart, removeFromCart } from '../reducers/cartReducer';
 
-const CartContainer = ({ activeUser, cart, removeFromCart, cartTotal }) => (
+const CartContainer = ({ activeUser, cart, removeFromCart, cartTotal }) => {
+    console.log('CartContainer',cart)
+    return (
     <div className='container'>
-        { activeUser ?
+        { cart ?
             <div>
                 <CartProducts cart={ cart } removeFromCart={ removeFromCart } />
                 <hr />
@@ -21,7 +23,8 @@ const CartContainer = ({ activeUser, cart, removeFromCart, cartTotal }) => (
             : 'Cart is empty'
         }
     </div>
-);
+    )
+};
 
 const calculateTotal = (cartItems) => {
     return cartItems.reduce( (total, item) => total + item.product.price * item.qty, 0);
