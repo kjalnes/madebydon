@@ -1,8 +1,12 @@
 import axios from 'axios';
-import { loadCartSuccess, removeFromCartSuccess, addToCartSuccess } from '../actions/';
+import { 
+    loadCartSuccess, 
+    removeFromCartSuccess, 
+    addToCartSuccess,
+    clearCartSuccess } from '../actions/';
 
 // Constants
-import { LOAD_CART, REMOVE_FROM_CART, ADD_TO_CART } from '../constants/';
+import { LOAD_CART, REMOVE_FROM_CART, ADD_TO_CART, CLEAR_CART } from '../constants/';
 
 
 // Initial State
@@ -55,7 +59,11 @@ const loadCart = (orderId) => {
         axios.get(`/api/order/${orderId}`)
             .then(response => response.data)
             .then(order => {
+                const cart = loadState();
                 dispatch(loadCartSuccess(order));
+                console.log('local cart is=', cart);
+
+
             })
             .catch(err => console.log('Error loadCart:', err));
     };
@@ -86,7 +94,6 @@ const removeFromCart = (orderId, productId) => {
 // Add items to 
 // the cart
 const addToCart = (orderId, product, qty = 1) => {
-    console.log('addToCart', orderId)
     // Check if Anonymous
     if (orderId === 0) {
         // Run local
@@ -100,10 +107,16 @@ const addToCart = (orderId, product, qty = 1) => {
         axios.post(`/api/order/${orderId}/`, { qty: qty, product })
             .then(response => response.data)
             .then((response) => {
-                console.log('response from the server', response);
                 dispatch(addToCartSuccess(orderId, product, qty))
             })
             .catch(err => console.log('Error: addToCart', err));
+    };
+};
+
+
+const clearCart = () => {
+    return (dispatch) => {
+        return dispatch(clearCartSuccess());
     };
 };
 
@@ -114,6 +127,8 @@ const cartReducer = (state = loadState() || initialState, action) => {
     switch (action.type) {
         case LOAD_CART:
             return { ...state, cartItems: action.cart[0].orderlines }
+        case CLEAR_CART:
+            return { ...state,  cartItems: [] } 
         case REMOVE_FROM_CART:
             return { ...state, cartItems: state.cartItems.filter(item => item.productId !== action.productId) }
         case ADD_TO_CART:
@@ -140,5 +155,5 @@ const cartReducer = (state = loadState() || initialState, action) => {
     }
 };
 
-export { loadCart, removeFromCart, addToCart, loadState, saveState };
+export { loadCart, removeFromCart, addToCart, loadState, saveState, clearCart };
 export default cartReducer;

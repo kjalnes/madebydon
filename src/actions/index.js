@@ -1,4 +1,8 @@
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS, LOAD_CART, REMOVE_FROM_CART, ADD_TO_CART } from '../constants/';
+import { 
+    LOGIN_SUCCESS, LOGOUT_SUCCESS, 
+    LOAD_CART, REMOVE_FROM_CART, ADD_TO_CART, CLEAR_CART
+} from '../constants/';
+
 // authReducer
 const loginSuccess = (user)=> ({
   type: LOGIN_SUCCESS,
@@ -28,4 +32,13 @@ const addToCartSuccess = (orderId, product, qty) => ({
     qty: qty
 });
 
-export { loginSuccess, logoutSuccess, loadCartSuccess, removeFromCartSuccess, addToCartSuccess }
+const clearCartSuccess = () => ({type: CLEAR_CART});
+
+export { 
+    loginSuccess,
+    logoutSuccess,
+    loadCartSuccess,
+    removeFromCartSuccess,
+    addToCartSuccess,
+    clearCartSuccess
+ }

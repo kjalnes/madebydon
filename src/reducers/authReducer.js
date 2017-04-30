@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { loadCart } from './cartReducer';
+import { loadCart, clearCart } from './cartReducer';
 import store from '../store';
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../constants/';
 import { loginSuccess, logoutSuccess } from '../actions/';
@@ -37,8 +37,9 @@ const login = (credentials) => {
 
 const logout = () => {
     return (dispatcher) => {
-        localStorage.removeItem('token');
-        return dispatcher(logoutSuccess())
+        localStorage.clear(); // Clear the token and the cart
+        dispatcher(logoutSuccess()); // how to chain them?
+        dispatcher(clearCart());
     }
 }
 
