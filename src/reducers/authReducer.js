@@ -18,7 +18,8 @@ const loadUser = (token) => {
                 .then((orderId)=>{
                     console.log('orderid', orderId)
                     dispatcher(loadCart(orderId));
-                });
+                })
+                .catch( err => console.log(err));
         }
     };
 };
@@ -43,6 +44,23 @@ const logout = () => {
     }
 }
 
+// api/user
+const createUser = (userInfo, cart) => {
+    return(dispatch) => {
+        axios.post('/api/user',  userInfo )
+        .then( response => response.data)
+        .then( user => {
+            // user is created in database but login breaks because of
+            // the include in our session.js file line 35 breaks...
+            // We have to create order and orderlines based on localstate cart
+            // currently being passed as argument
+          dispatch(login({ email: user.email, password: user.password }))
+      })
+        .catch(err => console.log(err))
+    }
+}
+
+
 const initialState = {};
 
 const authReducer = (state = initialState, action) => {
@@ -55,7 +73,7 @@ const authReducer = (state = initialState, action) => {
     return state
 }
 
-export { login, logout, loadUser };
+export { login, logout, loadUser, createUser };
 export default authReducer;
 
 

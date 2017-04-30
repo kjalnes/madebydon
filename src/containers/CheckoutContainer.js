@@ -1,9 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router';
+import CreateUserForm from '../CreateUserForm';
 
 const CheckoutContainer = () => {
     return (
-        <h1> Checkout </h1>
+        <div className='container'>
+            <CreateUserForm />
 
+
+            Shopped with us before?
+            <Link to='/login'> Sign in here</Link>
+        </div>
     )
 }
 
