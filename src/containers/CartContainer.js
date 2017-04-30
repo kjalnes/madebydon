@@ -4,8 +4,9 @@ import CartTotals from '../CartTotals';
 import { connect } from 'react-redux';
 import { loadCart, removeFromCart } from '../reducers/cartReducer';
 
-const CartContainer = ({ activeUser, cart, removeFromCart, cartTotal }) => {
-    console.log('CartContainer',cart)
+const CartContainer = ( props ) => {
+    // console.log('CartContainer',cart)
+    const { activeUser, cart, removeFromCart, cartTotal, router } = props;
     return (
     <div className='container'>
         { cart ?
@@ -16,10 +17,11 @@ const CartContainer = ({ activeUser, cart, removeFromCart, cartTotal }) => {
                     <div className='col-xs-8'>
                     </div>
                     <div className='col-xs-4'>
-                        <CartTotals cartTotal={ cartTotal } />
+                        <CartTotals cartTotal={ cartTotal } activeUser={ activeUser } router={ router } />
                     </div>
                 </div>
             </div>
+
             : 'Cart is empty'
         }
     </div>
@@ -46,3 +48,4 @@ const mapDispatchToProps = (dispatch) => (
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);
+
