@@ -8,7 +8,7 @@ import Home from './Home';
 import LoginContainer from './containers/LoginContainer';
 import ProductListContainer from './containers/productListContainer';
 import CartContainer from './containers/CartContainer';
-
+import CheckoutContainer from './containers/CheckoutContainer';
 
 const root = document.getElementById('root');
 
@@ -17,9 +17,11 @@ const routes = (
     <Router history={ hashHistory }>
       <Route path='/' component={ App }>
         <IndexRoute component={ Home } />
-        <Route path='products' component={ProductListContainer} />
-        <Route path='login' component={LoginContainer} />
-        <Route path='cart' component={CartContainer} />
+        <Route path='products' component={ ProductListContainer } />
+        <Route path='login' component={ LoginContainer } />
+        <Route path='cart' component={ CartContainer } >
+        </Route>
+        <Route path='checkout' component={ CheckoutContainer } />
       </Route>
     </Router>
   </Provider>

@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { 
-    loadCartSuccess, 
-    removeFromCartSuccess, 
+import {
+    loadCartSuccess,
+    removeFromCartSuccess,
     addToCartSuccess,
     clearCartSuccess } from '../actions/';
 
@@ -32,7 +32,7 @@ const loadState = () => {
 
 }
 
-// Save the cart state 
+// Save the cart state
 // to localStorage
 const saveState = (state) => {
     try {
@@ -70,7 +70,7 @@ const loadCart = (orderId) => {
 };
 
 
-// Remove items 
+// Remove items
 // from the cart
 const removeFromCart = (orderId, productId) => {
     // Check if Anonymous
@@ -91,7 +91,7 @@ const removeFromCart = (orderId, productId) => {
     };
 };
 
-// Add items to 
+// Add items to
 // the cart
 const addToCart = (orderId, product, qty = 1) => {
     // Check if Anonymous
@@ -128,7 +128,7 @@ const cartReducer = (state = loadState() || initialState, action) => {
         case LOAD_CART:
             return { ...state, cartItems: action.cart[0].orderlines }
         case CLEAR_CART:
-            return { ...state,  cartItems: [] } 
+            return { ...state,  cartItems: [] }
         case REMOVE_FROM_CART:
             return { ...state, cartItems: state.cartItems.filter(item => item.productId !== action.productId) }
         case ADD_TO_CART:
