@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
-// import { browserHistory } from 'react-router';
 
 class CartTotals extends Component  {
 
     onCheckoutClick(ev) {
       ev.preventDefault()
-        if (this.props.activeUser) {
-            console.log('we have a user')
-            this.props.router.push('/checkout')
-            // this.props.router.push('/checkout/billing')
-            // go to billing and shipping page
-            // not set up yet
-        } else {
-            console.log('we dont have a user')
-            this.props.router.push('/checkout')
-        }
+      this.props.router.push('/checkout')
     }
 
     render() {

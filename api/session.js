@@ -6,7 +6,6 @@ const secret = process.env.SECRET || 'foo';
 module.exports = app;
 
 
-// 2- When a user logs-in, check if it has a “pending” or “cart” order. If by any misterious chance, does not have it, create an empty order so I get the use as part of the log-in.
 
 // user login
 app.post('/', (req, res, next)=> {
@@ -43,7 +42,6 @@ app.get('/:token', (req, res, next) => {
           }]
         })
         .then( user => {
-            // console.log(user)
             if(!user) {
                 return res.sendStatus(401)
             }

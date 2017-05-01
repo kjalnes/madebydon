@@ -19,10 +19,8 @@ const routes = (
         <IndexRoute component={ Home } />
         <Route path='products' component={ ProductListContainer } />
         <Route path='login' component={ LoginContainer } />
-        <Route path='cart' component={ CartContainer } >
-        </Route>
-        <Route path='checkout' component={ CheckoutContainer } >
-        </Route>
+        <Route path='cart' component={ CartContainer } />
+        <Route path='checkout' component={ CheckoutContainer } />
       </Route>
     </Router>
   </Provider>

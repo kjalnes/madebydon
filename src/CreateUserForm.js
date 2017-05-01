@@ -16,9 +16,9 @@ class CreateUserForm extends Component {
 
     onCreateSubmit(ev) {
         ev.preventDefault()
-        this.props.createUser(this.state)
-        this.props.router.push('/login')
-        // here we will redirect to the shipping and billing part of checkout rather than login....
+        this.props.createUser(this.state);
+        this.props.router.push('/login');
+        // here we will eventually redirect to the shipping and billing part of checkout rather than login....
     }
 
     render() {

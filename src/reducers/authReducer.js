@@ -52,10 +52,6 @@ const createUser = (userInfo) => {
         axios.post('/api/user', { userInfo, cart } )
         .then( response => response.data)
         .then( user => {
-            // user is created in database but login breaks because of
-            // the include in our session.js file line 35 breaks...
-            // We have to create order and orderlines based on localstate cart
-            // currently being passed as argument
           dispatch(login({ email: user.email, password: user.password }))
       })
         .catch(err => console.log(err))
