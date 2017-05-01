@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 import CreateUserForm from '../CreateUserForm';
+import { connect } from 'react-redux'
 
-const CheckoutContainer = () => {
-    return (
-        <div className='container'>
-            <CreateUserForm />
+const CheckoutContainer = (props) =>  {
+    const { activeUser, router } = props;
+        return (
+            <div className='container'>
+                { activeUser ?
+                    <div>[show billing and shipping address form component... Not created yet]</div>
+                :
+                    <div>
+                        <CreateUserForm router={ router }/>
+                        Shopped with us before?
+                        <Link to='/login'> Sign in here</Link>
+                    </div>
+                }
+            </div>
+        )
+    }
 
 
-            Shopped with us before?
-            <Link to='/login'> Sign in here</Link>
-        </div>
-    )
-}
 
-export default CheckoutContainer;
+const mapStateToProps = (state) => (
+    {
+        activeUser: state.auth.user
+    }
+)
+
+export default connect(mapStateToProps)(CheckoutContainer);

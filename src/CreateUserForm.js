@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { createUser } from './reducers/authReducer';
 
 class CreateUserForm extends Component {
-    constructor({ createUser }) {
+    constructor({ createUser, router }) {
         super();
         this.state = { firstName: '', lastName: '', email: '', password: '' };
         this.onInputChange = this.onInputChange.bind(this);
@@ -16,9 +16,9 @@ class CreateUserForm extends Component {
 
     onCreateSubmit(ev) {
         ev.preventDefault()
-        const cart = localStorage.getItem('cart')
-
-        this.props.createUser(this.state, cart)
+        this.props.createUser(this.state)
+        this.props.router.push('/login')
+        // here we will redirect to the shipping and billing part of checkout rather than login....
     }
 
     render() {
@@ -42,17 +42,16 @@ class CreateUserForm extends Component {
 
                 </form>
             </div>
-
         )
     }
 }
-
 
 const mapDispatchToProps = (dispatch) => (
     {
         createUser: (userInfo) => dispatch(createUser(userInfo))
     }
 )
+
 
 
 export default connect(null, mapDispatchToProps)(CreateUserForm);

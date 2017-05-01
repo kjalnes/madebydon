@@ -21,7 +21,8 @@ const routes = (
         <Route path='login' component={ LoginContainer } />
         <Route path='cart' component={ CartContainer } >
         </Route>
-        <Route path='checkout' component={ CheckoutContainer } />
+        <Route path='checkout' component={ CheckoutContainer } >
+        </Route>
       </Route>
     </Router>
   </Provider>

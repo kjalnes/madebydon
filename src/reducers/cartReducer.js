@@ -61,9 +61,6 @@ const loadCart = (orderId) => {
             .then(order => {
                 const cart = loadState();
                 dispatch(loadCartSuccess(order));
-                console.log('local cart is=', cart);
-
-
             })
             .catch(err => console.log('Error loadCart:', err));
     };
