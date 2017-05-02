@@ -3,6 +3,7 @@ const Product = require('./Product');
 const User = require('./User');
 const Order = require('./Order');
 const OrderLine = require('./OrderLine');
+const Address = require('./Address');
 
 Order.belongsTo(User); // creates userId
 User.hasMany(Order);
@@ -11,6 +12,13 @@ OrderLine.belongsTo(Order); // creates orderId
 OrderLine.belongsTo(Product); // creates productId
 Order.hasMany(OrderLine); // allow me to include on findAll
 Product.hasMany(OrderLine);
+
+// Address.belongsTo(User, { as: 'shipping' });
+// Address.belongsTo(User, { as: 'billing' });
+User.belongsTo(Address, { as: 'shipping' });
+User.belongsTo(Address, { as: 'billing' });
+
+
 
 const sync = ()=> conn.sync({ force: true });
 
@@ -26,11 +34,15 @@ const seed = ()=> {
     { firstName: 'Harish', lastName: 'tadikona', email: 'harish11.tadikonda@gmail.com', password: 'harish29'},
     { firstName: 'Kris', lastName: 'Alnes', email: 'kris', password: 'kdog'} ];
 
+  const address = { addressLine1:'123 Green ave', addressLine2: 'apt 4', city: 'Brooklyn', state: 'NY', country: '11211', country: 'USA' };
+
   return sync()
     .then(()=> {
       const productPromises = products.map( product => Product.create(product));
       const userPromises = users.map( user => User.create(user));
-      return Promise.all([productPromises, userPromises])
+      const shippingTest = Address.create(address, { as: 'shipping'})
+      const billingTest = Address.create(address, { as: 'billing'})
+      return Promise.all([productPromises, userPromises, shippingTest, billingTest])
     })
     .then( () => {
       const orderOne = Order.create({ userId: 3, status: 'pending' });

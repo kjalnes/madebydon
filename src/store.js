@@ -25,7 +25,8 @@ if (reduxDevtools) {
     store = createStore(combined, applyMiddleware(thunk));
 }
 
-// Initial Load of data
+/*** Initial Load of data ***/
+
 // Products
 store.dispatch(loadProducts());
 
