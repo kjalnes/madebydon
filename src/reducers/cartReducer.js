@@ -56,17 +56,27 @@ const loadCart = (orderId) => {
     }
 
     return (dispatch) => {
-        axios.get(`/api/order/${orderId}`)
-            .then(response => response.data)
-            .then(order => {
+        // overwriteQty
 
-                const cart = loadState();
-                dispatch(loadCartSuccess(order));
-                console.log('local cart is=', cart);
+        const localCart = loadState();
+        const orderlines = localCart.cartItems.map( item => {
+            // overwriteQty = true
+            return dispatch(addToCart( orderId, item.product, item.qty, true))
+        })
+        // async?
+        return Promise.all(orderlines)
+        .then( () => {
+            console.log('promise resolved')
 
-
-            })
-            .catch(err => console.log('Error loadCart:', err));
+            axios.get(`/api/order/${orderId}`)
+                .then(response => response.data)
+                .then(order => {
+                    // console.log('local cart is=', cart);
+                    console.log('order', order)
+                    dispatch(loadCartSuccess(order));
+                })
+                .catch(err => console.log('Error loadCart:', err));
+        })
     };
 };
 
@@ -94,21 +104,27 @@ const removeFromCart = (orderId, productId) => {
 
 // Add items to
 // the cart
-const addToCart = (orderId, product, qty = 1) => {
+const addToCart = (orderId, product, qty, overwriteQty=false) => {
     // Check if Anonymous
+    if(qty === undefined) {
+        qty = 1
+    }
+
+    // if anonymous user, set the local cart to our state
     if (orderId === 0) {
         // Run local
         return (dispatch) => {
-            dispatch(addToCartSuccess(orderId, product, qty));
+            dispatch(addToCartSuccess(orderId, product, qty, overwriteQty));
             return Promise.resolve();
         };
     }
-    // Load logged user cart
+    // if we have a logged in user, add product(s) to server
+    // and set the axios response to our local state
     return (dispatch) => {
-        axios.post(`/api/order/${orderId}/`, { qty: qty, product })
+        axios.post(`/api/order/${orderId}/`, { qty, product, overwriteQty })
             .then(response => response.data)
             .then((response) => {
-                dispatch(addToCartSuccess(orderId, product, qty))
+                dispatch(addToCartSuccess(orderId, product, qty, overwriteQty))
             })
             .catch(err => console.log('Error: addToCart', err));
     };
@@ -135,10 +151,15 @@ const cartReducer = (state = loadState() || initialState, action) => {
         case ADD_TO_CART:
             let cartItems;
             let productExistsInCart = state.cartItems.some(item => item.productId === action.product.id) // boolean
-            if (productExistsInCart) {
+
+            if ( productExistsInCart ) {
                 cartItems = state.cartItems.map(_item => {
                     if (_item.productId === action.product.id) {
-                        _item.qty += action.qty
+                        if(action.overwriteQty) {
+                            _item.qty = action.qty
+                        } else {
+                            _item.qty += action.qty
+                        }
                     }
                     return _item
                 })

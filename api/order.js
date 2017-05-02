@@ -14,7 +14,12 @@ app.post('/:orderId', (req, res, next) => {
         .then(orderline => {
             if (orderline) {
                 //Update the qty
-                orderline.qty += req.body.qty;
+                if(req.body.overwriteQty) {
+                    orderline.qty = req.body.qty;
+                } else {
+                    orderline.qty += req.body.qty;
+                }
+
                 return orderline.save();
             } else {
                 // Insert

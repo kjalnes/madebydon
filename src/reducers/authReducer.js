@@ -40,10 +40,11 @@ const login = (credentials) => {
 const logout = () => {
     return (dispatcher) => {
         localStorage.clear(); // Clear the token and the cart
+
         dispatcher(logoutSuccess()); // how to chain them?
         dispatcher(clearCart());
     }
-}
+};
 
 // api/user
 const createUser = (userInfo) => {
@@ -56,7 +57,7 @@ const createUser = (userInfo) => {
       })
         .catch(err => console.log(err))
     }
-}
+};
 
 
 const initialState = {};
@@ -69,7 +70,7 @@ const authReducer = (state = initialState, action) => {
             return {...state, user: null }
     }
     return state
-}
+};
 
 export { login, logout, loadUser, createUser };
 export default authReducer;
