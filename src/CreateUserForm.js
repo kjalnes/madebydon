@@ -23,6 +23,7 @@ class CreateUserForm extends Component {
         .then( () => {
             console.log('user has been created')
             this.props.router.push('/checkout')
+
         })
         // here we will eventually redirect to the shipping and billing part of checkout rather than login....
     }

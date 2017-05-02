@@ -3,18 +3,27 @@ import { Link } from 'react-router';
 import CreateUserForm from '../CreateUserForm';
 import { connect } from 'react-redux'
 import CheckoutStep1 from '../CheckoutStep1';
+import CheckoutStep2 from '../CheckoutStep2';
 import { onSaveStep } from '../reducers/checkoutReducer';
 
 
 const CheckoutContainer = (props) =>  {
     const { activeUser, router, checkoutStep, onSaveStep } = props;
-
     return (
+
         <div className='container'>
+
             { activeUser ?
                 <div>
-                    { checkoutStep }
-                    <CheckoutStep1  onSaveStep={ onSaveStep }/>
+                    {
+                        (checkoutStep === 1) ?
+                            <CheckoutStep1 onSaveStep= { onSaveStep } /> : null
+                    }
+                    {
+                        (checkoutStep === 2) ?
+                            <CheckoutStep2 onSaveStep= { onSaveStep } /> : null
+                    }
+
                 </div>
             :
                 <div>
