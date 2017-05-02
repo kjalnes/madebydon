@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
-// import { browserHistory } from 'react-router';
 
 class CartTotals extends Component  {
 
     onCheckoutClick(ev) {
       ev.preventDefault()
-        if (this.props.activeUser) {    // there is not an activeUser
-            console.log('we have a user')
-            // go to billing and shipping page
-        } else {
-            console.log('we dont have a user')
-            this.props.router.push('/checkout')
-            // show login form
-            // show link to create User form page
-        }
+      this.props.router.push('/checkout')
     }
-
 
     render() {
         return (
@@ -64,18 +54,3 @@ class CartTotals extends Component  {
 }
 
 export default CartTotals;
-
-
-
-/*
-on click prevent default
-
-onCheckoutClick(ev) {
- //   ev.preventDefault()
-    if there is not an activeUser
-        show create User form page
-    else
-        go to billing and shipping page
-}
-
-*/

@@ -3,21 +3,22 @@ import { loadCart, clearCart } from './cartReducer';
 import store from '../store';
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../constants/';
 import { loginSuccess, logoutSuccess } from '../actions/';
+import { loadState } from './cartReducer';
 
 // Load the user from the token
 const loadUser = (token) => {
-    return (dispatcher) => {
+    return (dispatch) => {
         if (token) {
             axios.get(`/api/session/${token}`)
                 .then(response => response.data)
                 .then(user => {
-                    dispatcher(loginSuccess(user))
+                    dispatch(loginSuccess(user))
                     // console.log('user cart id ',user.orders[0].id );
                     return user.orders[0].id
                 })
                 .then((orderId)=>{
-                    console.log('orderid', orderId)
-                    dispatcher(loadCart(orderId));
+                    // console.log('orderid', orderId)
+                    dispatch(loadCart(orderId));
                 })
                 .catch( err => console.log(err));
         }
@@ -25,12 +26,12 @@ const loadUser = (token) => {
 };
 
 const login = (credentials) => {
-    return (dispatcher) => {
+    return (dispatch) => {
         axios.post('/api/session', credentials)
             .then(response => response.data)
             .then(data => {
                 localStorage.setItem('token', data.token);
-                dispatcher(loadUser(data.token));
+                dispatch(loadUser(data.token));
             })
             .catch(err => console.log(err));
     }
@@ -39,26 +40,24 @@ const login = (credentials) => {
 const logout = () => {
     return (dispatcher) => {
         localStorage.clear(); // Clear the token and the cart
+
         dispatcher(logoutSuccess()); // how to chain them?
         dispatcher(clearCart());
     }
-}
+};
 
 // api/user
-const createUser = (userInfo, cart) => {
+const createUser = (userInfo) => {
+    const cart = loadState()
     return(dispatch) => {
-        axios.post('/api/user',  userInfo )
+        axios.post('/api/user', { userInfo, cart } )
         .then( response => response.data)
         .then( user => {
-            // user is created in database but login breaks because of
-            // the include in our session.js file line 35 breaks...
-            // We have to create order and orderlines based on localstate cart
-            // currently being passed as argument
           dispatch(login({ email: user.email, password: user.password }))
       })
         .catch(err => console.log(err))
     }
-}
+};
 
 
 const initialState = {};
@@ -71,7 +70,7 @@ const authReducer = (state = initialState, action) => {
             return {...state, user: null }
     }
     return state
-}
+};
 
 export { login, logout, loadUser, createUser };
 export default authReducer;

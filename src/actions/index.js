@@ -1,5 +1,5 @@
-import { 
-    LOGIN_SUCCESS, LOGOUT_SUCCESS, 
+import {
+    LOGIN_SUCCESS, LOGOUT_SUCCESS,
     LOAD_CART, REMOVE_FROM_CART, ADD_TO_CART, CLEAR_CART
 } from '../constants/';
 
@@ -25,16 +25,17 @@ const removeFromCartSuccess = (productId) => ({
     productId: productId
 });
 
-const addToCartSuccess = (orderId, product, qty) => ({
+const addToCartSuccess = (orderId, product, qty, overwriteQty) => ({
     type: ADD_TO_CART,
     orderId: orderId,
     product: product,
-    qty: qty
+    qty: qty,
+    overwriteQty: overwriteQty
 });
 
 const clearCartSuccess = () => ({type: CLEAR_CART});
 
-export { 
+export {
     loginSuccess,
     logoutSuccess,
     loadCartSuccess,

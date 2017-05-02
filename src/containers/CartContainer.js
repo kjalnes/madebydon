@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 import { loadCart, removeFromCart } from '../reducers/cartReducer';
 
 const CartContainer = ( props ) => {
-    // console.log('CartContainer',cart)
     const { activeUser, cart, removeFromCart, cartTotal, router } = props;
     return (
     <div className='container'>
-        { cart ?
+        { cart  ?
             <div>
                 <CartProducts cart={ cart } removeFromCart={ removeFromCart } />
                 <hr />

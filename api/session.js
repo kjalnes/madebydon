@@ -6,6 +6,7 @@ const secret = process.env.SECRET || 'foo';
 module.exports = app;
 
 
+
 // user login
 app.post('/', (req, res, next)=> {
   models.User.findOne({
@@ -29,7 +30,7 @@ app.post('/', (req, res, next)=> {
 app.get('/:token', (req, res, next) => {
     try{
         const token = jwt.decode(req.params.token, secret);
-        console.log('token', token)
+        // console.log('token', token)
         models.User.findOne({
           where: { id: token.id },
           include: [{
@@ -41,7 +42,6 @@ app.get('/:token', (req, res, next) => {
           }]
         })
         .then( user => {
-            console.log(user)
             if(!user) {
                 return res.sendStatus(401)
             }
