@@ -13,7 +13,7 @@ import CheckoutContainer from './containers/CheckoutContainer';
 const root = document.getElementById('root');
 
 const routes = (
-  <Provider store = {store }>
+  <Provider store = { store }>
     <Router history={ hashHistory }>
       <Route path='/' component={ App }>
         <IndexRoute component={ Home } />

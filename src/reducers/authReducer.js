@@ -1,9 +1,16 @@
 import axios from 'axios';
 import { loadCart, clearCart } from './cartReducer';
 import store from '../store';
+
+/*** Constants ***/
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../constants/';
-import { loginSuccess, logoutSuccess } from '../actions/';
+
+/*** Actions ***/
+import { loginSuccess, logoutSuccess } from '../actions/login';
 import { loadState } from './cartReducer';
+
+
+/**** Methods ***/
 
 // Load the user from the token
 const loadUser = (token) => {
@@ -13,11 +20,9 @@ const loadUser = (token) => {
                 .then(response => response.data)
                 .then(user => {
                     dispatch(loginSuccess(user))
-                    // console.log('user cart id ',user.orders[0].id );
                     return user.orders[0].id
                 })
                 .then((orderId)=>{
-                    // console.log('orderid', orderId)
                     dispatch(loadCart(orderId));
                 })
                 .catch( err => console.log(err));
@@ -40,15 +45,13 @@ const login = (credentials) => {
 const logout = () => {
     return (dispatcher) => {
         localStorage.clear(); // Clear the token and the cart
-
         dispatcher(logoutSuccess()); // how to chain them?
         dispatcher(clearCart());
     }
 };
 
-// api/user
 const createUser = (userInfo) => {
-    const cart = loadState()
+    const cart = loadState();
     return(dispatch) => {
         axios.post('/api/user', { userInfo, cart } )
         .then( response => response.data)
@@ -59,6 +62,7 @@ const createUser = (userInfo) => {
     }
 };
 
+/*** Reducer ***/
 
 const initialState = {};
 
@@ -72,7 +76,14 @@ const authReducer = (state = initialState, action) => {
     return state
 };
 
-export { login, logout, loadUser, createUser };
+
+export {
+    login,
+    logout,
+    loadUser,
+    createUser
+};
+
 export default authReducer;
 
 

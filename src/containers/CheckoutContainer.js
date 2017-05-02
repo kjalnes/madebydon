@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import CreateUserForm from '../CreateUserForm';
 import { connect } from 'react-redux'
+import CheckoutStep1 from '../CheckoutStep1';
+import { onSaveStep } from '../reducers/checkoutReducer';
+
 
 const CheckoutContainer = (props) =>  {
-    const { activeUser, router } = props;
+    const { activeUser, router, checkoutStep, onSaveStep } = props;
+
     return (
         <div className='container'>
             { activeUser ?
                 <div>
-                    [show billing and shipping address form component(s)... Not created yet]
+                    { checkoutStep }
+                    <CheckoutStep1  onSaveStep={ onSaveStep }/>
                 </div>
             :
                 <div>
@@ -24,8 +29,25 @@ const CheckoutContainer = (props) =>  {
 
 const mapStateToProps = (state) => (
     {
-        activeUser: state.auth.user
+        activeUser: state.auth.user,
+        checkoutStep: state.checkout.checkoutStep
     }
 )
 
-export default connect(mapStateToProps)(CheckoutContainer);
+const mapDispatchToProps = (dispatch) => (
+    {
+        onSaveStep: () => dispatch(onSaveStep())
+    }
+)
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutContainer);
+
+/*
+Checkout steps
+1. Login or create user
+2. shipping
+3. billing and credit card
+4. verify
+*/
