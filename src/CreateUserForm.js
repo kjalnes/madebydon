@@ -19,12 +19,7 @@ class CreateUserForm extends Component {
         // Question: we need to make sure user has been created before
         // we redirect to another page
         // what is the best practice?
-        Promise.all([ this.props.createUser(this.state) ])
-        .then( () => {
-            console.log('user has been created')
-            this.props.router.push('/checkout')
-
-        })
+        this.props.createUser(this.state, this.props.router)
         // here we will eventually redirect to the shipping and billing part of checkout rather than login....
     }
 
@@ -55,7 +50,11 @@ class CreateUserForm extends Component {
 
 const mapDispatchToProps = (dispatch) => (
     {
-        createUser: (userInfo) => dispatch(createUser(userInfo))
+        createUser: (userInfo, router) => dispatch(createUser(userInfo))
+                                    .then( () => {
+                                        console.log('user has been created')
+                                        router.push('/checkout')
+                                    })
     }
 )
 

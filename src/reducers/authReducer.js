@@ -53,11 +53,11 @@ const logout = () => {
 const createUser = (userInfo) => {
     const cart = loadState();
     return(dispatch) => {
-        axios.post('/api/user', { userInfo, cart } )
-        .then( response => response.data)
-        .then( user => {
-          dispatch(login({ email: user.email, password: user.password }))
-      })
+        return axios.post('/api/user', { userInfo, cart } )
+            .then( response => response.data)
+            .then( user => {
+              dispatch(login({ email: user.email, password: user.password }))
+        })
         .catch(err => console.log(err))
     }
 };
