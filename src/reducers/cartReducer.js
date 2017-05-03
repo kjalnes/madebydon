@@ -1,24 +1,26 @@
 import axios from 'axios';
+
+/*** Constants ***/
+import {
+    LOAD_CART,
+    REMOVE_FROM_CART,
+    ADD_TO_CART,
+    CLEAR_CART } from '../constants/';
+
+/*** Actions ***/
 import {
     loadCartSuccess,
     removeFromCartSuccess,
     addToCartSuccess,
-    clearCartSuccess } from '../actions/';
-
-// Constants
-import { LOAD_CART, REMOVE_FROM_CART, ADD_TO_CART, CLEAR_CART } from '../constants/';
+    clearCartSuccess } from '../actions/cart';
 
 
-// Initial State
-const initialState = {
-    cartItems: [] // array of orderline objects
-};
 
 
-// Methods
 
-// Load the state of
-// the cart from localstorage
+/**** Methods ***/
+
+// Load the state of the cart from localstorage (only when not logged in)
 const loadState = () => {
     try {
         const serializedState = localStorage.getItem('cart');
@@ -32,21 +34,21 @@ const loadState = () => {
 
 }
 
-// Save the cart state
-// to localStorage
+// Global listener saving the cart state to localStorage
 const saveState = (state) => {
     try {
         const serializeState = JSON.stringify(state);
         localStorage.setItem('cart', serializeState)
     } catch (err) {
-        //do nothing
+        /* Do nothing.
+         This is to make sure code does not break in case of individual users localstorage restrictions */
     }
 }
 
-// Load Cart
-// from localStorage
+// Load Cart from localStorage
 const loadCart = (orderId) => {
 
+    // Run local if Anonymous user
     if (orderId === 0) {
         return (dispatch) => {
             const cart = loadState();
@@ -56,23 +58,16 @@ const loadCart = (orderId) => {
     }
 
     return (dispatch) => {
-        // overwriteQty
-
         const localCart = loadState();
         const orderlines = localCart.cartItems.map( item => {
             // overwriteQty = true
             return dispatch(addToCart( orderId, item.product, item.qty, true))
         })
-        // async?
         return Promise.all(orderlines)
         .then( () => {
-            console.log('promise resolved')
-
             axios.get(`/api/order/${orderId}`)
                 .then(response => response.data)
                 .then(order => {
-                    // console.log('local cart is=', cart);
-                    console.log('order', order)
                     dispatch(loadCartSuccess(order));
                 })
                 .catch(err => console.log('Error loadCart:', err));
@@ -81,12 +76,10 @@ const loadCart = (orderId) => {
 };
 
 
-// Remove items
-// from the cart
+// Remove items from the cart
 const removeFromCart = (orderId, productId) => {
-    // Check if Anonymous
+    // Run local if Anonymous user
     if (orderId === 0) {
-        // Run local
         return (dispatch) => {
             dispatch(removeFromCartSuccess(productId));
             return Promise.resolve();
@@ -102,14 +95,8 @@ const removeFromCart = (orderId, productId) => {
     };
 };
 
-// Add items to
-// the cart
-const addToCart = (orderId, product, qty, overwriteQty=false) => {
-    // Check if Anonymous
-    if(qty === undefined) {
-        qty = 1
-    }
-
+// Add items to the cart
+const addToCart = (orderId, product, qty=1, overwriteQty=false) => {
     // if anonymous user, set the local cart to our state
     if (orderId === 0) {
         // Run local
@@ -138,8 +125,12 @@ const clearCart = () => {
 };
 
 
+/*** Reducer ***/
 
-// Reducer
+const initialState = {
+    cartItems: [] // array of orderline objects
+};
+
 const cartReducer = (state = loadState() || initialState, action) => {
     switch (action.type) {
         case LOAD_CART:

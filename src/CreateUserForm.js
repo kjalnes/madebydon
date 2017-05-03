@@ -16,8 +16,10 @@ class CreateUserForm extends Component {
 
     onCreateSubmit(ev) {
         ev.preventDefault()
-        this.props.createUser(this.state);
-        this.props.router.push('/login');
+        // Question: we need to make sure user has been created before
+        // we redirect to another page
+        // what is the best practice?
+        this.props.createUser(this.state, this.props.router)
         // here we will eventually redirect to the shipping and billing part of checkout rather than login....
     }
 
@@ -48,7 +50,11 @@ class CreateUserForm extends Component {
 
 const mapDispatchToProps = (dispatch) => (
     {
-        createUser: (userInfo) => dispatch(createUser(userInfo))
+        createUser: (userInfo, router) => dispatch(createUser(userInfo))
+                                    .then( () => {
+                                        console.log('user has been created')
+                                        router.push('/checkout')
+                                    })
     }
 )
 
