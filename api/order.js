@@ -110,7 +110,60 @@ app.post('/:orderId/billing', (req, res,next) => {
 });
 
 
+// post payment
+app.post('/:orderId/payment', (req, res,next) => {
+    console.log('server payment route', req.params.orderId)
+    let order;
 
+    models.Order.findAll({
+        where: { id: req.params.orderId },
+        include: [
+            {
+                model: models.OrderLine,
+                include: [{ model: models.Product }]
+            }
+            ,
+            {
+                model: models.Address,
+                as: 'shipping'
+            },
+            {
+                model: models.Address,
+                as: 'billing'
+            }
+        ]
+    })
+    .then(_order => {
+        console.log('order exist', _order);
+        order = _order;
 
+        //sk = secret key
+        const stripe = require('stripe')('sk_test_R10qlCsOK5ECIlbM6geYGHIR')
+
+        // returns a promise
+        return stripe.charges.create({
+            amount: 200.00,
+            currency: 'usd',
+            description: 'we be shoppin',
+            source: req.body.token
+        })
+    })
+    .then( charge => {
+        console.log('stripe call success', charge);
+        // Update the order status and the order
+        console.log('order.status before save', order[0].status)
+        order[0].status = 'complete';
+        // here the stripe number an others matching records
+
+        console.log('order.status after save', order[0].status)
+
+        return order[0].save()
+    })
+    .then( _order =>{
+        console.log('ready to send the order',_order);
+        res.send([ _order ]);
+    })
+    .catch(err => records.sendStatus(500));
+});
 
 module.exports = app;

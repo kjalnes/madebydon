@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 /*** Confirm Order Page ***/
 class CheckoutStep3 extends Component {
-    constructor(props) {
-        super(props);
+    constructor({ order, errMessage }) {
+        super();
         this.state = { card: '', exp: '', cvc: '' };
         this.onSubmit = this.onSubmit.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
@@ -35,7 +35,7 @@ class CheckoutStep3 extends Component {
         console.log('is valid until here', payment);
 
         console.log('I have the order', this.props.order);
-        
+
         // Submit the order to stripe with the CC card to get the token
         // for that card.
         this.props.completeCheckout(this.props.order,payment);
@@ -43,9 +43,11 @@ class CheckoutStep3 extends Component {
     }
 
     render() {
+        console.log( 'this.props.order', this.props.order )
+        console.log( 'this.props.errMessage', this.props.errMessage )
         return (
             <div className='container'>
-                {(this.props.order)?this.props.order.message: ''}
+                { this.props.errMessage ? <div className='alert alert-danger'>{ this.props.errMessage }</div> : null }
                 <form onSubmit={this.onSubmit}>
                     <div className="panel-body">
                         <div className="form-group">

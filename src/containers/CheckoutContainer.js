@@ -10,7 +10,7 @@ import { completeCheckout } from '../reducers/orderReducer';
 
 const CheckoutContainer = (props) =>  {
 
-    const { activeUser, router, children, orderId } = props;
+    const { activeUser, router, children, orderId, order, errMessage } = props;
 
     return (
 
@@ -35,7 +35,8 @@ const mapStateToProps = (state) => (
     {
         activeUser: state.auth.user,
         orderId: state.order.order && state.order.order[0] && state.order.order[0].id,
-        order: state.order.order && state.order.order[0]
+        order: state.order.order && state.order.order[0],
+        errMessage: state.order.message
     }
 )
 
@@ -49,7 +50,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             },
 
             completeCheckout: (order, payment)=>{
-                dispatch(completeCheckout(order, payment))
+                dispatch(completeCheckout(order, payment)) // we need to return a promise
+                .then( response => {
+                    console.log('we are about to push incl response', response)
+                    ownProps.router.push(`/checkout/confirm`)
+                })
+                .catch( err => console.log('error', err))
             }
         }
     )
