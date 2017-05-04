@@ -3,7 +3,8 @@ const models = require('../models').models;
 
 
 app.get('/:orderId', (req, res, next) => {
-    models.Order.findOne(
+    // models.Order.findOne(
+    models.Order.findAll(
         {
             where: { id: req.params.orderId },
             include: [
@@ -87,7 +88,7 @@ app.post(`/:orderId/shipping`, (req, res,next) => {
             .then( order => {
                 order.shippingId = address.id
                 order.save();
-                res.send(order);
+                res.send([ order ]);
             })
     })
     .catch(next)
@@ -98,14 +99,11 @@ app.post(`/:orderId/shipping`, (req, res,next) => {
 app.post('/:orderId/billing', (req, res,next) => {
     models.Address.create(req.body.userInfo)
     .then( address => {
-        console.log('address.id', address.id)
         return models.Order.findById(req.params.orderId)
             .then( order => {
-                console.log('order before updated billingId', order)
                 order.billingId = address.id
                 order.save();
-                console.log('updated order', order)
-                res.send(order);
+                res.send([ order ]);
             })
     })
     .catch(next)

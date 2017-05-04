@@ -8,16 +8,15 @@ import CheckoutStep2 from '../CheckoutStep2';
 
 const CheckoutContainer = (props) =>  {
 
-    const { activeUser, router, children } = props;
+    const { activeUser, router, children, orderId } = props;
 
     return (
 
         <div className='container'>
              {
-                activeUser ?
+                activeUser && children ?
                 <div>
                     { React.cloneElement(children, { ...props })}
-
                 </div>
             :
                 <div>
@@ -33,7 +32,7 @@ const CheckoutContainer = (props) =>  {
 const mapStateToProps = (state) => (
     {
         activeUser: state.auth.user,
-        orderId: state.order.order && state.order.order.id
+        orderId: state.order.order && state.order.order[0] && state.order.order[0].id
     }
 )
 

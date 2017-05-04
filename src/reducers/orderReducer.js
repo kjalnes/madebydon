@@ -20,7 +20,6 @@ const loadOrder = (orderId) => {
         return axios.get(`/api/order/${orderId}`)
         .then( response => response.data )
         .then( order => {
-            console.log('order loaded', order)
             dispatch(loadOrderSuccess(order))
         })
         .catch(err => console.log('Error loadOrder:', err));

@@ -4,7 +4,11 @@ class CartTotals extends Component  {
 
     onCheckoutClick(ev) {
       ev.preventDefault()
-      this.props.router.push('/checkout')
+      if(this.props.activeUser) {
+        this.props.router.push('/checkout/shipping')
+      } else {
+        this.props.router.push('/checkout')
+      }
     }
 
     render() {
