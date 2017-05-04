@@ -2,8 +2,7 @@ import React from 'react';
 
 const UserInfo = (props) => {
     const { activeUser, onLogoutSubmit, order } = props;
-    console.log('order', order.shipping )
-    console.log('activeUser', activeUser )
+
     return (
         <div>
             <div className="container">
