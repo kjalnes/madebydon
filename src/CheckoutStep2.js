@@ -19,7 +19,7 @@ class CheckoutStep2 extends Component {
         ev.preventDefault();
         const userInfo = this.state;
         const orderId = this.props.orderId;
-        this.props.saveCheckoutStep(userInfo, orderId, saveBilling, 'confirm');
+        this.props.saveCheckoutStep(userInfo, orderId, saveBilling, 'payment');
         // validate on client side not done
     }
 

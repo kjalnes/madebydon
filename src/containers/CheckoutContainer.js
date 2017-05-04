@@ -4,6 +4,8 @@ import CreateUserForm from '../CreateUserForm';
 import { connect } from 'react-redux'
 import CheckoutStep1 from '../CheckoutStep1';
 import CheckoutStep2 from '../CheckoutStep2';
+import { completeCheckout } from '../reducers/orderReducer';
+
 
 
 const CheckoutContainer = (props) =>  {
@@ -32,7 +34,8 @@ const CheckoutContainer = (props) =>  {
 const mapStateToProps = (state) => (
     {
         activeUser: state.auth.user,
-        orderId: state.order.order && state.order.order[0] && state.order.order[0].id
+        orderId: state.order.order && state.order.order[0] && state.order.order[0].id,
+        order: state.order.order && state.order.order[0]
     }
 )
 
@@ -43,6 +46,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                 dispatch( axiosFn(userInfo, orderId) )
                 .then( () => ownProps.router.push(`/checkout/${nextPath}`))
                 .catch( err => console.log(err))
+            },
+
+            completeCheckout: (order, payment)=>{
+                dispatch(completeCheckout(order, payment))
             }
         }
     )
