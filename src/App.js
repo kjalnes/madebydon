@@ -14,7 +14,8 @@ const App = ({ children, products, user, cartNum })=> (
 const mapStateToProps = (state)=>(
   { products: state.products,
     user: state.auth.user,
-    cartNum: state.cart.cartItems.length
+    cartNum: state.cart.cartItems.reduce( (total, item) => {
+      return total += item.qty }, 0)
    }
 );
 

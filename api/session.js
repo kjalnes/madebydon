@@ -5,8 +5,6 @@ const secret = process.env.SECRET || 'foo';
 
 module.exports = app;
 
-
-
 // user login
 app.post('/', (req, res, next)=> {
   models.User.findOne({

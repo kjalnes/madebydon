@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { loadCart, clearCart } from './cartReducer';
+import { loadOrder } from './orderReducer';
 import store from '../store';
 
 /*** Constants ***/
@@ -17,13 +18,14 @@ const loadUser = (token) => {
     return (dispatch) => {
         if (token) {
             axios.get(`/api/session/${token}`)
-                .then(response => response.data)
-                .then(user => {
+                .then( response => response.data)
+                .then( user => {
                     dispatch(loginSuccess(user))
                     return user.orders[0].id
                 })
-                .then((orderId)=>{
+                .then( orderId => {
                     dispatch(loadCart(orderId));
+                    dispatch(loadOrder(orderId));
                 })
                 .catch( err => console.log(err));
         }
@@ -32,7 +34,7 @@ const loadUser = (token) => {
 
 const login = (credentials) => {
     return (dispatch) => {
-        axios.post('/api/session', credentials)
+        return axios.post('/api/session', credentials)
             .then(response => response.data)
             .then(data => {
                 localStorage.setItem('token', data.token);
@@ -43,10 +45,10 @@ const login = (credentials) => {
 }
 
 const logout = () => {
-    return (dispatcher) => {
-        localStorage.clear(); // Clear the token and the cart
-        dispatcher(logoutSuccess()); // how to chain them?
-        dispatcher(clearCart());
+    return (dispatch) => {
+        localStorage.clear();
+        dispatch(logoutSuccess());
+        dispatch(clearCart());
     }
 };
 
@@ -61,6 +63,20 @@ const createUser = (userInfo) => {
         .catch(err => console.log(err))
     }
 };
+
+
+// const saveShipping = (userInfo, orderId) => {
+//     return(dispatch) => {
+//         return axios.post(`/api/order/${orderId}/address`, { userInfo } )
+//             .then( response => response.data)
+//             .then( user => {
+//               dispatch(login({ email: user.email, password: user.password }))
+//         })
+//         .catch(err => console.log(err))
+//     }
+// };
+
+
 
 /*** Reducer ***/
 
@@ -82,6 +98,7 @@ export {
     logout,
     loadUser,
     createUser
+    // saveShipping
 };
 
 export default authReducer;

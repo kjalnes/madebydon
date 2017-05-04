@@ -2,6 +2,32 @@ const app = require('express').Router();
 const models = require('../models').models;
 
 
+app.get('/:orderId', (req, res, next) => {
+    models.Order.findOne(
+        {
+            where: { id: req.params.orderId },
+            include: [
+                {
+                    model: models.OrderLine,
+                    include: [{ model: models.Product }]
+                }
+                ,
+                {
+                    model: models.Address,
+                    as: 'shipping'
+                },
+                {
+                    model: models.Address,
+                    as: 'billing'
+                }
+            ]
+        })
+        .then(order => {
+            res.send(order);
+        })
+        .catch(next);
+});
+
 
 app.post('/:orderId', (req, res, next) => {
     models.OrderLine.findOne(
@@ -53,24 +79,37 @@ app.delete('/:orderId/:productId', (req, res, next) => {
         .catch(next);
 });
 
-
-app.get('/:orderId', (req, res, next) => {
-    models.Order.findAll(
-        {
-            where: { id: req.params.orderId },
-            include: [
-                {
-                    model: models.OrderLine,
-                    include: [{ model: models.Product }]
-                }
-            ]
-        })
-        .then(order => {
-            res.send(order);
-        })
-        .catch(next);
+// post shipping address
+app.post(`/:orderId/shipping`, (req, res,next) => {
+    models.Address.create(req.body.userInfo)
+    .then( address => {
+        return models.Order.findById(req.params.orderId)
+            .then( order => {
+                order.shippingId = address.id
+                order.save();
+                res.send(order);
+            })
+    })
+    .catch(next)
 });
 
+
+// post billing address
+app.post('/:orderId/billing', (req, res,next) => {
+    models.Address.create(req.body.userInfo)
+    .then( address => {
+        console.log('address.id', address.id)
+        return models.Order.findById(req.params.orderId)
+            .then( order => {
+                console.log('order before updated billingId', order)
+                order.billingId = address.id
+                order.save();
+                console.log('updated order', order)
+                res.send(order);
+            })
+    })
+    .catch(next)
+});
 
 
 

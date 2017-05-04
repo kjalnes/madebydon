@@ -9,6 +9,9 @@ import LoginContainer from './containers/LoginContainer';
 import ProductListContainer from './containers/productListContainer';
 import CartContainer from './containers/CartContainer';
 import CheckoutContainer from './containers/CheckoutContainer';
+import CheckoutStep1 from './CheckoutStep1';
+import CheckoutStep2 from './CheckoutStep2';
+import CheckoutStep3 from './CheckoutStep3';
 
 const root = document.getElementById('root');
 
@@ -20,7 +23,11 @@ const routes = (
         <Route path='products' component={ ProductListContainer } />
         <Route path='login' component={ LoginContainer } />
         <Route path='cart' component={ CartContainer } />
-        <Route path='checkout' component={ CheckoutContainer } />
+        <Route path='checkout' component={ CheckoutContainer }>
+          <Route path='/checkout/shipping' component={ CheckoutStep1 } />
+          <Route path='/checkout/billing' component={ CheckoutStep2 } />
+          <Route path='/checkout/confirm' component={ CheckoutStep3 } />
+        </Route>
       </Route>
     </Router>
   </Provider>
