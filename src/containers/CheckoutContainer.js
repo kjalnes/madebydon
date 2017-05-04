@@ -58,7 +58,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     return dispatch(clearCart())
                 })
                 // we have to reset the order in redux and local store
-                .then( () => ownProps.router.push(`/checkout/confirm`))
+                // reroute to complete/orderId
+                .then( () => ownProps.router.push(`/checkout/complete`))
                 .catch( err => console.log('error', err))
             }
         }
