@@ -13,10 +13,10 @@ OrderLine.belongsTo(Product); // creates productId
 Order.hasMany(OrderLine); // allow me to include on findAll
 Product.hasMany(OrderLine);
 
-// Address.belongsTo(User, { as: 'shipping' });
-// Address.belongsTo(User, { as: 'billing' });
-User.belongsTo(Address, { as: 'shipping' });
-User.belongsTo(Address, { as: 'billing' });
+Order.belongsTo(Address, { as: 'shipping' });
+Order.belongsTo(Address, { as: 'billing' });
+
+
 
 
 
@@ -30,22 +30,23 @@ const seed = ()=> {
       { name:'basketball', price: 28, description: 'its also a ball', imgURL: ''} ];
 
   const users = [
-    { firstName: 'Mauro', lastName: 'Restuccia', email: 'mauro', password: '1234' },
+    { firstName: 'Mauro', lastName: 'Restuccia', email: 'Mauro', password: 'mcat' },
     { firstName: 'Harish', lastName: 'tadikona', email: 'harish11.tadikonda@gmail.com', password: 'harish29'},
     { firstName: 'Kris', lastName: 'Alnes', email: 'kris', password: 'kdog'} ];
 
-  const address = { addressLine1:'123 Green ave', addressLine2: 'apt 4', city: 'Brooklyn', state: 'NY', country: '11211', country: 'USA' };
+  const shippingAddress = { addressLine1:'123 Green ave', addressLine2: 'apt 4', city: 'Brooklyn', state: 'NY', zip: '11211', country: 'USA' };
+  const billingAddress = { addressLine1:'60 Berry Street', addressLine2: 'apt 4D', city: 'Brooklyn', state: 'NY', zip: '11211', country: 'USA' };
 
   return sync()
     .then(()=> {
       const productPromises = products.map( product => Product.create(product));
       const userPromises = users.map( user => User.create(user));
-      const shippingTest = Address.create(address, { as: 'shipping'})
-      const billingTest = Address.create(address, { as: 'billing'})
+      const shippingTest = Address.create(shippingAddress, { as: 'shipping'})
+      const billingTest = Address.create(billingAddress, { as: 'billing'})
       return Promise.all([productPromises, userPromises, shippingTest, billingTest])
     })
     .then( () => {
-      const orderOne = Order.create({ userId: 3, status: 'pending' });
+      const orderOne = Order.create({ userId: 3, status: 'pending', shippingId: 1, billingId: 2 });
       const orderTwo = Order.create({ userId: 1, status: 'pending' });
       return Promise.all([orderOne, orderTwo])
     })
@@ -62,7 +63,8 @@ module.exports = {
     Product,
     User,
     Order,
-    OrderLine
+    OrderLine,
+    Address
   },
   sync,
   seed

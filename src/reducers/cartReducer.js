@@ -46,6 +46,8 @@ const saveState = (state) => {
 }
 
 // Load Cart from localStorage
+/* receiving all info needed here,
+incl orderLines, shippingAdr and billingAdr if they exist */
 const loadCart = (orderId) => {
 
     // Run local if Anonymous user

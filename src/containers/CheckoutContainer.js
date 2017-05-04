@@ -4,32 +4,26 @@ import CreateUserForm from '../CreateUserForm';
 import { connect } from 'react-redux'
 import CheckoutStep1 from '../CheckoutStep1';
 import CheckoutStep2 from '../CheckoutStep2';
-import { onSaveStep } from '../reducers/checkoutReducer';
 
 
 const CheckoutContainer = (props) =>  {
-    const { activeUser, router, checkoutStep, onSaveStep } = props;
+
+    const { activeUser, router, children } = props;
+
     return (
 
         <div className='container'>
-
-            { activeUser ?
+             {
+                activeUser ?
                 <div>
-                    {
-                        (checkoutStep === 1) ?
-                            <CheckoutStep1 onSaveStep= { onSaveStep } /> : null
-                    }
-                    {
-                        (checkoutStep === 2) ?
-                            <CheckoutStep2 onSaveStep= { onSaveStep } /> : null
-                    }
+                    { React.cloneElement(children, { ...props })}
 
                 </div>
             :
                 <div>
                     <CreateUserForm router={ router } />
                     Shopped with Don before?
-                    <Link to='/login'> Sign in here.</Link>
+                    <Link to='/login?checkout=true'> Sign in here.</Link>
                 </div>
             }
         </div>
@@ -39,17 +33,21 @@ const CheckoutContainer = (props) =>  {
 const mapStateToProps = (state) => (
     {
         activeUser: state.auth.user,
-        checkoutStep: state.checkout.checkoutStep
+        orderId: state.order.order && state.order.order.id
     }
 )
 
-const mapDispatchToProps = (dispatch) => (
-    {
-        onSaveStep: () => dispatch(onSaveStep())
-    }
-)
-
-
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return (
+        {
+            saveCheckoutStep: (userInfo, orderId, axiosFn, nextPath) => {
+                dispatch( axiosFn(userInfo, orderId) )
+                .then( () => ownProps.router.push(`/checkout/${nextPath}`))
+                .catch( err => console.log(err))
+            }
+        }
+    )
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutContainer);
 

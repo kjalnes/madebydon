@@ -3,13 +3,13 @@ import thunk from 'redux-thunk';
 import productsReducer, { loadProducts } from './reducers/productsReducer';
 import authReducer, { loadUser } from './reducers/authReducer';
 import cartReducer, { saveState } from './reducers/cartReducer';
-import checkoutReducer, { onSaveStep } from './reducers/checkoutReducer';
+import orderReducer from './reducers/orderReducer';
 
 const combined = combineReducers({
   products: productsReducer,
   auth: authReducer,
   cart: cartReducer,
-  checkout: checkoutReducer
+  order: orderReducer
 });
 
 /*

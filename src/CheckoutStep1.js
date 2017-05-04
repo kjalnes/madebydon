@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { saveShipping } from './reducers/orderReducer';
 
 /*** Shipping Form ***/
-
 class CheckoutStep1 extends Component {
-    constructor({ onSaveStep }) {
+    constructor({ activeUser, saveCheckoutStep, orderId }) {
         super();
         this.state = { addressLine1: '', addressLine2: '', city: '', state: '', zip: '', country: '' };
         this.onInputChange = this.onInputChange.bind(this);
-        this.onSaveStep = this.onSaveStep.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onInputChange(key, ev) {
         this.setState({ [key]: ev.target.value })
     }
 
-    onSaveStep(ev) {
-        ev.preventDefault()
-        this.props.onSaveStep()
+    onSubmit(ev) {
+        ev.preventDefault();
+        const userInfo = this.state;
+        const orderId = this.props.orderId;
+        this.props.saveCheckoutStep(userInfo, orderId, saveShipping, 'billing');
+        // validate on client side not done
     }
 
     render() {
@@ -40,7 +43,7 @@ class CheckoutStep1 extends Component {
                     <div className="form-group">
                         <input onChange={ this.onInputChange.bind(null, 'country') } className="form-control" value={this.state.country} placeholder='Country'/>
                     </div>
-                    <button onClick={ this.onSaveStep }>Save shipping address</button>
+                    <button onClick={ this.onSubmit }>Save shipping address</button>
 
                 </form>
             </div>
@@ -48,5 +51,5 @@ class CheckoutStep1 extends Component {
     }
 }
 
-
 export default CheckoutStep1;
+

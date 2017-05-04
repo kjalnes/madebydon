@@ -6,7 +6,7 @@ module.exports = app;
 
 /* CREATE user and CREATE empty order */
 app.post('/', (req, res, next)=> {
-    // this assumes the user does not exist already
+    //  assumes the user does not exist in db already
     models.User.create(req.body.userInfo)
     .then( user => {
         return models.Order.create({ status: 'pending', userId: user.id })
