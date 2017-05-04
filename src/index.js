@@ -12,6 +12,7 @@ import CheckoutContainer from './containers/CheckoutContainer';
 import CheckoutStep1 from './CheckoutStep1';
 import CheckoutStep2 from './CheckoutStep2';
 import CheckoutStep3 from './CheckoutStep3';
+import CheckoutStep4 from './CheckoutStep4';
 
 const root = document.getElementById('root');
 
@@ -26,7 +27,8 @@ const routes = (
         <Route path='checkout' component={ CheckoutContainer }>
           <Route path='/checkout/shipping' component={ CheckoutStep1 } />
           <Route path='/checkout/billing' component={ CheckoutStep2 } />
-          <Route path='/checkout/confirm' component={ CheckoutStep3 } />
+          <Route path='/checkout/payment' component={ CheckoutStep3 } />
+          <Route path='/checkout/confirm' component={ CheckoutStep4 } />
         </Route>
       </Route>
     </Router>
