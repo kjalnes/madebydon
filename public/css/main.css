@@ -82,3 +82,20 @@ a.glyphicon.glyphicon-remove {
     padding: 10px;
     border: none;
 }
+
+.productSearch{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.productSearch input{
+    width:85%;
+}
+
+.productItem img{
+    height:100%;
+    width:100%;
+}
+
+.productsList{
+    margin:5%;
+}
