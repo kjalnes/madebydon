@@ -28,7 +28,7 @@ const routes = (
           <Route path='/checkout/shipping' component={ CheckoutStep1 } />
           <Route path='/checkout/billing' component={ CheckoutStep2 } />
           <Route path='/checkout/payment' component={ CheckoutStep3 } />
-          <Route path='/checkout/confirm' component={ CheckoutStep4 } />
+          <Route path='/checkout/complete' component={ CheckoutStep4 } />
         </Route>
       </Route>
     </Router>
