@@ -52,10 +52,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             completeCheckout: (order, payment)=>{
                 dispatch(completeCheckout(order, payment)) // we need to return a promise
                 .then( response => {
-                    console.log('we are about to push incl response', response)
-                    dispatch(clearCart())
-                    ownProps.router.push(`/checkout/confirm`)
+                    console.log('response', response)
+                    console.log('response.order', response.order)
+                    console.log('resonse.newOrder', response.newOrder)
+                    return dispatch(clearCart())
                 })
+                // we have to reset the order in redux and local store
+                .then( () => ownProps.router.push(`/checkout/confirm`))
                 .catch( err => console.log('error', err))
             }
         }

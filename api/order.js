@@ -159,9 +159,14 @@ app.post('/:orderId/payment', (req, res,next) => {
 
         return order[0].save()
     })
-    .then( _order =>{
+    .then( _order => {
+        order = _order;
         console.log('ready to send the order',_order);
-        res.send([ _order ]);
+        return models.Order.create({ userId: _order.userId })
+    })
+    .then( newOrder => {
+        console.log('newOrder', newOrder)
+        res.send({order: order, newOrder: newOrder });
     })
     .catch(err => records.sendStatus(500));
 });

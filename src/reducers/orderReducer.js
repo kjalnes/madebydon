@@ -9,7 +9,7 @@ import store from '../store';
 const LOAD_ORDER = 'LOAD_ORDER';
 const LOAD_ERROR = 'LOAD_ERROR';
 const COMPLETE_CHECKOUT = 'COMPLETE_CHECKOUT';
-
+const CONFIRM_ORDER_SUCCESS = 'CONFIRM_ORDER_SUCCESS';
 
 /*** Actions ***/
 // import {  } from '../actions/login';
@@ -18,6 +18,10 @@ const loadOrderSuccess = (order) => ({
     order: order
 });
 
+const confirmOrderSuccess = (order) => ({
+    type: CONFIRM_ORDER_SUCCESS,
+    order: order
+});
 
 /**** Methods ***/
 
@@ -94,7 +98,7 @@ const completeCheckout = (order, payment) => {
             .then(() => (createStripeToken(payment)))
             .then((token) => (performCheckout(order, token)))
             .then((payload) => {
-                return dispatch(loadOrderSuccess(order))
+                return dispatch(confirmOrderSuccess(order))
             })
             .catch(err => {
                 console.log('cascade error',err);
@@ -103,6 +107,11 @@ const completeCheckout = (order, payment) => {
     };
 }
 
+const confirmOrder = () => {
+    return (dispatch) => {
+
+    }
+}
 
 
 /*** Reducer ***/
@@ -115,6 +124,8 @@ const orderReducer = (state = initialState, action) => {
             return {...state, order: action.order }
         case LOAD_ERROR:
             return {...state, message: action.message }
+        case CONFIRM_ORDER_SUCCESS:
+            return {...state, order: action.order }
     }
     return state
 };

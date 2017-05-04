@@ -1,7 +1,10 @@
 const conn = require('./db');
 
 const Order = conn.define('order', {
-      status: conn.Sequelize.ENUM('complete', 'pending')
+    status: {
+        type: conn.Sequelize.ENUM('complete', 'pending'),
+        defaultValue: 'pending'
+    }
 });
 
 module.exports = Order;
