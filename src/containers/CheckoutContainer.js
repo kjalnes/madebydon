@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import CheckoutStep1 from '../CheckoutStep1';
 import CheckoutStep2 from '../CheckoutStep2';
 import { completeCheckout } from '../reducers/orderReducer';
-
+import { clearCart } from '../reducers/cartReducer';
 
 
 const CheckoutContainer = (props) =>  {
@@ -53,6 +53,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                 dispatch(completeCheckout(order, payment)) // we need to return a promise
                 .then( response => {
                     console.log('we are about to push incl response', response)
+                    dispatch(clearCart())
                     ownProps.router.push(`/checkout/confirm`)
                 })
                 .catch( err => console.log('error', err))
