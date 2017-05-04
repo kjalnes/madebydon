@@ -26,9 +26,6 @@ const destroyProduct = (product)=> {
   };
 };
 
-// const addtoCart = ()=>{
-
-// };
 
 const filterProducts =()=>{
 
@@ -39,7 +36,6 @@ const filterProducts =()=>{
 export {
   destroyProduct,
   loadProducts,
-  // addtoCart,
   filterProducts
 };
 
