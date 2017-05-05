@@ -16,6 +16,13 @@ body {
     font-weight: 300;
 }
 
+.hide {
+    display: none;
+}
+
+hr {
+    border: 1px solid #eee;
+}
 
 .logo-title {
     text-align: center;
@@ -71,6 +78,20 @@ a.glyphicon.glyphicon-remove {
     margin-top: 10px;
 }
 
+/* CHECKOUT STEP 3 PAGE */
+
+.container.checkout-step-3 {
+    margin-top: 0;
+}
+
+form.checkout-form {
+    width: 80%;
+}
+
+/*.address-checkout {
+    padding-bottom: 30px;
+}
+*/
 /* MY PROFILE PAGE */
 ul.list-group {
     list-style: none;
@@ -134,4 +155,4 @@ ul.list-group {
 .productsList{
     margin:5%;
 }
-/*
+*/
