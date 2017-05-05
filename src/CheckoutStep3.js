@@ -69,7 +69,7 @@ class CheckoutStep3 extends Component {
                                     <input type="number" className="form-control" id="cvcInput" placeholder="123" onChange={this.onInputChange.bind(null, 'cvc')} />
                                 </div>
                             </div>
-                            <button>Place my order</button>
+                            <button className='custom-button-1'>Place my order</button>
                         </form>
                     </div>
                     <div className='col-xs-6'>
