@@ -38,7 +38,7 @@ class CheckoutStep3 extends Component {
 
         // Submit the order to stripe with the CC card to get the token
         // for that card.
-        this.props.completeCheckout(this.props.order,payment);
+        this.props.completeCheckout(this.props.order, payment);
 
     }
 

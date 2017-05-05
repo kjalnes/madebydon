@@ -1,6 +1,7 @@
 const app = require('express').Router();
 const models = require('../models').models;
 
+module.exports = app;
 
 app.get('/:orderId', (req, res, next) => {
     // models.Order.findOne(
@@ -112,7 +113,7 @@ app.post('/:orderId/billing', (req, res,next) => {
 
 // post payment
 app.post('/:orderId/payment', (req, res,next) => {
-    console.log('server payment route', req.params.orderId)
+    // console.log('server payment route', req.params.orderId)
     let order;
 
     models.Order.findAll({
@@ -134,7 +135,7 @@ app.post('/:orderId/payment', (req, res,next) => {
         ]
     })
     .then(_order => {
-        console.log('order exist', _order);
+        // console.log('order exist', _order);
         order = _order;
 
         //sk = secret key
@@ -151,8 +152,12 @@ app.post('/:orderId/payment', (req, res,next) => {
     .then( charge => {
         console.log('stripe call success', charge);
         // Update the order status and the order
-        console.log('order.status before save', order[0].status)
+        // console.log('order.status before save', order[0].status)
         order[0].status = 'complete';
+        order[0].confirmationId = charge.id
+        order[0].amount = charge.amount
+
+        // order.confirmationId = charge.id
         // here the stripe number an others matching records
 
         console.log('order.status after save', order[0].status)
@@ -161,7 +166,8 @@ app.post('/:orderId/payment', (req, res,next) => {
     })
     .then( _order => {
         order = _order;
-        console.log('ready to send the order',_order);
+        // console.log('ready to send the order',_order);
+        // create new empty order for user
         return models.Order.create({ userId: _order.userId })
     })
     .then( newOrder => {
@@ -171,4 +177,4 @@ app.post('/:orderId/payment', (req, res,next) => {
     .catch(err => records.sendStatus(500));
 });
 
-module.exports = app;
+

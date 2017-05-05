@@ -71,6 +71,19 @@ a.glyphicon.glyphicon-remove {
     margin-top: 10px;
 }
 
+/* MY PROFILE PAGE */
+ul.list-group {
+    list-style: none;
+}
+
+.order-item {
+    text-decoration: underline;
+}
+
+.order-list  {
+    margin: 0;
+}
+
 /* CUSTOM BUTTONS */
 .custom-button-1 {
     background-color: #ebe9eb;
@@ -82,3 +95,7 @@ a.glyphicon.glyphicon-remove {
     padding: 10px;
     border: none;
 }
+
+
+
+

@@ -26,3 +26,33 @@ app.post('/', (req, res, next)=> {
     })
     .catch(next)
 });
+
+// /api/user/:userId/orders
+
+// get all completed orders from user
+app.get('/:userId/orders', (req, res, next) => {
+    models.Order.findAll({ where: {
+            userId: req.params.userId,
+            status: 'complete'
+        },
+        include: [
+            {
+                model: models.OrderLine,
+                include: [ models.Product ]
+            },
+            {
+                model: models.Address,
+                as: 'billing'
+            },
+            {
+                model: models.Address,
+                as: 'shipping'
+            }
+        ]
+    })
+    .then( orders => {
+        console.log('user has completed orders amount', orders.length)
+        res.send(orders)
+    })
+    .catch(next)
+});

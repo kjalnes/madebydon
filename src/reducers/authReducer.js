@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { loadCart, clearCart } from './cartReducer';
-import { loadOrder } from './orderReducer';
+import { loadOrder, loadCompletedOrders } from './orderReducer';
 import store from '../store';
 
 /*** Constants ***/
@@ -14,13 +14,15 @@ import { loadState } from './cartReducer';
 /**** Methods ***/
 
 // Load the user from the token
+// Load order, completed order and cart
 const loadUser = (token) => {
     return (dispatch) => {
         if (token) {
             axios.get(`/api/session/${token}`)
                 .then( response => response.data)
                 .then( user => {
-                    dispatch(loginSuccess(user))
+                    dispatch(loginSuccess(user));
+                    dispatch(loadCompletedOrders(user.id));
                     return user.orders[0].id
                 })
                 .then( orderId => {
