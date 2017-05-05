@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CartContainer from './containers/CartContainer';
 
 /*** Confirm Order Page ***/
 class CheckoutStep3 extends Component {
@@ -48,6 +49,8 @@ class CheckoutStep3 extends Component {
         return (
             <div className='container'>
                 { this.props.errMessage ? <div className='alert alert-danger'>{ this.props.errMessage }</div> : null }
+                <CartContainer checkoutCart={true} />
+
                 <form onSubmit={this.onSubmit}>
                     <div className="panel-body">
                         <div className="form-group">

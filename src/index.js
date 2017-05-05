@@ -25,7 +25,7 @@ const routes = (
         <Route path='products' component={ ProductListContainer } />
         <Route path='login' component={ LoginContainer } />
         <Route path='cart' component={ CartContainer } />
-        <Route path='checkout' component={ CheckoutContainer }>
+        <Route path='checkout' component={ CheckoutContainer } >
           <Route path='/checkout/shipping' component={ CheckoutStep1 } />
           <Route path='/checkout/billing' component={ CheckoutStep2 } />
           <Route path='/checkout/payment' component={ CheckoutStep3 } />
