@@ -9,7 +9,7 @@ const UserOrderHistory = ({ completedOrders }) => {
 
     return (
         <div className='container'>
-            <span className='custom-title-1'>Order History</span>
+            <span className='custom-title-1'>My Order History</span>
             {
                 completedOrders.map( order => {
                     return (
