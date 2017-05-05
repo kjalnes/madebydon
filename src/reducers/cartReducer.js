@@ -5,14 +5,16 @@ import {
     LOAD_CART,
     REMOVE_FROM_CART,
     ADD_TO_CART,
-    CLEAR_CART } from '../constants/';
+    CLEAR_CART
+} from '../constants/';
 
 /*** Actions ***/
 import {
     loadCartSuccess,
     removeFromCartSuccess,
     addToCartSuccess,
-    clearCartSuccess } from '../actions/cart';
+    clearCartSuccess
+} from '../actions/cart';
 
 
 
@@ -61,19 +63,19 @@ const loadCart = (orderId) => {
 
     return (dispatch) => {
         const localCart = loadState();
-        const orderlines = localCart.cartItems.map( item => {
+        const orderlines = localCart.cartItems.map(item => {
             // overwriteQty = true
-            return dispatch(addToCart( orderId, item.product, item.qty, true))
+            return dispatch(addToCart(orderId, item.product, item.qty, true))
         })
         return Promise.all(orderlines)
-        .then( () => {
-            axios.get(`/api/order/${orderId}`)
-                .then(response => response.data)
-                .then(order => {
-                    dispatch(loadCartSuccess(order));
-                })
-                .catch(err => console.log('Error loadCart:', err));
-        })
+            .then(() => {
+                axios.get(`/api/order/${orderId}`)
+                    .then(response => response.data)
+                    .then(order => {
+                        dispatch(loadCartSuccess(order));
+                    })
+                    .catch(err => console.log('Error loadCart:', err));
+            })
     };
 };
 
@@ -98,7 +100,7 @@ const removeFromCart = (orderId, productId) => {
 };
 
 // Add items to the cart
-const addToCart = (orderId, product, qty=1, overwriteQty=false) => {
+const addToCart = (orderId, product, qty = 1, overwriteQty = false) => {
     // if anonymous user, set the local cart to our state
     if (orderId === 0) {
         // Run local
@@ -138,17 +140,17 @@ const cartReducer = (state = loadState() || initialState, action) => {
         case LOAD_CART:
             return { ...state, cartItems: action.cart[0].orderlines }
         case CLEAR_CART:
-            return { ...state,  cartItems: [] }
+            return { ...state, cartItems: [] }
         case REMOVE_FROM_CART:
             return { ...state, cartItems: state.cartItems.filter(item => item.productId !== action.productId) }
         case ADD_TO_CART:
             let cartItems;
             let productExistsInCart = state.cartItems.some(item => item.productId === action.product.id) // boolean
 
-            if ( productExistsInCart ) {
+            if (productExistsInCart) {
                 cartItems = state.cartItems.map(_item => {
                     if (_item.productId === action.product.id) {
-                        if(action.overwriteQty) {
+                        if (action.overwriteQty) {
                             _item.qty = action.qty
                         } else {
                             _item.qty += action.qty

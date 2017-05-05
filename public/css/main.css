@@ -105,11 +105,33 @@ ul.list-group {
     width:85%;
 }
 
-.productItem img{
-    height:100%;
-    width:100%;
+.productItem{
+    padding: .9em 0;
+    margin-top:0;
+    margin-bottom:40;
+    margin-left:2;
+    margin-right:2;
+    height: 435px;
 }
 
+.productItem img{
+    width: 100%;
+}
+
+
+.productItem h3{
+    font-family: 'Helvetica Neue', 'RealMadrid2009', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif'!important;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 16px !important;
+}
+
+.productItem button{
+   position: absolute;
+   bottom:   0;
+}
+/*
 .productsList{
     margin:5%;
 }
+/*
