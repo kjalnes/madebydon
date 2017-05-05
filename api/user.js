@@ -20,14 +20,12 @@ app.post('/', (req, res, next)=> {
             return Promise.all(orderlines)
         })
         .then( () => {
-            console.log('user, order and orderlines created')
             res.send(user)
         })
     })
     .catch(next)
 });
 
-// /api/user/:userId/orders
 
 // get all completed orders from user
 app.get('/:userId/orders', (req, res, next) => {
@@ -51,7 +49,6 @@ app.get('/:userId/orders', (req, res, next) => {
         ]
     })
     .then( orders => {
-        console.log('user has completed orders amount', orders.length)
         res.send(orders)
     })
     .catch(next)

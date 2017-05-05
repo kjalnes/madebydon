@@ -113,7 +113,6 @@ app.post('/:orderId/billing', (req, res,next) => {
 
 // post payment
 app.post('/:orderId/payment', (req, res,next) => {
-    // console.log('server payment route', req.params.orderId)
     let order;
 
     models.Order.findAll({

@@ -67,18 +67,6 @@ const createUser = (userInfo) => {
 };
 
 
-// const saveShipping = (userInfo, orderId) => {
-//     return(dispatch) => {
-//         return axios.post(`/api/order/${orderId}/address`, { userInfo } )
-//             .then( response => response.data)
-//             .then( user => {
-//               dispatch(login({ email: user.email, password: user.password }))
-//         })
-//         .catch(err => console.log(err))
-//     }
-// };
-
-
 
 /*** Reducer ***/
 
@@ -100,7 +88,6 @@ export {
     logout,
     loadUser,
     createUser
-    // saveShipping
 };
 
 export default authReducer;
