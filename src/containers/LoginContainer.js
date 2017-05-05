@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import UserInfo from '../UserInfo';
 
 class LoginContainer extends Component {
-    constructor({ login, logout, activeUser, router, order }) {
+    constructor({ login, logout, activeUser, router, order, completedOrders }) {
         super();
         this.state = { email: '', password: '' };
         this.onInputChange = this.onInputChange.bind(this);
@@ -39,6 +39,7 @@ class LoginContainer extends Component {
                         activeUser={ this.props.activeUser }
                         onLogoutSubmit={ this.onLogoutSubmit }
                         order= { this.props.order }
+                        completedOrders = { this.props.completedOrders }
                     />
                   :
                     <form>
@@ -64,7 +65,13 @@ class LoginContainer extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({ activeUser: state.auth.user, order: state.order.order })
+const mapStateToProps = (state) => (
+    {
+        activeUser: state.auth.user,
+        order: state.order.order,
+        completedOrders: state.order.completedOrders
+    }
+)
 
 const mapDispatchToProps = (dispatch) => (
     {

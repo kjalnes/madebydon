@@ -20,9 +20,36 @@ app.post('/', (req, res, next)=> {
             return Promise.all(orderlines)
         })
         .then( () => {
-            console.log('user, order and orderlines created')
             res.send(user)
         })
+    })
+    .catch(next)
+});
+
+
+// get all completed orders from user
+app.get('/:userId/orders', (req, res, next) => {
+    models.Order.findAll({ where: {
+            userId: req.params.userId,
+            status: 'complete'
+        },
+        include: [
+            {
+                model: models.OrderLine,
+                include: [ models.Product ]
+            },
+            {
+                model: models.Address,
+                as: 'billing'
+            },
+            {
+                model: models.Address,
+                as: 'shipping'
+            }
+        ]
+    })
+    .then( orders => {
+        res.send(orders)
     })
     .catch(next)
 });

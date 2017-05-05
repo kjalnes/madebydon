@@ -10,6 +10,7 @@ const LOAD_ORDER = 'LOAD_ORDER';
 const LOAD_ERROR = 'LOAD_ERROR';
 const COMPLETE_CHECKOUT = 'COMPLETE_CHECKOUT';
 const CONFIRM_ORDER_SUCCESS = 'CONFIRM_ORDER_SUCCESS';
+const LOAD_COMPLETED_ORDERS = 'LOAD_COMPLETED_ORDERS';
 
 /*** Actions ***/
 // import {  } from '../actions/login';
@@ -18,10 +19,18 @@ const loadOrderSuccess = (order) => ({
     order: order
 });
 
-const confirmOrderSuccess = (order) => ({
+const confirmOrderSuccess = (orders) => ({
     type: CONFIRM_ORDER_SUCCESS,
-    order: order
+    order: orders.order,
+    newOrder: orders.newOrder
 });
+
+const completedOrdersSuccess = (orders) => ({
+    type: LOAD_COMPLETED_ORDERS,
+    completedOrders: orders
+});
+
+
 
 /**** Methods ***/
 
@@ -33,6 +42,19 @@ const loadOrder = (orderId) => {
             dispatch(loadOrderSuccess(order))
         })
         .catch(err => console.log('Error loadOrder:', err));
+    }
+}
+
+/* loads all previous orders */
+const loadCompletedOrders = (userId) => {
+    return (dispatch) => {
+        return axios.get(`/api/user/${userId}/orders`)
+        .then( response => response.data )
+        .then( orders => {
+            // console.log('got all orders', orders)
+            dispatch(completedOrdersSuccess(orders))
+        })
+        .catch(err => console.log('Error loadCompletedOrders:', err));
     }
 }
 
@@ -81,9 +103,10 @@ const performCheckout = (order, token) => {
     console.log(`Using token (${token}) to purchase ${order.id} with a total????`);
 
     return axios.post(`/api/order/${order.id}/payment`, { token })
-    .then( response => {
-        console.log('response from performCheckout',response)
-        return response;
+    .then( response =>  response.data)
+    .then( data =>  {
+        console.log('data', data)
+        return data
     })
 
 
@@ -97,8 +120,9 @@ const completeCheckout = (order, payment) => {
         return Scriptly.loadJavascript('https://js.stripe.com/v2/')
             .then(() => (createStripeToken(payment)))
             .then((token) => (performCheckout(order, token)))
-            .then((payload) => {
-                return dispatch(confirmOrderSuccess(order))
+            .then( data => {
+                console.log(data.order, data.newOrder)
+                return dispatch(confirmOrderSuccess( data ))
             })
             .catch(err => {
                 console.log('cascade error',err);
@@ -125,13 +149,21 @@ const orderReducer = (state = initialState, action) => {
         case LOAD_ERROR:
             return {...state, message: action.message }
         case CONFIRM_ORDER_SUCCESS:
-            return {...state, order: action.order }
+            return {...state, order: action.newOrder, completedOrders: state.completedOrders.concat([action.order]) }
+        case LOAD_COMPLETED_ORDERS:
+            return {...state, completedOrders: action.completedOrders }
     }
     return state
 };
 
 
-export { loadOrder, saveShipping, saveBilling, completeCheckout };
+export {
+    loadOrder,
+    saveShipping,
+    saveBilling,
+    completeCheckout,
+    loadCompletedOrders
+};
 
 export default orderReducer;
 
