@@ -5,18 +5,18 @@ import { connect } from 'react-redux';
 import { loadCart, removeFromCart } from '../reducers/cartReducer';
 
 const CartContainer = ( props ) => {
-    const { activeUser, cart, removeFromCart, cartTotal, router } = props;
+    const { activeUser, cart, removeFromCart, cartTotal, router, isFinalStep } = props;
     return (
     <div className='container'>
         { cart  ?
             <div>
-                <CartProducts cart={ cart } removeFromCart={ removeFromCart } />
+                <CartProducts cart={ cart } removeFromCart={ removeFromCart } isFinalStep={ isFinalStep } />
                 <hr />
                 <div className='row'>
                     <div className='col-xs-8'>
                     </div>
                     <div className='col-xs-4'>
-                        <CartTotals cartTotal={ cartTotal } activeUser={ activeUser } router={ router } />
+                        <CartTotals cartTotal={ cartTotal } activeUser={ activeUser } router={ router } isFinalStep={ isFinalStep } />
                     </div>
                 </div>
             </div>
