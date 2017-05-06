@@ -1,7 +1,7 @@
 {
-  "name": "react-template",
+  "name": "made by don",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mini E-commercer Store",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.15.3",
@@ -31,9 +31,9 @@
   "scripts": {
     "db-init": "pg-init grace_shopper",
     "postinstall": "npm run webpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "./node_modules/webpack/bin/webpack.js",
-    "start:dev": "npm run webpack -- -w & DATABASE_URL=postgres://localhost/grace_shopper nodemon --ignore dist/ --ignore src/ server.js"
+    "start:dev": "npm run webpack -- -w & DATABASE_URL=postgres://localhost/grace_shopper nodemon --ignore dist/ --ignore src/ server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
