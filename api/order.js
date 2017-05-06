@@ -42,7 +42,7 @@ app.post('/:orderId', (req, res, next) => {
         .then(orderline => {
             if (orderline) {
                 //Update the qty
-                if(req.body.overwriteQty) {
+                if (req.body.overwriteQty) {
                     orderline.qty = req.body.qty;
                 } else {
                     orderline.qty += req.body.qty;
@@ -82,37 +82,37 @@ app.delete('/:orderId/:productId', (req, res, next) => {
 });
 
 // post shipping address
-app.post(`/:orderId/shipping`, (req, res,next) => {
+app.post(`/:orderId/shipping`, (req, res, next) => {
     models.Address.create(req.body.userInfo)
-    .then( address => {
-        return models.Order.findById(req.params.orderId)
-            .then( order => {
-                order.shippingId = address.id
-                order.save();
-                res.send([ order ]);
-            })
-    })
-    .catch(next)
+        .then(address => {
+            return models.Order.findById(req.params.orderId)
+                .then(order => {
+                    order.shippingId = address.id
+                    order.save();
+                    res.send([order]);
+                });
+        })
+        .catch(next);
 });
 
 
 // post billing address
-app.post('/:orderId/billing', (req, res,next) => {
+app.post('/:orderId/billing', (req, res, next) => {
     models.Address.create(req.body.userInfo)
-    .then( address => {
-        return models.Order.findById(req.params.orderId)
-            .then( order => {
-                order.billingId = address.id
-                order.save();
-                res.send([ order ]);
-            })
-    })
-    .catch(next)
+        .then(address => {
+            return models.Order.findById(req.params.orderId)
+                .then(order => {
+                    order.billingId = address.id
+                    order.save();
+                    res.send([order]);
+                })
+        })
+        .catch(next)
 });
 
 
 // post payment
-app.post('/:orderId/payment', (req, res,next) => {
+app.post('/:orderId/payment', (req, res, next) => {
     let order;
 
     models.Order.findAll({
@@ -133,47 +133,75 @@ app.post('/:orderId/payment', (req, res,next) => {
             }
         ]
     })
-    .then(_order => {
-        // console.log('order exist', _order);
-        order = _order;
+        .then(_order => {
+            // console.log('order exist', _order);
+            order = _order;
 
-        //sk = secret key
-        const stripe = require('stripe')('sk_test_R10qlCsOK5ECIlbM6geYGHIR')
+            //sk = secret key
+            const stripe = require('stripe')('sk_test_R10qlCsOK5ECIlbM6geYGHIR')
 
-        // returns a promise
-        return stripe.charges.create({
-            amount: 200.00,
-            currency: 'usd',
-            description: 'we be shoppin',
-            source: req.body.token
+            // returns a promise
+            return stripe.charges.create({
+                amount: 200.00,
+                currency: 'usd',
+                description: 'we be shoppin',
+                source: req.body.token
+            })
         })
-    })
-    .then( charge => {
-        console.log('stripe call success', charge);
-        // Update the order status and the order
-        // console.log('order.status before save', order[0].status)
-        order[0].status = 'complete';
-        order[0].confirmationId = charge.id
-        order[0].amount = charge.amount
+        .then(charge => {
+            console.log('stripe call success', charge);
+            // Update the order status and the order
+            // console.log('order.status before save', order[0].status)
+            order[0].status = 'complete';
+            order[0].confirmationId = charge.id
+            order[0].amount = charge.amount
 
-        // order.confirmationId = charge.id
-        // here the stripe number an others matching records
+            // order.confirmationId = charge.id
+            // here the stripe number an others matching records
 
-        console.log('order.status after save', order[0].status)
+            console.log('order.status after save', order[0].status)
 
-        return order[0].save()
-    })
-    .then( _order => {
-        order = _order;
-        // console.log('ready to send the order',_order);
-        // create new empty order for user
-        return models.Order.create({ userId: _order.userId })
-    })
-    .then( newOrder => {
-        console.log('newOrder', newOrder)
-        res.send({order: order, newOrder: newOrder });
-    })
-    .catch(err => records.sendStatus(500));
+            return order[0].save()
+        })
+        .then(_order => {
+            order = _order;
+            // console.log('ready to send the order',_order);
+            // create new empty order for user
+            return models.Order.create({ userId: _order.userId })
+        })
+        .then(newOrder => {
+            console.log('newOrder', newOrder);
+            // Order confirmation via email
+            sendEmail();
+
+            res.send({ order: order, newOrder: newOrder });
+        })
+        .catch(err => res.status(500).send(err));
 });
 
 
+function sendEmail() {
+    console.log('sendemail');
+    var helper = require('sendgrid').mail;
+    var fromEmail = new helper.Email('thanks@madebydon.com');
+    var toEmail = new helper.Email('mrestuccia@mac.com');
+    var subject = 'Sending with SendGrid is Fun';
+    var content = new helper.Content('text/plain', 'and easy to do anywhere, even with Node.js');
+    var mail = new helper.Mail(fromEmail, subject, toEmail, content);
+
+    var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+    var request = sg.emptyRequest({
+        method: 'POST',
+        path: '/v3/mail/send',
+        body: mail.toJSON()
+    });
+
+    sg.API(request, function (error, response) {
+        if (error) {
+            console.log('Error response received');
+        }
+        console.log(response.statusCode);
+        console.log(response.body);
+        console.log(response.headers);
+    });
+}

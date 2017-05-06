@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import { loadCart, removeFromCart } from '../reducers/cartReducer';
-import CartItem from './cartItem';
+import CartItem from './CartItem';
 
 
 const CartProducts = ({ cart, removeFromCart }) => {
