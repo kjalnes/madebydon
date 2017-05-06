@@ -41,9 +41,12 @@ class CheckoutStep2 extends Component {
                         <input onChange={ this.onInputChange.bind(null, 'zip') } className="form-control" value={this.state.zip} placeholder='Zip code'/>
                     </div>
                     <div className="form-group">
+                        <input onChange={ this.onInputChange.bind(null, 'state') } className="form-control" value={this.state.state} placeholder='State'/>
+                    </div>
+                    <div className="form-group">
                         <input onChange={ this.onInputChange.bind(null, 'country') } className="form-control" value={this.state.country} placeholder='Country'/>
                     </div>
-                    <button onClick={ this.onSubmit }>Save billing address</button>
+                    <button onClick={ this.onSubmit } className='custom-button-1'>Save billing address</button>
 
                 </form>
             </div>

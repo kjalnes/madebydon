@@ -88,6 +88,7 @@ app.post(`/:orderId/shipping`, (req, res,next) => {
         return models.Order.findById(req.params.orderId)
             .then( order => {
                 order.shippingId = address.id
+                order.shipping = address
                 order.save();
                 res.send([ order ]);
             })
