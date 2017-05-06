@@ -54,7 +54,7 @@ class CheckoutStep3 extends Component {
                 <div className='row'>
                     <div className='col-xs-6'>
                         <p> Please review your order. </p>
-                        <form onSubmit={this.onSubmit} className='checkout-form'>
+                        <form onSubmit={this.onSubmit} className='checkout-form well'>
                             <div className="panel-body">
                                 <div className="form-group">
                                     <label htmlFor="cardNumberInput">Card Number</label>

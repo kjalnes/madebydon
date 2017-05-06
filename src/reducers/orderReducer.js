@@ -65,6 +65,7 @@ const saveShipping = (userInfo, orderId) => {
         return axios.post(`/api/order/${orderId}/shipping`, { userInfo } )
             .then( response => response.data)
             .then( order => {
+                console.log('order from saveShipping', order)
                 return dispatch(loadOrderSuccess(order))
         })
         .catch(err => console.log(err))
