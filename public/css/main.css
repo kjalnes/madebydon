@@ -29,6 +29,10 @@ hr {
     font-weight: 300;
 }
 
+a.logo-link:hover {
+    text-decoration: none !important;
+}
+
 .navigation  {
     text-align: center;
     font-family: 'Helvetica Neue', 'RealMadrid2009', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif';
@@ -114,19 +118,24 @@ ul.list-group {
     width: 100%;
 }
 
+.custom-button-1:hover {
+    font-style: italic;
+}
+
 button.custom-button-1.product-list {
     width: 43%;
 }
+
+button.custom-button-1.product-detail {
+    width: 30%;
+}
+
 
 .productSearch{
     text-align: center;
     margin-bottom: 20px;
 }
 
-/*.productSearch input{
-    width:85%;
-}
-*/
 .productItem {
     padding: .9em 0;
     margin-top:0;

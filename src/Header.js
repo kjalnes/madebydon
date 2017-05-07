@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const Header = ({activeUser, cartNum}) => {
   return (  <div className='container navigation'>
-          <h1 className='logo-title'>Made by Don</h1>
+          <Link to='/' className='logo-link'><h1 className='logo-title'>Made by Don</h1></Link>
           <Link to='/'>Home</Link>
           { ' | ' }
           <Link to='/products'>Products</Link>
