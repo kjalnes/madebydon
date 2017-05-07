@@ -35,6 +35,7 @@ const completedOrdersSuccess = (orders) => ({
 /**** Methods ***/
 
 const loadOrder = (orderId) => {
+    console.log('loadOrder being called yall', orderId)
     return (dispatch) => {
         return axios.get(`/api/order/${orderId}`)
         .then( response => response.data )
@@ -65,8 +66,7 @@ const saveShipping = (userInfo, orderId) => {
         return axios.post(`/api/order/${orderId}/shipping`, { userInfo } )
             .then( response => response.data)
             .then( order => {
-                console.log('order from saveShipping', order)
-                return dispatch(loadOrderSuccess(order))
+                dispatch(loadOrder(orderId))
         })
         .catch(err => console.log(err))
     }
@@ -77,7 +77,7 @@ const saveBilling = (userInfo, orderId) => {
         return axios.post(`/api/order/${orderId}/billing`, { userInfo } )
             .then( response => response.data)
             .then( order => {
-                return dispatch(loadOrderSuccess(order))
+                dispatch(loadOrder(orderId))
         })
         .catch(err => console.log('error saveBilling', err))
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CartItem = ({ orderLine, removeFromCart }) => {
+const CartItem = ({ orderLine, removeFromCart, isFinalStep }) => {
   if (typeof orderLine === 'undefined') return;
 
   function onDelete(ev) {
@@ -11,7 +11,9 @@ const CartItem = ({ orderLine, removeFromCart }) => {
   return (
       <tr>
         <td className='cart-delete-icon'>
-          <a className='glyphicon glyphicon-remove' title="Remove this item" onClick={(ev) => onDelete(ev)}></a>
+        { isFinalStep ? null :
+              <a className='glyphicon glyphicon-remove' title="Remove this item" onClick={(ev) => onDelete(ev)}> </a>
+        }
         </td>
         <td className="product-thumbnail">
           <img src="http://placehold.it/60x60" />

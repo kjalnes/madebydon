@@ -22,6 +22,7 @@ class CheckoutStep3 extends Component {
     onSubmit(event) {
         event.preventDefault();
 
+
         // Validate the infomation on the client only.
         console.log(this.state);
 
@@ -38,7 +39,7 @@ class CheckoutStep3 extends Component {
 
         // Submit the order to stripe with the CC card to get the token
         // for that card.
-        this.props.completeCheckout(this.props.order, payment);
+        return this.props.completeCheckout(this.props.order, payment);
 
     }
 
@@ -47,13 +48,12 @@ class CheckoutStep3 extends Component {
             <div className='container checkout-step-3'>
 
                 <CartContainer isFinalStep={ true } />
-
-                { this.props.errMessage ? <div className='alert alert-danger'>{ this.props.errMessage }</div> : null }
                 <hr />
 
                 <div className='row'>
                     <div className='col-xs-6'>
                         <p> Please review your order. </p>
+                        { this.props.errMessage ? <div className='alert alert-danger'>{ this.props.errMessage }</div> : null }
                         <form onSubmit={this.onSubmit} className='checkout-form well'>
                             <div className="panel-body">
                                 <div className="form-group">
