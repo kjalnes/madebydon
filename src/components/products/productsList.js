@@ -1,30 +1,32 @@
 import React from 'react';
 
 
-const Product = ({ product, addtoCart, activeUser }) => {
+const Product = ({ product, addtoCart, activeUser, selectProduct }) => {
 	if (!product) return null;
 	return (
 		<div className="col-md-3">
 			<div className="productItem">
-				<img src={`./public/assets/images/style_${product.id}.jpg`} />
-				<h3> {product.name} </h3>
+				<div  onClick={() => selectProduct(product)}>
+					<img src={`./public/assets/images/style_${product.id}.jpg`} />
+					<h3> {product.name} </h3>
+				</div>
 				<button onClick={() => addtoCart((activeUser) ? activeUser.orders[0].id : 0, product, 1)} className="custom-button-1">Add to Cart</button>
 			</div>
 		</div>
 	);
 };
 
-const ProductRow = ({ products, addtoCart, activeUser }) => (
+const ProductRow = ({ products, addtoCart, activeUser, selectProduct }) => (
 	<div className="row">
 		{
 			products.map((product, index) => (
-				<Product key={index} product={product} addtoCart={addtoCart} activeUser={activeUser} />
+				<Product key={index} product={product} addtoCart={addtoCart} activeUser={activeUser} selectProduct={selectProduct} />
 			))
 		}
 	</div>
 );
 
-const ProductContainer = ({ products, addtoCart, activeUser }) => (
+const ProductContainer = ({ products, addtoCart, activeUser, selectProduct }) => (
 	<div className="container">
 		{
 			products.reduce((groups, product, index) => {
@@ -34,7 +36,7 @@ const ProductContainer = ({ products, addtoCart, activeUser }) => (
 				groups[groups.length - 1].push(product);
 				return groups;
 			}, []).map((group, index) => (
-				<ProductRow key={index} products={group} addtoCart={addtoCart} activeUser={activeUser} />
+				<ProductRow key={index} products={group} addtoCart={addtoCart} activeUser={activeUser} selectProduct={selectProduct} />
 			))
 		}
 	</div>
