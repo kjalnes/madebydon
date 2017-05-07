@@ -4,7 +4,6 @@ const models = require('../models').models;
 module.exports = app;
 
 app.get('/:orderId', (req, res, next) => {
-    // models.Order.findOne(
     models.Order.findAll(
         {
             where: { id: req.params.orderId },
@@ -85,7 +84,7 @@ app.delete('/:orderId/:productId', (req, res, next) => {
 app.post(`/:orderId/shipping`, (req, res, next) => {
     models.Address.create(req.body.userInfo)
         .then(address => {
-            return models.Order.findById(req.params.orderId)
+            return models.Order.findOne({ where: { id: req.params.orderId }})
                 .then(order => {
                     order.shippingId = address.id
                     order.save();
@@ -172,7 +171,7 @@ app.post('/:orderId/payment', (req, res, next) => {
         .then(newOrder => {
             console.log('newOrder', newOrder);
             // Order confirmation via email
-            sendEmail();
+            // sendEmail();
 
             res.send({ order: order, newOrder: newOrder });
         })

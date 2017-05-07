@@ -55,12 +55,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     console.log('response', response)
                     console.log('response.order', response.order)
                     console.log('resonse.newOrder', response.newOrder)
-                    return dispatch(clearCart())
+                    if(response.order && response.newOrder) {
+                        dispatch(clearCart())
+                        console.log('we have a succeeded with the order')
+                        ownProps.router.push(`/checkout/complete`)
+                    }
                 })
-                // we have to reset the order in redux and local store
-                // reroute to complete/orderId
-                .then( () => ownProps.router.push(`/checkout/complete`))
-                .catch( err => console.log('error', err))
+                .catch( err => console.log('error completeCheckout', err))
             }
         }
     )

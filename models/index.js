@@ -54,10 +54,11 @@ const seed = () => {
       return Promise.all([productPromises, userPromises, shippingTest, billingTest])
     })
     .then(() => {
-      const orderOne = Order.create({ userId: 3, status: 'pending', shippingId: 1, billingId: 2 });
+      const orderOne = Order.create({ userId: 3, status: 'pending', shippingId: 1, billingId: 2
+ });
       const orderTwo = Order.create({ userId: 1, status: 'pending' });
-      const orderThree = Order.create({ userId: 3, status: 'complete', shippingId: 1, billingId: 2 });
-      const orderFour = Order.create({ userId: 3, status: 'complete', shippingId: 1, billingId: 2 });
+      const orderThree = Order.create({ userId: 3, status: 'complete', shippingId: 1, billingId: 2, confirmationId: 'ch_1AG9jlG9HL9FNXzQRYZ9KpdZ' });
+      const orderFour = Order.create({ userId: 3, status: 'complete', shippingId: 1, billingId: 2, confirmationId: 'ch_1AG9jlG9HL9FNXzQRYZ9KpdZ' });
       return Promise.all([orderOne, orderTwo, orderThree, orderFour])
     })
     .then( ([orderOne, orderTwo, orderThree, orderFour]) => {

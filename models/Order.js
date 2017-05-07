@@ -6,8 +6,7 @@ const Order = conn.define('order', {
         defaultValue: 'pending'
     },
     confirmationId: {
-        type: conn.Sequelize.STRING,
-        defaultValue: 'ch_1AG9jlG9HL9FNXzQRYZ9KpdZ'
+        type: conn.Sequelize.STRING
     },
     amount: {
         type: conn.Sequelize.STRING,
