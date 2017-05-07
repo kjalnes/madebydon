@@ -63,6 +63,20 @@ a.logo-link:hover {
     line-height: 40px;
 }
 
+.custom-title-2 {
+    font-family: 'Helvetica Neue', 'RealMadrid2009', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif';
+    /*font-weight: 300;*/
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 19px;
+    margin: 0 auto;
+}
+
+/* HOME PAGE */
+
+
+
 
 /* CART PAGE */
 td {
@@ -123,7 +137,7 @@ ul.list-group {
 }
 
 button.custom-button-1.product-list {
-    width: 43%;
+    width: 60%;
 }
 
 button.custom-button-1.product-detail {
@@ -139,10 +153,10 @@ button.custom-button-1.product-detail {
 .productItem {
     padding: .9em 0;
     margin-top:0;
-    margin-bottom:40;
+    /*margin-bottom:40;*/
     margin-left:2;
     margin-right:2;
-    height: 435px;
+    /*height: 435px;*/
 }
 
 .productItem img {
@@ -158,6 +172,13 @@ button.custom-button-1.product-detail {
 }
 
 .productItem button{
-   position: absolute;
-   bottom:   0;
+   /*position: absolute;*/
+   /*bottom:   0;*/
+}
+
+
+/* PRODUCT LIST CONTAINER */
+.col-md-3 {
+    padding-right: 1px;
+    padding-left: 1px;
 }
