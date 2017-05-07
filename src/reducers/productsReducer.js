@@ -1,6 +1,7 @@
 import axios from 'axios';
 const LOAD_PRODUCTS_SUCCESS = 'LOAD_PRODUCTS_SUCCESS';
-const DESTROY_PRODUCT_SUCCESS = 'DESTROY_PRODUCT_SUCCESS';
+const SELECT_PRODUCT_SUCCESS = 'SELECT_PRODUCT_SUCCESS';
+const DESELECT_PRODUCT_SUCCESS = 'DESELECT_PRODUCT_SUCCESS';
 
 const loadProductsSuccess = (products) => ({
   type: LOAD_PRODUCTS_SUCCESS,
@@ -14,42 +15,46 @@ const loadProducts = () => {
   };
 };
 
-const destroyProductSuccess = (product) => ({
-  type: DESTROY_PRODUCT_SUCCESS,
+
+const selectProductSuccess = (product) => ({
+  type: SELECT_PRODUCT_SUCCESS,
   product: product
 });
 
-const destroyProduct = (product) => {
+const selectProduct = (product) => {
   return (dispatch) => {
-    return axios.delete(`/api/products/${product.id}`)
-      .then(response => dispatch(destroyProductSuccess(product)));
+    dispatch(selectProductSuccess(product));
   };
 };
 
 
-const filterProducts = () => {
+const deSelectProductSuccess = () => ({
+  type: SELECT_PRODUCT_SUCCESS
+});
 
+const deSelectProduct = () => {
+  return (dispatch) => {
+    dispatch(deSelectProductSuccess());
+  };
 };
 
 
 
-export {
-  destroyProduct,
-  loadProducts,
-  filterProducts
-};
 
-
-const productsReducer = (state = [], action) => {
+const productsReducer = (state = { list: [], selectedProduct: undefined }, action) => {
   switch (action.type) {
     case LOAD_PRODUCTS_SUCCESS:
-      state = action.products;
+      state = { ...state, list: action.products };
       break;
-    case DESTROY_PRODUCT_SUCCESS:
-      state = state.filter(product => product.id != action.product.id);
+    case SELECT_PRODUCT_SUCCESS:
+      state = { ...state, selectedProduct: action.product };
+      break;
+    case DESELECT_PRODUCT_SUCCESS:
+      state = { ...state, selectedProduct: null };
       break;
   }
   return state;
 };
 
+export { loadProducts, selectProduct, deSelectProduct };
 export default productsReducer;

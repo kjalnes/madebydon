@@ -31,7 +31,6 @@ const routes = (
           <Route path='/checkout/payment' component={ CheckoutStep3 } />
           <Route path='/checkout/complete' component={ CheckoutStep4 } />
         </Route>
-        <Route path='productDetails' component={ ProductDetailsContainer } />
       </Route>
     </Router>
   </Provider>
