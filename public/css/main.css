@@ -12,7 +12,6 @@
 
 body {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
-
     font-weight: 300;
 }
 
@@ -28,6 +27,10 @@ hr {
     text-align: center;
     font-family: 'RealMadrid2009', 'Helvetica Neue', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif' !important;
     font-weight: 300;
+}
+
+a.logo-link:hover {
+    text-decoration: none !important;
 }
 
 .navigation  {
@@ -85,14 +88,11 @@ a.glyphicon.glyphicon-remove {
 }
 
 form.checkout-form {
-    width: 80%;
+    /*width: 80%;*/
 }
 
-/*.address-checkout {
-    padding-bottom: 30px;
-}
-*/
 /* MY PROFILE PAGE */
+
 ul.list-group {
     list-style: none;
 }
@@ -118,16 +118,25 @@ ul.list-group {
     width: 100%;
 }
 
+.custom-button-1:hover {
+    font-style: italic;
+}
+
+button.custom-button-1.product-list {
+    width: 43%;
+}
+
+button.custom-button-1.product-detail {
+    width: 30%;
+}
+
 
 .productSearch{
     text-align: center;
     margin-bottom: 20px;
 }
-.productSearch input{
-    width:85%;
-}
 
-.productItem{
+.productItem {
     padding: .9em 0;
     margin-top:0;
     margin-bottom:40;
@@ -136,12 +145,12 @@ ul.list-group {
     height: 435px;
 }
 
-.productItem img{
+.productItem img {
     width: 100%;
 }
 
 
-.productItem h3{
+.productItem h3 {
     font-family: 'Helvetica Neue', 'RealMadrid2009', 'Arial Narrow', 'Helvetica Neue', Arial, 'san serif'!important;
     font-weight: 100;
     text-transform: uppercase;
@@ -152,8 +161,3 @@ ul.list-group {
    position: absolute;
    bottom:   0;
 }
-/*
-.productsList{
-    margin:5%;
-}
-*/

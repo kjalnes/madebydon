@@ -10,7 +10,7 @@ const Product = ({ product, addtoCart, activeUser, selectProduct }) => {
 					<img src={`./public/assets/images/style_${product.id}.jpg`} />
 					<h3> {product.name} </h3>
 				</div>
-				<button onClick={() => addtoCart((activeUser) ? activeUser.orders[0].id : 0, product, 1)} className="custom-button-1">Add to Cart</button>
+				<button onClick={() => addtoCart((activeUser) ? activeUser.orders[0].id : 0, product, 1)} className="custom-button-1 product-list">Add to Cart</button>
 			</div>
 		</div>
 	);

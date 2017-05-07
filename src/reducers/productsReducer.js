@@ -50,6 +50,7 @@ const productsReducer = (state = { list: [], selectedProduct: undefined }, actio
       state = { ...state, selectedProduct: action.product };
       break;
     case DESELECT_PRODUCT_SUCCESS:
+      console.log('we are getting here')
       state = { ...state, selectedProduct: null };
       break;
   }
