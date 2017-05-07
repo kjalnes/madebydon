@@ -10,7 +10,15 @@ import { clearCart } from '../reducers/cartReducer';
 
 const CheckoutContainer = (props) =>  {
 
-    const { activeUser, router, children, orderId, order, errMessage } = props;
+    const {
+        activeUser,
+        router,
+        children,
+        orderId,
+        order,
+        errMessage,
+        completedOrders,
+        errAuth } = props;
 
     return (
 
@@ -22,7 +30,7 @@ const CheckoutContainer = (props) =>  {
                 </div>
             :
                 <div>
-                    <CreateUserForm router={ router } />
+                    <CreateUserForm router={ router } errAuth={ errAuth } />
                     Shopped with Don before?
                     <Link to='/login?checkout=true'> Sign in here.</Link>
                 </div>
@@ -36,7 +44,10 @@ const mapStateToProps = (state) => (
         activeUser: state.auth.user,
         orderId: state.order.order && state.order.order[0] && state.order.order[0].id,
         order: state.order.order && state.order.order[0],
-        errMessage: state.order.message
+        errMessage: state.order.message,
+        completedOrders: state.order.completedOrders,
+        errAuth: state.auth.errMsg
+
     }
 )
 

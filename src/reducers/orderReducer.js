@@ -122,7 +122,7 @@ const completeCheckout = (order, payment) => {
             .then(() => (createStripeToken(payment)))
             .then((token) => (performCheckout(order, token)))
             .then( data => {
-                console.log(data.order, data.newOrder)
+                console.log('datat on completeCheckout before dispatch', data)
                 return dispatch(confirmOrderSuccess( data ))
             })
             .catch(err => {

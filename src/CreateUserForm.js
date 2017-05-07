@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { createUser } from './reducers/authReducer';
 
 class CreateUserForm extends Component {
-    constructor({ createUser, router }) {
+    constructor({ createUser, router, errAuth }) {
         super();
         this.state = { firstName: '', lastName: '', email: '', password: '' };
         this.onInputChange = this.onInputChange.bind(this);
@@ -26,6 +26,7 @@ class CreateUserForm extends Component {
         return (
             <div className='container'>
                 <h3>Create your user profile</h3>
+                { this.props.errAuth ? <div className='alert alert-danger'>{this.props.errAuth}</div> : null }
                 <form>
                     <div className="form-group">
                         <input onChange={ this.onInputChange.bind(null, 'firstName') } className="form-control" value={this.state.firstName} placeholder='First name'/>

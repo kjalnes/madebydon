@@ -5,6 +5,9 @@ import Address from './Address';
 const UserAccount = (props) => {
     const { activeUser, onLogoutSubmit, order, completedOrders } = props;
     const lastOrder = completedOrders ? completedOrders.slice(-1)[0] : null;
+    const shippingAdr = lastOrder !== undefined ? lastOrder.shipping : null;
+    const billingAdr = lastOrder !== undefined ? lastOrder.billing : null;
+
 
     return (
         <div>
@@ -23,7 +26,7 @@ const UserAccount = (props) => {
                 <div className='col-xs-6'>
                     <span className='custom-title-1'>BILLING ADDRESS</span><br />
                     { lastOrder ?
-                        <Address activeUser={ activeUser } address={ lastOrder.billing } />
+                        <Address activeUser={ activeUser } address={ billingAdr } />
                         :
                         <span>You have no billing address saved.</span>
                     }
@@ -31,8 +34,8 @@ const UserAccount = (props) => {
                 </div>
                 <div className='col-xs-6'>
                     <span className='custom-title-1'>SHIPPING ADDRESS</span><br />
-                    { lastOrder.shipping ?
-                        <Address activeUser={ activeUser } address={ lastOrder.shipping } />
+                    { lastOrder ?
+                        <Address activeUser={ activeUser } address={ shippingAdr } />
                         :
                         <span>You have no shipping address saved.</span>
                     }

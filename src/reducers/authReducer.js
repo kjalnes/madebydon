@@ -5,6 +5,7 @@ import store from '../store';
 
 /*** Constants ***/
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../constants/';
+const CREATE_USER_FAILURE = 'CREATE_USER_FAILURE';
 
 /*** Actions ***/
 import { loginSuccess, logoutSuccess } from '../actions/login';
@@ -23,12 +24,14 @@ const loadUser = (token) => {
                 .then( user => {
                     dispatch(loginSuccess(user));
                     dispatch(loadCompletedOrders(user.id));
-                    return user.orders[0].id
+                    dispatch(loadCart(user.orders[0].id));
+                    dispatch(loadOrder(user.orders[0].id));
+                    // return user.orders[0].id
                 })
-                .then( orderId => {
-                    dispatch(loadCart(orderId));
-                    dispatch(loadOrder(orderId));
-                })
+                // .then( orderId => {
+                    // dispatch(loadCart(orderId));
+                    // dispatch(loadOrder(orderId));
+                // })
                 .catch( err => console.log(err));
         }
     };
@@ -62,7 +65,10 @@ const createUser = (userInfo) => {
             .then( user => {
               dispatch(login({ email: user.email, password: user.password }))
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            dispatch({type: CREATE_USER_FAILURE, errMsg: err.message })
+            console.log('login failed, this is the err', err)
+        })
     }
 };
 
@@ -78,6 +84,8 @@ const authReducer = (state = initialState, action) => {
             return {...state, user: action.user }
         case LOGOUT_SUCCESS:
             return {...state, user: null }
+        case CREATE_USER_FAILURE:
+            return {...state, errMsg: action.errMsg }
     }
     return state
 };

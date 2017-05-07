@@ -17,6 +17,9 @@ class ProductListContainer extends React.Component {
 		return (
 			(!this.props.selectedProduct) ?
 				<div className="">
+					<div className='text-center'>
+		            	<span className='custom-title-2'>DON MAKE HANDMADE LEATHER BAGS AND NOBODY HELPS HIM.</span>
+		        	</div>
 					<ProductContainer
 						products={this.props.products}
 						activeUser={this.props.activeUser}
