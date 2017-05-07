@@ -66,7 +66,8 @@ const createUser = (userInfo) => {
               dispatch(login({ email: user.email, password: user.password }))
         })
         .catch(err => {
-            dispatch({type: CREATE_USER_FAILURE, errMsg: err.message })
+            // dispatch({type: CREATE_USER_FAILURE, errMsg: err.message })
+            dispatch({type: CREATE_USER_FAILURE, errMsg: 'Create user failed. Check that the informaiton you have provided is valid' })
             console.log('login failed, this is the err', err)
         })
     }
