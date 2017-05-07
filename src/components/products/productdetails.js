@@ -1,11 +1,12 @@
 import React from 'react';
 
-const ProductDetails = ({ selectedProduct, activeUser, addtoCart }) => {
+const ProductDetails = ({ selectedProduct, activeUser, addtoCart, deSelectProduct }) => {
 	if (!selectedProduct) return null;
+
 	return (
 		<div className="row">
 			<div className="col-md-6">
-				<img src={`./public/assets/images/style_${selectedProduct.id}.jpg`} />
+				<img onClick={ deSelectProduct } src={`./public/assets/images/style_${selectedProduct.id}.jpg`} />
 			</div>
 			<div className="col-md-6">
 				<h3>{selectedProduct.name}</h3>

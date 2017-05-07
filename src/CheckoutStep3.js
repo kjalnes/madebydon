@@ -45,7 +45,7 @@ class CheckoutStep3 extends Component {
 
     render() {
         return (
-            <div className='container checkout-step-3'>
+            <div className='checkout-step-3'>
 
                 <CartContainer isFinalStep={ true } />
                 <hr />

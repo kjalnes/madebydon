@@ -7,13 +7,12 @@ import CartItem from './CartItem';
   const CartProducts = ({ cart, removeFromCart, isFinalStep }) => {
   let giftClass = isFinalStep ? 'gift-message hide' : 'gift-message';
   return (
-    <div className='container'>
+    <div className=''>
       <span className={giftClass}>
         <b>Gift?</b> If you wish to gift this item, check the gift wrap option on the product page or let us know in the notes section on the checkout page. Add the personal message you want to include on a card in the notes as well.
       </span>
       {
         (cart.cartItems.length > 0) ?
-        <div className='container'>
           <form>
             <table className='table shop_table shop_table_responsive cart' cellSpacing="2" cellPadding="4">
               <thead>
@@ -31,7 +30,6 @@ import CartItem from './CartItem';
               </tbody>
             </table>
           </form>
-        </div>
         :
         <div className='container'>
           <div>Cart is Empty</div>

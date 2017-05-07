@@ -6,8 +6,9 @@ import { loadCart, removeFromCart } from '../reducers/cartReducer';
 
 const CartContainer = ( props ) => {
     const { activeUser, cart, removeFromCart, cartTotal, router, isFinalStep } = props;
+    const containerClass = isFinalStep ? '' : 'container';
     return (
-    <div className='container'>
+    <div className={containerClass}>
         { cart  ?
             <div>
                 <CartProducts cart={ cart } removeFromCart={ removeFromCart } isFinalStep={ isFinalStep } />

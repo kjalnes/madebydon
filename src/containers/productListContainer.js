@@ -8,7 +8,7 @@ import { ProductContainer, ProductRow, Product } from '../components/products/pr
 import ProductDetails from '../components/products/productdetails';
 
 class ProductListContainer extends React.Component {
-	constructor({ products, activeUser, addtoCart, selectProduct, deselectProduct }) {
+	constructor({ products, activeUser, addtoCart, selectProduct, deSelectProduct }) {
 		super();
 	}
 
@@ -27,7 +27,8 @@ class ProductListContainer extends React.Component {
 					<ProductDetails
 						selectedProduct={this.props.selectedProduct}
 						activeUser={this.props.activeUser}
-						addtoCart={this.props.addtoCart} />
+						addtoCart={this.props.addtoCart}
+						deSelectProduct={this.props.deSelectProduct} />
 				</div>
 		);
 	}
