@@ -16,7 +16,7 @@ class ProductListContainer extends React.Component {
 		if (!this.props.products) return null;
 		return (
 			(!this.props.selectedProduct) ?
-				<div className="container">
+				<div className="">
 					<ProductContainer
 						products={this.props.products}
 						activeUser={this.props.activeUser}
