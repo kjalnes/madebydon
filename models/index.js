@@ -25,16 +25,122 @@ const sync = () => conn.sync({ force: true });
 const seed = () => {
 
   const products = [
-    { name: 'Minimalist Folding Bag', price: 139, imgURL: 'style_1.jpg' },
-    { name: 'Minimalist Leather Backpack', price: 189, imgURL: 'style_2.jpg' },
-    { name: 'Geometry Shoulder Bag', price: 139, imgURL: 'style_3.jpg' },
-    { name: 'Minimalist Envelope Handbag', price: 89, imgURL: 'style_4.jpg' },
-    { name: 'LARGE SHOULDER BAG LONG STRAP', price: 279, imgURL: 'style_4.jpg' },
-    { name: 'Medium Shoulder Bag Long Strap', price: 159, imgURL: 'style_5.jpg' },
-    { name: 'Minimalist Bag Long Strap', price: 89, imgURL: 'style_6.jpg' },
-    { name: 'Large Multi Pocket Leather Backpack', price: 279, imgURL: 'style_7.jpg' },
-    { name: 'Minimalist Slouchy Leather Backpack', price: 240, imgURL: 'style_8.jpg' }
-  ]
+    { name: 'Minimalist Folding Bag', 
+      price: 139, imgURL: 'style_1.jpg', 
+      description: `Small minimalist folding bag with zipper accessing both sides of the inside. Slinky strap with knots. Can be worn both ways.
+Black full grain cow hide with brown suede interior.`,
+productDetails: `Style # 008<br/>
+Style type: Shoulder Bag<br/>
+Size: W: 8” (20cm) / H: 5.5” (14cm)<br/>
+Length of Shoulder Strap: 48” (122cm)<br/>
+Type of Closure: Zipper<br/>
+Material 100% Leather<br/>
+Color: Black<br/>
+Interior: Brown Suede` },
+    { name: 'Minimalist Leather Backpack', 
+      price: 189, 
+      imgURL: 'style_2.jpg',
+      description: `Minimalist backpack with long slinky straps.
+Vertical full size zipper pocket in front and horizontal full size zipper pocket in the back.
+Black cow hide with brown suede interior.
+`,
+      productDetails: `Style # 001<br/>
+Style type: Backpack<br/>
+Size: W: 12” (31cm) / H:12” (31cm)<br/>
+Length of Shoulder Straps: 38”(97cm)<br/>
+Type of Closure: Zipper<br/>
+Outer Pockets : 2 Zipper (front and back)<br/>
+Material 100% Leather<br/>
+Color: Black<br/>
+Interior: Brown Suede`},
+    { name: 'Geometry Shoulder Bag', 
+      price: 139, 
+      imgURL: 'style_3.jpg',
+      description: `Don calls this the geometric hippy bag. Everyone had this in the 70s, but no one had the zipper figured out. Two snap button adjusts the size. Strap also adjustable.
+Black cow hide with brown suede interior.`,
+      productDetails: `Style # 007<br/>
+Style type: Shoulder Bag / Hand Bag<br/>
+Size:W:11.8”(30cm) / H:11.8”(30cm)<br/>
+Length of Shoulder Strap:43.7 max ”(max 111cm)<br/>
+Body Weight:<br/>
+Type of Closure: Zipper / 2 snap buttons<br/>
+Material 100% Leather<br/>
+Color Black<br/>
+Interior Brown`},
+    { name: 'Minimalist Envelope Handbag', 
+      price: 89, 
+      imgURL: 'style_4.jpg',
+      description: `Minimalist envelope bag. Folds to a clutch. One suede interior zipper pocket.
+Black full grain cow hide.`,
+      productDetails: `Style # 006<br/>
+Style type: Clutch / Hand Bag<br/>
+Size:W:9.8”(25cm) / H:11.8”(30cm)<br/>
+Body Weight:<br/>
+Type of Closure: Snap button front<br/>
+Inner Pockets : 1 Zipper<br/>
+Material 100% Leather<br/>
+Color Black` },
+    { name: 'LARGE SHOULDER BAG LONG STRAP', 
+      price: 279, 
+      imgURL: 'style_4.jpg',
+      description: `The large bag. Don says you can fill it with bricks and it won’t fall apart. The strap piece goes all the way from buckle to the bottom of the bag.
+Black cow hide with brown suede interior.`,
+      productDetails: `Style # 005<br/>
+Style type: Shoulder Bag<br/>
+Width: 19” (48cm)<br/>
+Height: 14” (35cm)<br/>
+Depth: 4.5" (11xm)<br/>
+Length of Shoulder Strap: 52.7” max (134cm)<br/>
+Type of Closure: Twist button front<br/>
+Inner Pockets : 2 Zipper<br/>
+Outer Pockets: 1 Zipper (back)<br/>
+Material: 100% Leather<br/>
+Color: Black<br/>
+Interior: Brown` },
+    { name: 'Medium Shoulder Bag Long Strap', 
+      price: 159, 
+      imgURL: 'style_5.jpg',
+      description: `Shoulder bag with adjustable strap buckle. Simple and functional with one inner zipper pocket and two small open pockets on the inside.
+Black cow hide with brown suede interior.`,
+      productDetails: `Style # 004<br/>
+Style type: Shoulder Bag<br/>
+Size:W: 12.9” (33cm) / H:10.2”(26cm)<br/>
+Length of Shoulder Strap: 43” max (109cm max)<br/>
+Type of Closure: Fold over flap<br/>
+Inner Pockets: 1 Zipper / 2 open pockets<br/>
+Material: 100% Leather<br/>
+Color: Black` },
+    { name: 'Minimalist Bag Long Strap', 
+      price: 89, 
+      imgURL: 'style_6.jpg',
+      description: `Minimalist long strap bag, no fuss. One small zipper pocket on the inside. Zipper closure.
+Black cow hide with brown leather interior.`,
+      productDetails: `Style # 003<br/>
+Style type: Shoulder Bag<br/>
+Size:W: 9.4” (24cm) / H:11.4”(29cm)<br/>
+Length of Shoulder Strap: 52.7”(134cm)<br/>
+Body Weight:<br/>
+Type of Closure: Zipper<br/>
+Inner Pockets : 1 Zipper<br/>
+Material 100% Leather<br/>
+Color Black` },
+    { name: 'Large Multi Pocket Leather Backpack', 
+      price: 279, 
+      imgURL: 'style_7.jpg',
+      description: `Large multi pocket backpack with adjustable straps. Zipper pocket in back, two zipper pockets in the front and two on the inside.
+Black cow hide with brown suede interior.`,
+      productDetails: `Style # 002<br/>
+Style type: Backpack<br/>
+Size: W:16.5”(42cm) / H:19.3”(49cm)<br/>
+Length of Shoulder Straps: 37.3” max (95cm max)<br/>
+Body Weight:<br/>
+Type of Closure: zipper and twist buttons<br/>
+Inner Pockets :1 Zipper<br/>
+Outer Pockets : 3 Zipper and 2 open side pockets<br/>
+Material 100% Leather<br/>
+Color: Black<br/>
+Interior: Brown`  },
+];
 
 
   const users = [
