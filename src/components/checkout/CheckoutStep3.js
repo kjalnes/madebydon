@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CartContainer from '../../containers/CartContainer';
-import Address from '../../Address';
+import Address from '../user/Address';
 
 /*** Confirm Order Page ***/
 class CheckoutStep3 extends Component {

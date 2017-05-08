@@ -4,10 +4,10 @@ import { selectProduct, deSelectProduct } from '../reducers/productsReducer';
 import { addToCart  } from '../reducers/cartReducer';
 
 
-import { ProductContainer, ProductRow, Product } from '../components/products/ProductsList';
+import { ProductGrid, ProductRow, Product } from '../components/products/ProductsList';
 import ProductDetails from '../components/products/ProductDetails';
 
-class ProductListContainer extends React.Component {
+class ProductContainer extends React.Component {
 	constructor({ products, activeUser, addtoCart, selectProduct, deSelectProduct }) {
 		super();
 	}
@@ -18,8 +18,8 @@ class ProductListContainer extends React.Component {
 			(!this.props.selectedProduct) ?
 				<div className="">
 					<div className='text-center'>
-		            	<span className='custom-title-2'>DON MAKE HANDMADE LEATHER BAGS AND NOBODY HELPS HIM.</span>
-		        	</div>
+	           	<span className='custom-title-2'>DON MAKE HANDMADE LEATHER BAGS AND NOBODY HELPS HIM.</span>
+	       	</div>
 					<ProductContainer
 						products={this.props.products}
 						activeUser={this.props.activeUser}
@@ -57,4 +57,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductContainer);

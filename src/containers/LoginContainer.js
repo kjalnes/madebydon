@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { login, logout } from '../reducers/authReducer';
 import { connect } from 'react-redux';
-import UserAccount from '../UserAccount';
+import { login, logout } from '../reducers/authReducer';
+import UserAccount from '../components/user/UserAccount';
 
 class LoginContainer extends Component {
     constructor({ login, logout, activeUser, router, order, completedOrders }) {
