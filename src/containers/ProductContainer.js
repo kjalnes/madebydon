@@ -20,7 +20,7 @@ class ProductContainer extends React.Component {
 					<div className='text-center'>
 	           	<span className='custom-title-2'>DON MAKE HANDMADE LEATHER BAGS AND NOBODY HELPS HIM.</span>
 	       	</div>
-					<ProductContainer
+					<ProductGrid
 						products={this.props.products}
 						activeUser={this.props.activeUser}
 						addtoCart={this.props.addtoCart}
