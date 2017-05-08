@@ -5,14 +5,13 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import store from './store';
 import LoginContainer from './containers/LoginContainer';
-import ProductListContainer from './containers/productListContainer';
-import ProductDetailsContainer from './containers/productDetailsContainer';
+import ProductContainer from './containers/ProductContainer';
 import CartContainer from './containers/CartContainer';
 import CheckoutContainer from './containers/CheckoutContainer';
-import CheckoutStep1 from './CheckoutStep1';
-import CheckoutStep2 from './CheckoutStep2';
-import CheckoutStep3 from './CheckoutStep3';
-import CheckoutStep4 from './CheckoutStep4';
+import CheckoutStep1 from './components/checkout/CheckoutStep1';
+import CheckoutStep2 from './components/checkout/CheckoutStep2';
+import CheckoutStep3 from './components/checkout/CheckoutStep3';
+import CheckoutStep4 from './components/checkout/CheckoutStep4';
 
 const root = document.getElementById('root');
 
@@ -20,7 +19,7 @@ const routes = (
   <Provider store = { store }>
     <Router history={ hashHistory }>
       <Route path='/' component={ App }>
-        <IndexRoute component={ ProductListContainer } />
+        <IndexRoute component={ ProductContainer } />
         <Route path='login' component={ LoginContainer } />
         <Route path='cart' component={ CartContainer } />
         <Route path='checkout' component={ CheckoutContainer } >

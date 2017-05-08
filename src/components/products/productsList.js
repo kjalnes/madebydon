@@ -26,7 +26,7 @@ const ProductRow = ({ products, addtoCart, activeUser, selectProduct }) => (
 	</div>
 );
 
-const ProductContainer = ({ products, addtoCart, activeUser, selectProduct }) => (
+const ProductGrid = ({ products, addtoCart, activeUser, selectProduct }) => (
 	<div className="container">
 		{
 			products.reduce((groups, product, index) => {
@@ -43,4 +43,4 @@ const ProductContainer = ({ products, addtoCart, activeUser, selectProduct }) =>
 );
 
 
-export { ProductContainer, ProductRow, Product };
+export { ProductGrid, ProductRow, Product };

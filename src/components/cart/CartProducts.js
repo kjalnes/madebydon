@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { loadCart, removeFromCart } from '../reducers/cartReducer';
 import CartItem from './CartItem';
 
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { createUser } from './reducers/authReducer';
+import { connect } from 'react-redux';
+
+import { createUser } from '../../reducers/authReducer';
 
 class CreateUserForm extends Component {
     constructor({ createUser, router, errAuth }) {
