@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import UserOrderHistory from './UserOrderHistory';
+import UserOrderHistory from '../../UserOrderHistory';
 
 /*** Confirmed Order: Thank You Page ***/
 const CheckoutStep4 = (props) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ProductDetails from '../components/products/productdetails';
+import ProductDetails from '../components/products/ProductDetails';
 import { addToCart } from '../reducers/cartReducer';
 
 

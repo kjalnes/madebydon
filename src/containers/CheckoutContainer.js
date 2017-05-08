@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import CreateUserForm from '../CreateUserForm';
 import { connect } from 'react-redux'
-import CheckoutStep1 from '../CheckoutStep1';
-import CheckoutStep2 from '../CheckoutStep2';
+//import CheckoutStep1 from '../components/checkout/CheckoutStep1';
+//import CheckoutStep2 from '../components/checkout/CheckoutStep2';
 import { completeCheckout } from '../reducers/orderReducer';
 import { clearCart } from '../reducers/cartReducer';
 

@@ -4,8 +4,8 @@ import { selectProduct, deSelectProduct } from '../reducers/productsReducer';
 import { addToCart  } from '../reducers/cartReducer';
 
 
-import { ProductContainer, ProductRow, Product } from '../components/products/productsList';
-import ProductDetails from '../components/products/productdetails';
+import { ProductContainer, ProductRow, Product } from '../components/products/ProductsList';
+import ProductDetails from '../components/products/ProductDetails';
 
 class ProductListContainer extends React.Component {
 	constructor({ products, activeUser, addtoCart, selectProduct, deSelectProduct }) {

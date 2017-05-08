@@ -133,7 +133,7 @@ app.post('/:orderId/payment', (req, res, next) => {
         ]
     })
         .then(_order => {
-            // console.log('order exist', _order);
+            console.log('order exist', _order);
             order = _order;
 
             //sk = secret key
