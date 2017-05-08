@@ -19,11 +19,9 @@ app.post('/', (req, res, next)=> {
             })
             return Promise.all(orderlines)
         })
-        .then( () => {
-            res.send(user)
-        })
+        .then( () => res.send(user))
     })
-    .catch(next)
+    .catch( err => res.status(500).send(err))
 });
 
 
