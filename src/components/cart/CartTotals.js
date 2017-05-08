@@ -12,6 +12,9 @@ class CartTotals extends Component  {
     }
 
     render() {
+        const tax = this.props.cartTotal * (this.props.tax /100);
+        const orderTotal =  (this.props.cartTotal + tax + this.props.shipping);
+
         return (
           <div className='cart-totals'>
             <span className='custom-title-1'>Order Total</span>
@@ -29,7 +32,7 @@ class CartTotals extends Component  {
                     Shipping
                 </div>
                 <div className='col-xs-6'>
-                    $ 0
+                 $ { this.props.shipping }
                 </div>
             </div>
 
@@ -38,7 +41,7 @@ class CartTotals extends Component  {
                     Tax
                 </div>
                 <div className='col-xs-6'>
-                    $ 0
+                    $ { tax.toFixed(2) }
                 </div>
             </div>
 
@@ -47,7 +50,7 @@ class CartTotals extends Component  {
                     <b>Total</b>
                 </div>
                 <div className='col-xs-6'>
-                    <b>$ { this.props.cartTotal }</b>
+                    <b>$ { orderTotal.toFixed(2) }</b>
                 </div>
             </div>
             { this.props.isFinalStep ?

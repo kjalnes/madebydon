@@ -5,8 +5,9 @@ import CartTotals from '../components/cart/CartTotals';
 import { loadCart, removeFromCart } from '../reducers/cartReducer';
 
 const CartContainer = (props) => {
-    const { activeUser, cart, removeFromCart, cartTotal, router, isFinalStep } = props;
+    const { activeUser, cart, shipping, tax, removeFromCart, cartTotal, router, isFinalStep } = props;
     const containerClass = isFinalStep ? '' : 'container';
+
     return (
         <div className={containerClass}>
             {cart ?
@@ -17,7 +18,7 @@ const CartContainer = (props) => {
                         <div className='col-xs-8'>
                         </div>
                         <div className='col-xs-4'>
-                            <CartTotals cartTotal={cartTotal} activeUser={activeUser} router={router} isFinalStep={isFinalStep} />
+                            <CartTotals cartTotal={cartTotal} shipping={shipping} tax={tax}  activeUser={activeUser} router={router} isFinalStep={isFinalStep} />
                         </div>
                     </div>
                 </div>
@@ -28,15 +29,17 @@ const CartContainer = (props) => {
     )
 };
 
-const calculateTotal = (cartItems) => {
+const calculateTotal = (cartItems, shipping) => {
     return cartItems.reduce((total, item) => total + item.product.price * item.qty, 0);
 }
 
 const mapStateToProps = (state) => (
     {
-        activeUser: state.auth.user,
-        cart: state.cart,
-        cartTotal: calculateTotal(state.cart.cartItems)
+            activeUser: state.auth.user,
+            cart: state.cart,
+            cartTotal: calculateTotal(state.cart.cartItems),
+            shipping: state.order.order && state.order.order[0] ? state.order.order[0].shippingCost : 0,
+            tax: state.order.order && state.order.order[0] ? state.order.order[0].tax : 0
     }
 );
 
