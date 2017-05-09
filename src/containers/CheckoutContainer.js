@@ -6,7 +6,7 @@ import { completeCheckout } from '../reducers/orderReducer';
 import { clearCart } from '../reducers/cartReducer';
 
 
-const CheckoutContainer = (props) =>  {
+const CheckoutContainer = (props) => {
 
     const {
         activeUser,
@@ -21,17 +21,17 @@ const CheckoutContainer = (props) =>  {
     return (
 
         <div className='container'>
-             {
+            {
                 activeUser && children ?
-                <div>
-                    { React.cloneElement(children, { ...props })}
-                </div>
-            :
-                <div>
-                    <CreateUserForm router={ router } errAuth={ errAuth } />
-                    Shopped with Don before?
+                    <div>
+                        {React.cloneElement(children, { ...props })}
+                    </div>
+                    :
+                    <div>
+                        <CreateUserForm router={router} errAuth={errAuth} />
+                        Shopped with Don before?
                     <Link to='/login?checkout=true'> Sign in here.</Link>
-                </div>
+                    </div>
             }
         </div>
     )
@@ -54,24 +54,22 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return (
         {
             saveCheckoutStep: (userInfo, orderId, axiosFn, nextPath) => {
-                dispatch( axiosFn(userInfo, orderId) )
-                .then( () => ownProps.router.push(`/checkout/${nextPath}`))
-                .catch( err => console.log(err))
+                dispatch(axiosFn(userInfo, orderId))
+                    .then((action) => {
+                        if (!action) ownProps.router.push(`/checkout/${nextPath}`);
+                    })
+                    .catch(err => console.log('error saveCheckoutStep: ',err))
             },
 
-            completeCheckout: (order, payment)=>{
+            completeCheckout: (order, payment) => {
                 dispatch(completeCheckout(order, payment)) // we need to return a promise
-                .then( response => {
-                    console.log('response', response)
-                    console.log('response.order', response.order)
-                    console.log('resonse.newOrder', response.newOrder)
-                    if(response.order && response.newOrder) {
-                        dispatch(clearCart())
-                        console.log('we have a succeeded with the order')
-                        ownProps.router.push(`/checkout/complete`)
-                    }
-                })
-                .catch( err => console.log('error completeCheckout', err))
+                    .then(response => {
+                        if (response.order && response.newOrder) {
+                            dispatch(clearCart())
+                            ownProps.router.push(`/checkout/complete`)
+                        }
+                    })
+                    .catch(err => console.log('error completeCheckout:', err))
             }
         }
     )

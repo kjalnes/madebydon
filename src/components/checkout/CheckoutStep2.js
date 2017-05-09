@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saveBilling } from  '../../reducers/orderReducer';
+import { saveBilling } from '../../reducers/orderReducer';
 
-/*** Billing and Credit Card ***/
+/*** Billing ***/
 class CheckoutStep2 extends Component {
-    constructor({ activeUser, saveCheckoutStep, orderId }) {
+    constructor({ activeUser, saveCheckoutStep, orderId, errMessage }) {
         super();
         this.state = { addressLine1: '', addressLine2: '', city: '', state: '', zip: '', country: '' };
         this.onInputChange = this.onInputChange.bind(this);
@@ -27,26 +27,27 @@ class CheckoutStep2 extends Component {
         return (
             <div className='container'>
                 <h3>Your billing address</h3>
+                {this.props.errMessage ? this.props.errMessage.split(',').map((item, idx) => <div key={idx} className="alert alert-danger">{item}</div>) : null}
                 <form>
                     <div className="form-group">
-                        <input onChange={ this.onInputChange.bind(null, 'addressLine1') } className="form-control" value={this.state.addressLine1} placeholder='Street address'/>
+                        <input onChange={this.onInputChange.bind(null, 'addressLine1')} className="form-control" value={this.state.addressLine1} placeholder='Street address' />
                     </div>
                     <div className="form-group">
-                        <input onChange={ this.onInputChange.bind(null, 'addressLine2') } className="form-control" value={this.state.addressLine2} placeholder='Street address'/>
+                        <input onChange={this.onInputChange.bind(null, 'addressLine2')} className="form-control" value={this.state.addressLine2} placeholder='Street address' />
                     </div>
                     <div className="form-group">
-                        <input onChange={ this.onInputChange.bind(null, 'city') } className="form-control" value={this.state.city} placeholder='City'/>
+                        <input onChange={this.onInputChange.bind(null, 'city')} className="form-control" value={this.state.city} placeholder='City' />
                     </div>
                     <div className="form-group">
-                        <input onChange={ this.onInputChange.bind(null, 'zip') } className="form-control" value={this.state.zip} placeholder='Zip code'/>
+                        <input onChange={this.onInputChange.bind(null, 'zip')} className="form-control" value={this.state.zip} placeholder='Zip code' />
                     </div>
                     <div className="form-group">
-                        <input onChange={ this.onInputChange.bind(null, 'state') } className="form-control" value={this.state.state} placeholder='State'/>
+                        <input onChange={this.onInputChange.bind(null, 'state')} className="form-control" value={this.state.state} placeholder='State' />
                     </div>
                     <div className="form-group">
-                        <input onChange={ this.onInputChange.bind(null, 'country') } className="form-control" value={this.state.country} placeholder='Country'/>
+                        <input onChange={this.onInputChange.bind(null, 'country')} className="form-control" value={this.state.country} placeholder='Country' />
                     </div>
-                    <button onClick={ this.onSubmit } className='custom-button-1'>Save billing address</button>
+                    <button onClick={this.onSubmit} className='custom-button-1'>Save billing address</button>
 
                 </form>
             </div>

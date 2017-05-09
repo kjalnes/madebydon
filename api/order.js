@@ -65,7 +65,6 @@ app.post('/:orderId', (req, res, next) => {
 });
 
 app.delete('/:orderId/:productId', (req, res, next) => {
-    console.log('DELETE', req.params.orderId, req.params.productId);
     models.OrderLine.destroy({
         where:
         {
@@ -82,16 +81,21 @@ app.delete('/:orderId/:productId', (req, res, next) => {
 
 // post shipping address
 app.post(`/:orderId/shipping`, (req, res, next) => {
+    console.log('user_info', req.body)
     models.Address.create(req.body.userInfo)
         .then(address => {
-            return models.Order.findOne({ where: { id: req.params.orderId }})
+            return models.Order.findOne({ where: { id: req.params.orderId } })
                 .then(order => {
-                    order.shippingId = address.id
+                    order.shippingId = address.id;
                     order.save();
+                })
+                .then(order => {
                     res.send([order]);
                 });
         })
-        .catch(next);
+        .catch(err => {
+            res.status(400).json({ msg: err.message });
+        });
 });
 
 
@@ -101,12 +105,16 @@ app.post('/:orderId/billing', (req, res, next) => {
         .then(address => {
             return models.Order.findById(req.params.orderId)
                 .then(order => {
-                    order.billingId = address.id
+                    order.billingId = address.id;
                     order.save();
-                    res.send([order]);
                 })
+                .then(order => {
+                    res.send([order]);
+                });
         })
-        .catch(next)
+        .catch(err => {
+            res.status(400).json({ msg: err.message });
+        });
 });
 
 
@@ -135,10 +143,10 @@ app.post('/:orderId/payment', (req, res, next) => {
         .then(_order => {
             // console.log('order exist', _order[0].orderlines);
             order = _order;
-            let amount = order[0].orderlines.reduce( (total, line) => {
+            let amount = order[0].orderlines.reduce((total, line) => {
                 console.log('line', line)
-                return total+= line.product.price
-            },0)
+                return total += line.product.price
+            }, 0)
 
             //sk = secret key
             const stripe = require('stripe')('sk_test_R10qlCsOK5ECIlbM6geYGHIR')
