@@ -33,15 +33,18 @@ const calculateTotal = (cartItems, shipping) => {
     return cartItems.reduce((total, item) => total + item.product.price * item.qty, 0);
 }
 
-const mapStateToProps = (state) => (
-    {
-            activeUser: state.auth.user,
-            cart: state.cart,
-            cartTotal: calculateTotal(state.cart.cartItems),
-            shipping: state.order.order && state.order.order[0] ? state.order.order[0].shippingCost : 0,
-            tax: state.order.order && state.order.order[0] ? state.order.order[0].tax : 0
-    }
-);
+const mapStateToProps = (state) => {
+    const cartTotal = calculateTotal(state.cart.cartItems);
+    return (
+        {
+                activeUser: state.auth.user,
+                cart: state.cart,
+                cartTotal: cartTotal,
+                shipping: state.order.order && state.order.order[0] ? state.order.order[0].shippingCost : 12.99,
+                tax: cartTotal * 0.0875
+        }
+    )
+};
 
 const mapDispatchToProps = (dispatch) => (
     {

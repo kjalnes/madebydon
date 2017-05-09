@@ -133,11 +133,9 @@ app.post('/:orderId/payment', (req, res, next) => {
         ]
     })
         .then(_order => {
-            // console.log('order exist', _order[0].orderlines);
             order = _order;
             let amount = order[0].orderlines.reduce( (total, line) => {
-                console.log('line', line)
-                return total+= line.product.price
+                return total+= (line.product.price * line.qty)
             },0)
 
             //sk = secret key
@@ -152,13 +150,14 @@ app.post('/:orderId/payment', (req, res, next) => {
             })
         })
         .then(charge => {
-            console.log('stripe call success', charge);
+            console.log('stripe call success amount', charge.amount);
+            // console.log(order[0])
             // Update the order status and the order
             order[0].status = 'complete';
             order[0].confirmationId = charge.id
             order[0].amount = charge.amount
-            order[0].tax = order[0].amount * 0.08875
-            order[0].total = order[0].amount + order[0].tax + order[0].shippingCost
+            order[0].tax = charge.amount * 0.08875
+            order[0].total = charge.amount + order[0].tax + order[0].shippingCost
             // here the stripe number an others matching records
 
             console.log('order.status after save', order[0].status)

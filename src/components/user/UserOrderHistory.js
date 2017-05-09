@@ -14,6 +14,7 @@ const UserOrderHistory = ({ completedOrders }) => {
                     <span className='custom-title-1'>My Order History</span>
                     {
                         completedOrders.map( order => {
+                            console.log('order', order)
                             return (
                                 <div className='well' key={order.id}>
                                     <h4> Order Summary </h4><br/>
