@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectProduct, deSelectProduct } from '../reducers/productsReducer';
 import { addToCart  } from '../reducers/cartReducer';
-import { ProductGrid, ProductRow, Product } from '../components/products/ProductsList';
-import ProductDetails from '../components/products/Productdetails';
+import { ProductGrid, ProductRow, Product } from '../components/products/productsList';
+import ProductDetails from '../components/products/productdetails';
 
 class ProductContainer extends React.Component {
 	constructor({ products, activeUser, addtoCart, selectProduct, deSelectProduct }) {
