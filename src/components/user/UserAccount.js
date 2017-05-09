@@ -3,8 +3,9 @@ import UserOrderHistory from './UserOrderHistory';
 import Address from './Address';
 
 const UserAccount = (props) => {
-    const { activeUser, onLogoutSubmit, order, completedOrders } = props;
-    const lastOrder = completedOrders ? completedOrders.slice(-1)[0] : null;
+    const { activeUser, onLogoutSubmit, order, completedOrders, lastOrderId } = props;
+    const lastOrder = completedOrders ? completedOrders.find(order => order.id === lastOrderId) : null;
+
     const shippingAdr = lastOrder !== undefined ? lastOrder.shipping : null;
     const billingAdr = lastOrder !== undefined ? lastOrder.billing : null;
 

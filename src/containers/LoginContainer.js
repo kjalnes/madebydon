@@ -40,6 +40,7 @@ class LoginContainer extends Component {
                         onLogoutSubmit={ this.onLogoutSubmit }
                         order= { this.props.order }
                         completedOrders = { this.props.completedOrders }
+                        lastOrderId = {this.props.lastOrderId}
                     />
                   :
                     <form>
@@ -55,7 +56,8 @@ class LoginContainer extends Component {
                                 onChange={ this.onInputChange.bind(null, 'password') }
                                 className="form-control"
                                 value={this.state.password}
-                                placeholder='password'/>
+                                placeholder='password'
+                                type='password'/>
                         </div>
                         <button onClick={ this.onLoginSubmit }>Login</button>
                     </form>
@@ -69,7 +71,8 @@ const mapStateToProps = (state) => (
     {
         activeUser: state.auth.user,
         order: state.order.order,
-        completedOrders: state.order.completedOrders
+        completedOrders: state.order.completedOrders,
+        lastOrderId: state.order.lastOrderId
     }
 )
 
