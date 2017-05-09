@@ -41,7 +41,7 @@ class CreateUserForm extends Component {
                     <div className="form-group">
                         <input onChange={ this.onInputChange.bind(null, 'password') } className="form-control" value={this.state.password} placeholder='password' type='password' />
                     </div>
-                    <button onClick={ this.onCreateSubmit }>Create account</button>
+                    <button className="custom-button-1" onClick={ this.onCreateSubmit }>Create account</button>
                 </form>
             </div>
         )
