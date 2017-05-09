@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+// Product
 const Product = ({ product, addtoCart, activeUser, selectProduct }) => {
 	if (!product) return null;
 	return (
@@ -16,6 +16,8 @@ const Product = ({ product, addtoCart, activeUser, selectProduct }) => {
 	);
 };
 
+
+// Row with 4 products
 const ProductRow = ({ products, addtoCart, activeUser, selectProduct }) => (
 	<div className="row">
 		{
@@ -26,6 +28,7 @@ const ProductRow = ({ products, addtoCart, activeUser, selectProduct }) => (
 	</div>
 );
 
+// Containers of rows with 4 products
 const ProductGrid = ({ products, addtoCart, activeUser, selectProduct }) => (
 	<div className="container">
 		{

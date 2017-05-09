@@ -24,4 +24,5 @@ const ProductDetails = ({ selectedProduct, activeUser, addtoCart, deSelectProduc
 		</div>);
 };
 
+
 export default ProductDetails;
