@@ -28,7 +28,7 @@ class CheckoutStep2 extends Component {
             <div className='container'>
                 <h3>Your billing address</h3>
                 {this.props.errMessage ? this.props.errMessage.split(',').map((item, idx) => <div key={idx} className="alert alert-danger">{item}</div>) : null}
-                <form>
+                <form className='custom-form'>
                     <div className="form-group">
                         <input onChange={this.onInputChange.bind(null, 'addressLine1')} className="form-control" value={this.state.addressLine1} placeholder='Street address' />
                     </div>

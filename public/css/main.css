@@ -73,9 +73,6 @@ a.logo-link:hover {
     margin: 0 auto;
 }
 
-/* HOME PAGE */
-
-
 
 
 /* CART PAGE */
@@ -144,6 +141,15 @@ button.custom-button-1.product-detail {
     width: 30%;
 }
 
+.custom-form {
+    width: 60%;
+}
+
+
+span.gift-message {
+    padding-bottom: 35px;
+    display: block;
+}
 
 .productSearch{
     text-align: center;
