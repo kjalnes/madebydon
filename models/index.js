@@ -144,9 +144,9 @@ Interior: Brown`  },
 
 
   const users = [
-    { firstName: 'Mauro', lastName: 'Restuccia', email: 'Mauro', password: 'mcat' },
+    { firstName: 'Mauro', lastName: 'Restuccia', email: 'marestuccia@mac.com', password: 'mcat' },
     { firstName: 'Harish', lastName: 'tadikona', email: 'harish11.tadikonda@gmail.com', password: 'harish29' },
-    { firstName: 'Kris', lastName: 'Alnes', email: 'kris', password: 'kdog' }];
+    { firstName: 'Kris', lastName: 'Alnes', email: 'kris.alnes@gmail.com', password: 'kdog' }];
 
   const shippingAddress = { addressLine1: '123 Green ave', addressLine2: 'apt 4', city: 'Brooklyn', state: 'NY', zip: '11211', country: 'USA' };
   const billingAddress = { addressLine1: '60 Berry Street', addressLine2: 'apt 4D', city: 'Brooklyn', state: 'NY', zip: '11211', country: 'USA' };
