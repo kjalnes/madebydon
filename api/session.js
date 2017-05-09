@@ -28,7 +28,6 @@ app.post('/', (req, res, next)=> {
 app.get('/:token', (req, res, next) => {
     try{
         const token = jwt.decode(req.params.token, secret);
-        // console.log('token', token)
         models.User.findOne({
           where: { id: token.id },
           include: [{
