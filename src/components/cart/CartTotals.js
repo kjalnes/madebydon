@@ -22,7 +22,7 @@ class CartTotals extends Component  {
                     Subtotal
                 </div>
                 <div className='col-xs-6'>
-                    $ { this.props.cartTotal }
+                    $ { this.props.cartTotal.toFixed(2) }
                 </div>
             </div>
 
@@ -31,7 +31,7 @@ class CartTotals extends Component  {
                     Shipping
                 </div>
                 <div className='col-xs-6'>
-                 $ { this.props.shipping }
+                 $ { this.props.shipping.toFixed(2) }
                 </div>
             </div>
 

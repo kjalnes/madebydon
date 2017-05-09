@@ -16,7 +16,7 @@ class ProductContainer extends React.Component {
 			(!this.props.selectedProduct) ?
 				<div className="">
 					<div className='text-center'>
-	           	<span className='custom-title-2'>DON MAKE HANDMADE LEATHER BAGS AND NOBODY HELPS HIM.</span>
+	           	<span className='custom-title-2'>DON MAKES HANDMADE LEATHER BAGS AND NOBODY HELPS HIM.</span>
 	       	</div>
 					<ProductGrid
 						products={this.props.products}

@@ -25,8 +25,8 @@ const sync = () => conn.sync({ force: true });
 const seed = () => {
 
   const products = [
-    { name: 'Minimalist Folding Bag', 
-      price: 139, imgURL: 'style_1.jpg', 
+    { name: 'Minimalist Folding Bag',
+      price: 139, imgURL: 'style_1.jpg',
       description: `Small minimalist folding bag with zipper accessing both sides of the inside. Slinky strap with knots. Can be worn both ways.
 Black full grain cow hide with brown suede interior.`,
 productDetails: `Style # 008<br/>
@@ -37,8 +37,8 @@ Type of Closure: Zipper<br/>
 Material 100% Leather<br/>
 Color: Black<br/>
 Interior: Brown Suede` },
-    { name: 'Minimalist Leather Backpack', 
-      price: 189, 
+    { name: 'Minimalist Leather Backpack',
+      price: 189,
       imgURL: 'style_2.jpg',
       description: `Minimalist backpack with long slinky straps.
 Vertical full size zipper pocket in front and horizontal full size zipper pocket in the back.
@@ -53,8 +53,8 @@ Outer Pockets : 2 Zipper (front and back)<br/>
 Material 100% Leather<br/>
 Color: Black<br/>
 Interior: Brown Suede`},
-    { name: 'Geometry Shoulder Bag', 
-      price: 139, 
+    { name: 'Geometry Shoulder Bag',
+      price: 139,
       imgURL: 'style_3.jpg',
       description: `Don calls this the geometric hippy bag. Everyone had this in the 70s, but no one had the zipper figured out. Two snap button adjusts the size. Strap also adjustable.
 Black cow hide with brown suede interior.`,
@@ -67,8 +67,8 @@ Type of Closure: Zipper / 2 snap buttons<br/>
 Material 100% Leather<br/>
 Color Black<br/>
 Interior Brown`},
-    { name: 'Minimalist Envelope Handbag', 
-      price: 89, 
+    { name: 'Minimalist Envelope Handbag',
+      price: 89,
       imgURL: 'style_4.jpg',
       description: `Minimalist envelope bag. Folds to a clutch. One suede interior zipper pocket.
 Black full grain cow hide.`,
@@ -80,8 +80,8 @@ Type of Closure: Snap button front<br/>
 Inner Pockets : 1 Zipper<br/>
 Material 100% Leather<br/>
 Color Black` },
-    { name: 'LARGE SHOULDER BAG LONG STRAP', 
-      price: 279, 
+    { name: 'LARGE SHOULDER BAG',
+      price: 279,
       imgURL: 'style_4.jpg',
       description: `The large bag. Don says you can fill it with bricks and it won’t fall apart. The strap piece goes all the way from buckle to the bottom of the bag.
 Black cow hide with brown suede interior.`,
@@ -97,8 +97,8 @@ Outer Pockets: 1 Zipper (back)<br/>
 Material: 100% Leather<br/>
 Color: Black<br/>
 Interior: Brown` },
-    { name: 'Medium Shoulder Bag Long Strap', 
-      price: 159, 
+    { name: 'Medium Shoulder Bag',
+      price: 159,
       imgURL: 'style_5.jpg',
       description: `Shoulder bag with adjustable strap buckle. Simple and functional with one inner zipper pocket and two small open pockets on the inside.
 Black cow hide with brown suede interior.`,
@@ -110,8 +110,8 @@ Type of Closure: Fold over flap<br/>
 Inner Pockets: 1 Zipper / 2 open pockets<br/>
 Material: 100% Leather<br/>
 Color: Black` },
-    { name: 'Minimalist Bag Long Strap', 
-      price: 89, 
+    { name: 'Minimalist Bag Long Strap',
+      price: 89,
       imgURL: 'style_6.jpg',
       description: `Minimalist long strap bag, no fuss. One small zipper pocket on the inside. Zipper closure.
 Black cow hide with brown leather interior.`,
@@ -124,8 +124,8 @@ Type of Closure: Zipper<br/>
 Inner Pockets : 1 Zipper<br/>
 Material 100% Leather<br/>
 Color Black` },
-    { name: 'Large Multi Pocket Leather Backpack', 
-      price: 279, 
+    { name: 'Multi Pocket Backpack',
+      price: 279,
       imgURL: 'style_7.jpg',
       description: `Large multi pocket backpack with adjustable straps. Zipper pocket in back, two zipper pockets in the front and two on the inside.
 Black cow hide with brown suede interior.`,
