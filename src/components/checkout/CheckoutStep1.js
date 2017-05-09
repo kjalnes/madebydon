@@ -4,7 +4,7 @@ import { saveShipping } from '../../reducers/orderReducer';
 
 /*** Shipping Form ***/
 class CheckoutStep1 extends Component {
-    constructor({ activeUser, saveCheckoutStep, orderId }) {
+    constructor({ activeUser, saveCheckoutStep, orderId, errMessage }) {
         super();
         this.state = { addressLine1: '', addressLine2: '', city: '', state: '', zip: '', country: '' };
         this.onInputChange = this.onInputChange.bind(this);
@@ -27,7 +27,8 @@ class CheckoutStep1 extends Component {
         return (
             <div className='container'>
                 <h3>Your shipping address</h3>
-                <form>
+                {this.props.errMessage ? this.props.errMessage.split(',').map((item, idx) => <div key={idx} className="alert alert-danger">{item}</div>) : null}
+                 <form>
                     <div className="form-group">
                         <input onChange={ this.onInputChange.bind(null, 'addressLine1') } className="form-control" value={this.state.addressLine1} placeholder='Street address'/>
                     </div>

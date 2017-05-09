@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Scriptly from 'scriptly';
 import store from '../store';
-import {loadUser} from './authReducer';
+import { loadUser } from './authReducer';
 
 /*** Constants ***/
 // import {  } from '../constants/';
@@ -35,14 +35,13 @@ const completedOrdersSuccess = (orders) => ({
 /**** Methods ***/
 
 const loadOrder = (orderId) => {
-    console.log('loadOrder being called yall', orderId)
     return (dispatch) => {
         return axios.get(`/api/order/${orderId}`)
-        .then( response => response.data )
-        .then( order => {
-            dispatch(loadOrderSuccess(order))
-        })
-        .catch(err => console.log('Error loadOrder:', err));
+            .then(response => response.data)
+            .then(order => {
+                dispatch(loadOrderSuccess(order))
+            })
+            .catch(err => console.log('Error loadOrder:', err));
     }
 }
 
@@ -50,35 +49,39 @@ const loadOrder = (orderId) => {
 const loadCompletedOrders = (userId) => {
     return (dispatch) => {
         return axios.get(`/api/user/${userId}/orders`)
-        .then( response => response.data )
-        .then( orders => {
-            dispatch(completedOrdersSuccess(orders))
-        })
-        .catch(err => console.log('Error loadCompletedOrders:', err));
+            .then(response => response.data)
+            .then(orders => {
+                dispatch(completedOrdersSuccess(orders))
+            })
+            .catch(err => console.log('Error loadCompletedOrders:', err));
     }
 }
 
 
 /* remover this from the auth reducer */
 const saveShipping = (userInfo, orderId) => {
-    return(dispatch) => {
-        return axios.post(`/api/order/${orderId}/shipping`, { userInfo } )
-            .then( response => response.data)
-            .then( order => {
-                dispatch(loadOrder(orderId))
-        })
-        .catch(err => console.log(err))
+    return (dispatch) => {
+        return axios.post(`/api/order/${orderId}/shipping`, { userInfo })
+            .then(response => response.data)
+            .then(order => {
+                return dispatch(loadOrder(orderId))
+            })
+            .catch(err => {
+                return dispatch({ type: LOAD_ERROR, message: err.response.data.msg });
+            })
     }
 };
 
 const saveBilling = (userInfo, orderId) => {
-    return(dispatch) => {
-        return axios.post(`/api/order/${orderId}/billing`, { userInfo } )
-            .then( response => response.data)
-            .then( order => {
-                dispatch(loadOrder(orderId))
-        })
-        .catch(err => console.log('error saveBilling', err))
+    return (dispatch) => {
+        return axios.post(`/api/order/${orderId}/billing`, { userInfo })
+            .then(response => response.data)
+            .then(order => {
+                return dispatch(loadOrder(orderId))
+            })
+            .catch(err => {
+                return dispatch({ type: LOAD_ERROR, message: err.response.data.msg });
+            })
     }
 };
 
@@ -89,9 +92,9 @@ const createStripeToken = (card) => {
     return new Promise((res, rej) => {
         Stripe.setPublishableKey('pk_test_UC2pEf1LtfUlV6aQZVg0v9nY');
         Stripe.card.createToken(card, (status, response) => {
-                    if(response.error) rej(response.error);
-                    else res(response.id);
-                });
+            if (response.error) rej(response.error);
+            else res(response.id);
+        });
     });
 }
 
@@ -100,11 +103,10 @@ const createStripeToken = (card) => {
 /* stripe return confirmation nr and payment is complete */
 const performCheckout = (order, token) => {
     return axios.post(`/api/order/${order.id}/payment`, { token })
-    .then( response =>  response.data)
-    .then( data =>  {
-        // console.log('data', data)
-        return data
-    })
+        .then(response => response.data)
+        .then(data => {
+            return data
+        })
 
 
     // Axios POST to finish the order on the server
@@ -112,17 +114,17 @@ const performCheckout = (order, token) => {
 }
 
 const completeCheckout = (order, payment) => {
-    return(dispatch) => {
+    return (dispatch) => {
         return Scriptly.loadJavascript('https://js.stripe.com/v2/')
             .then(() => (createStripeToken(payment)))
             .then((token) => (performCheckout(order, token)))
-            .then( data => {
+            .then(data => {
                 dispatch(loadUser(localStorage.getItem('token')))
-                return dispatch(confirmOrderSuccess( data ))
+                return dispatch(confirmOrderSuccess(data))
             })
             .catch(err => {
-                console.log('cascade error',err);
-                return dispatch({type: LOAD_ERROR, message:err.message});
+                console.log('error completeCheckout:', err);
+                return dispatch({ type: LOAD_ERROR, message: err.message });
             });
     };
 }
@@ -136,18 +138,18 @@ const confirmOrder = () => {
 
 /*** Reducer ***/
 
-const initialState = {message:''};
+const initialState = { message: '' };
 
 const orderReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_ORDER:
-            return {...state, order: action.order }
+            return { ...state, order: action.order, message: '' }
         case LOAD_ERROR:
-            return {...state, message: action.message }
+            return { ...state, message: action.message }
         case CONFIRM_ORDER_SUCCESS:
-            return {...state, order: action.newOrder, completedOrders: state.completedOrders.concat([action.order]), lastOrderId: action.order.id }
+            return { ...state, order: action.newOrder, completedOrders: state.completedOrders.concat([action.order]), lastOrderId: action.order.id, message: ''  }
         case LOAD_COMPLETED_ORDERS:
-            return {...state, completedOrders: action.completedOrders }
+            return { ...state, completedOrders: action.completedOrders, message: ''  }
     }
     return state
 };
