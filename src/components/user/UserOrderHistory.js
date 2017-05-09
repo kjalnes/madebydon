@@ -2,11 +2,9 @@ import React from 'react';
 import CompletedOrderLines from './CompletedOrderLines';
 
 const UserOrderHistory = ({ completedOrders }) => {
-
     function getDate(dateStr) {
         return dateStr.slice(5,7) +'/'+ dateStr.slice(8,10) +'/' + dateStr.slice(0,4)
     }
-
     return (
         <div className='container'>
             { completedOrders.length ?
