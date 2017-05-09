@@ -73,7 +73,6 @@ app.delete('/:orderId/:productId', (req, res, next) => {
         }
     })
         .then((num) => {
-            console.log('deleted = ', num);
             res.sendStatus(200);
         })
         .catch(next);
@@ -81,7 +80,6 @@ app.delete('/:orderId/:productId', (req, res, next) => {
 
 // post shipping address
 app.post(`/:orderId/shipping`, (req, res, next) => {
-    console.log('user_info', req.body)
     models.Address.create(req.body.userInfo)
         .then(address => {
             return models.Order.findOne({ where: { id: req.params.orderId } })
@@ -159,28 +157,21 @@ app.post('/:orderId/payment', (req, res, next) => {
             })
         })
         .then(charge => {
-            console.log('stripe call success amount', charge.amount);
-            // console.log(order[0])
             // Update the order status and the order
             order[0].status = 'complete';
             order[0].confirmationId = charge.id
             order[0].amount = charge.amount
             order[0].tax = charge.amount * 0.08875
             order[0].total = charge.amount + order[0].tax + order[0].shippingCost
-            // here the stripe number an others matching records
-
-            console.log('order.status after save', order[0].status)
 
             return order[0].save()
         })
         .then(_order => {
             order = _order;
-            // console.log('ready to send the order',_order);
             // create new empty order for user
             return models.Order.create({ userId: _order.userId })
         })
         .then(newOrder => {
-            console.log('newOrder', newOrder);
             // Order confirmation via email
             // sendEmail();
 
