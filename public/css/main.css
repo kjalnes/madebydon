@@ -29,6 +29,13 @@ hr {
     font-weight: 300;
 }
 
+img.don-img {
+    width: 80%;
+}
+.don {
+    text-align: center;
+}
+
 a.logo-link:hover {
     text-decoration: none !important;
 }
@@ -53,6 +60,9 @@ a.logo-link:hover {
     margin-top: 40px;
 }
 
+img:hover {
+    opacity: 0.8;
+}
 
 /* CUSTOM TITLES */
 .custom-title-1 {
@@ -135,6 +145,7 @@ ul.list-group {
 
 button.custom-button-1.product-list {
     width: 60%;
+    padding: 5px;
 }
 
 button.custom-button-1.product-detail {
