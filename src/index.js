@@ -12,7 +12,7 @@ import CheckoutStep1 from './components/checkout/CheckoutStep1';
 import CheckoutStep2 from './components/checkout/CheckoutStep2';
 import CheckoutStep3 from './components/checkout/CheckoutStep3';
 import CheckoutStep4 from './components/checkout/CheckoutStep4';
-import About from './components/about';
+import About from './components/About';
 
 const root = document.getElementById('root');
 
