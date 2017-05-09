@@ -4,7 +4,7 @@ import {
     ADD_TO_CART,
     CLEAR_CART } from '../constants/';
 
-// cartReducer
+
 const loadCartSuccess = (cart) => ({
     type: LOAD_CART,
     cart: cart

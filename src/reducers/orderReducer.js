@@ -5,31 +5,19 @@ import store from '../store';
 import { loadUser } from './authReducer';
 
 /*** Constants ***/
-// import {  } from '../constants/';
-const LOAD_ORDER = 'LOAD_ORDER';
-const LOAD_ERROR = 'LOAD_ERROR';
-const COMPLETE_CHECKOUT = 'COMPLETE_CHECKOUT';
-const CONFIRM_ORDER_SUCCESS = 'CONFIRM_ORDER_SUCCESS';
-const LOAD_COMPLETED_ORDERS = 'LOAD_COMPLETED_ORDERS';
+import {
+    LOAD_ORDER,
+    LOAD_ERROR,
+    COMPLETE_CHECKOUT,
+    CONFIRM_ORDER_SUCCESS,
+    LOAD_COMPLETED_ORDERS } from '../constants/';
+
 
 /*** Actions ***/
-// import {  } from '../actions/login';
-const loadOrderSuccess = (order) => ({
-    type: LOAD_ORDER,
-    order: order
-});
-
-const confirmOrderSuccess = (orders) => ({
-    type: CONFIRM_ORDER_SUCCESS,
-    order: orders.order,
-    newOrder: orders.newOrder
-});
-
-const completedOrdersSuccess = (orders) => ({
-    type: LOAD_COMPLETED_ORDERS,
-    completedOrders: orders
-});
-
+import {
+  loadOrderSuccess,
+  confirmOrderSuccess,
+  completedOrdersSuccess } from '../actions/order';
 
 
 /**** Methods ***/
