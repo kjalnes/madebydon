@@ -19,6 +19,10 @@ const Order = conn.define('order', {
     tax: {
         type: conn.Sequelize.FLOAT,
         defaultValue: 8.875
+    },
+    total: {
+        type: conn.Sequelize.FLOAT,
+        defaultValue: 0
     }
 });
 

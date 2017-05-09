@@ -1,15 +1,17 @@
 import React from 'react';
 
-const CompletedOrderLines = ({ orderLines}) => {
+const CompletedOrderLines = ({ orderLines }) => {
     return (
         <div>
             {  orderLines.map( (line, index) => {
                     return(
-                        <ul className='order-list list-group' key={line.id}>
-                            <li className='order-item'> Order Item {index+1} </li>
-                            <li> <a href="">{line.product.name}</a> ${line.product.price}</li>
-                            <li>Quantity {line.qty}</li>
-                        </ul>
+                        <div style={{'marginBottom': '15px'}} key={line.id}>
+                            <ul className='order-list list-group' >
+                                <li className='order-item'> Order Item {index+1} </li>
+                                <li>{line.product.name} ${line.product.price}</li>
+                                <li>Quantity {line.qty}</li>
+                            </ul>
+                        </div>
                     )
                 })
             }

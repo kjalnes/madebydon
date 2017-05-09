@@ -99,13 +99,10 @@ const createStripeToken = (card) => {
 /* in our server (order.js) we make async call with payment information and token to stripes server from our server */
 /* stripe return confirmation nr and payment is complete */
 const performCheckout = (order, token) => {
-    console.log('order', order)
-    console.log(`Using token (${token}) to purchase ${order.id} with a total????`);
-
     return axios.post(`/api/order/${order.id}/payment`, { token })
     .then( response =>  response.data)
     .then( data =>  {
-        console.log('data', data)
+        // console.log('data', data)
         return data
     })
 
@@ -148,7 +145,7 @@ const orderReducer = (state = initialState, action) => {
         case LOAD_ERROR:
             return {...state, message: action.message }
         case CONFIRM_ORDER_SUCCESS:
-            return {...state, order: action.newOrder, completedOrders: state.completedOrders.concat([action.order]) }
+            return {...state, order: action.newOrder, completedOrders: state.completedOrders.concat([action.order]), lastOrderId: action.order.id }
         case LOAD_COMPLETED_ORDERS:
             return {...state, completedOrders: action.completedOrders }
     }

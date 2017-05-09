@@ -57,9 +57,7 @@ class CartTotals extends Component  {
                 null
                 :
                 <button onClick={ this.onCheckoutClick.bind(this) } className='custom-button-1'>Proceed to checkout</button>
-
             }
-
           </div>
         )
 

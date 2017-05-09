@@ -9,19 +9,27 @@ const UserOrderHistory = ({ completedOrders }) => {
 
     return (
         <div className='container'>
-            <span className='custom-title-1'>My Order History</span>
-            {
-                completedOrders.map( order => {
-                    return (
-                        <div className='well' key={order.id}>
-                            <b> Order Summary </b><br/>
-                            Order date { getDate(order.updatedAt) }
-                            <CompletedOrderLines orderLines={ order.orderlines } />
-                            <b>Order total $ { order.amount }</b><br/>
-                            Order confirmation id {order.confirmationId}
-                        </div>
-                    )
-                })
+            { completedOrders.length ?
+                <div>
+                    <span className='custom-title-1'>My Order History</span>
+                    {
+                        completedOrders.map( order => {
+                            return (
+                                <div className='well' key={order.id}>
+                                    <h4> Order Summary </h4><br/>
+                                    Order date { getDate(order.updatedAt) }
+                                    <CompletedOrderLines orderLines={order.orderlines} />
+                                    Tax ${order.tax.toFixed(2)}<br/>
+                                    Shipping ${order.shippingCost.toFixed(2)}<br/>
+                                    <b>Order total ${order.total.toFixed(2)}</b><br/><br/>
+                                    <i>Order transaction ID {order.confirmationId}</i>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                :
+                null
             }
         </div>
     )

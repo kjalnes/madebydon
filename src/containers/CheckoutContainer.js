@@ -44,7 +44,8 @@ const mapStateToProps = (state) => (
         order: state.order.order && state.order.order[0],
         errMessage: state.order.message,
         completedOrders: state.order.completedOrders,
-        errAuth: state.auth.errMsg
+        errAuth: state.auth.errMsg,
+        lastOrderId: state.order.lastOrderId
 
     }
 )
