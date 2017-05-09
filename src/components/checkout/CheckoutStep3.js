@@ -34,9 +34,6 @@ class CheckoutStep3 extends Component {
             cvc: this.state.cvc
         };
 
-        console.log('is valid until here', payment);
-        console.log('I have the order', this.props.order);
-
         // Submit the order to stripe with the CC card to get the token
         // for that card.
         return this.props.completeCheckout(this.props.order, payment);

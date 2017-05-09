@@ -25,7 +25,7 @@ import CartItem from './CartItem';
                 </tr>
               </thead>
               <tbody>
-                {cart.cartItems.map((orderLine) => (<CartItem key={orderLine.id} orderLine={orderLine} removeFromCart={ removeFromCart } isFinalStep={ isFinalStep } />))}
+                {cart.cartItems.map((orderLine, index) => (<CartItem key={index} orderLine={orderLine} removeFromCart={ removeFromCart } isFinalStep={ isFinalStep } />))}
               </tbody>
             </table>
           </form>

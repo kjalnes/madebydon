@@ -5,10 +5,10 @@ import UserOrderHistory from '../user/UserOrderHistory';
 
 /*** Confirmed Order: Thank You Page ***/
 const CheckoutStep4 = (props) => {
-    const { order, completedOrders } = props;
+    const { order, completedOrders, lastOrderId } = props;
     if(!completedOrders) return null
 
-    const lastOrder = completedOrders[completedOrders.length-1];
+    const lastOrder = completedOrders.find(order => order.id === lastOrderId);
     return (
         <div>
             <h3>Order Confirmation</h3>
