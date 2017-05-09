@@ -13,7 +13,6 @@ class CartTotals extends Component  {
 
     render() {
         const orderTotal =  (this.props.cartTotal + this.props.tax + this.props.shipping);
-
         return (
           <div className='cart-totals'>
             <span className='custom-title-1'>Order Total</span>
