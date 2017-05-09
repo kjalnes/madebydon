@@ -12,8 +12,7 @@ class CartTotals extends Component  {
     }
 
     render() {
-        const tax = this.props.cartTotal * (this.props.tax /100);
-        const orderTotal =  (this.props.cartTotal + tax + this.props.shipping);
+        const orderTotal =  (this.props.cartTotal + this.props.tax + this.props.shipping);
 
         return (
           <div className='cart-totals'>
@@ -41,7 +40,7 @@ class CartTotals extends Component  {
                     Tax
                 </div>
                 <div className='col-xs-6'>
-                    $ { tax.toFixed(2) }
+                    $ { this.props.tax.toFixed(2) }
                 </div>
             </div>
 
