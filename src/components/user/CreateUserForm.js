@@ -25,10 +25,10 @@ class CreateUserForm extends Component {
 
     render() {
         return (
-            <div className='container'>
+            <div className=''>
                 <h3>Create your user profile</h3>
                 { this.props.errAuth ? <div className='alert alert-danger'>{this.props.errAuth}</div> : null }
-                <form>
+                <form className='custom-form'>
                     <div className="form-group">
                         <input onChange={ this.onInputChange.bind(null, 'firstName') } className="form-control" value={this.state.firstName} placeholder='First name'/>
                     </div>

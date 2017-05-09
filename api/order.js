@@ -158,11 +158,10 @@ app.post('/:orderId/payment', (req, res, next) => {
             })
         })
         .then(charge => {
-            console.log('order[0]', order[0])
             // Update the order status and the order
             order[0].status = 'complete';
             order[0].confirmationId = charge.id
-            // order[0].amount = charge.amount / 100
+            order[0].amount = charge.amount / 100
             order[0].tax = (charge.amount / 100) * 0.08875
             order[0].total = charge.amount / 100
 

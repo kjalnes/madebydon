@@ -12,6 +12,7 @@ import CheckoutStep1 from './components/checkout/CheckoutStep1';
 import CheckoutStep2 from './components/checkout/CheckoutStep2';
 import CheckoutStep3 from './components/checkout/CheckoutStep3';
 import CheckoutStep4 from './components/checkout/CheckoutStep4';
+import About from './components/about';
 
 const root = document.getElementById('root');
 
@@ -21,6 +22,7 @@ const routes = (
       <Route path='/' component={ App }>
         <IndexRoute component={ ProductContainer } />
         <Route path='login' component={ LoginContainer } />
+        <Route path='about' component={ About } />
         <Route path='cart' component={ CartContainer } />
         <Route path='checkout' component={ CheckoutContainer } >
           <Route path='/checkout/shipping' component={ CheckoutStep1 } />

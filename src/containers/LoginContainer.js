@@ -43,24 +43,28 @@ class LoginContainer extends Component {
                         lastOrderId = {this.props.lastOrderId}
                     />
                   :
-                    <form>
-                        <div className="form-group">
-                            <input
-                                onChange={ this.onInputChange.bind(null, 'email') }
-                                className="form-control"
-                                value={this.state.email}
-                                placeholder='email'/>
-                        </div>
-                        <div className="form-group">
-                            <input
-                                onChange={ this.onInputChange.bind(null, 'password') }
-                                className="form-control"
-                                value={this.state.password}
-                                placeholder='password'
-                                type='password'/>
-                        </div>
-                        <button onClick={ this.onLoginSubmit }>Login</button>
-                    </form>
+                    <div>
+                        <h3>Guest Account</h3>
+                        <form className='custom-form well'>
+                            <span className='custom-title-1'>Sign in here to see your past orders.</span>
+                            <div className="form-group">
+                                <input
+                                    onChange={ this.onInputChange.bind(null, 'email') }
+                                    className="form-control"
+                                    value={this.state.email}
+                                    placeholder='email'/>
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    onChange={ this.onInputChange.bind(null, 'password') }
+                                    className="form-control"
+                                    value={this.state.password}
+                                    placeholder='password'
+                                    type='password'/>
+                            </div>
+                            <button onClick={ this.onLoginSubmit } className='custom-button-1'>Login</button>
+                        </form>
+                    </div>
                 }
             </div>
         )
