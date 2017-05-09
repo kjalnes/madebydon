@@ -144,7 +144,7 @@ Interior: Brown`  },
 
 
   const users = [
-    { firstName: 'Mauro', lastName: 'Restuccia', email: 'marestuccia@mac.com', password: 'mcat' },
+    { firstName: 'Mauro', lastName: 'Restuccia', email: 'mrestuccia@mac.com', password: 'mcat' },
     { firstName: 'Harish', lastName: 'tadikona', email: 'harish11.tadikonda@gmail.com', password: 'harish29' },
     { firstName: 'Kris', lastName: 'Alnes', email: 'kris.alnes@gmail.com', password: 'kdog' }];
 
