@@ -20,7 +20,7 @@ import {
   completedOrdersSuccess } from '../actions/order';
 
 
-/**** Methods ***/
+/*** Methods ***/
 
 const loadOrder = (orderId) => {
     return (dispatch) => {
@@ -111,7 +111,6 @@ const completeCheckout = (order, payment) => {
                 return dispatch(confirmOrderSuccess(data))
             })
             .catch(err => {
-                console.log('error completeCheckout:', err);
                 return dispatch({ type: LOAD_ERROR, message: err.message });
             });
     };
@@ -143,14 +142,7 @@ const orderReducer = (state = initialState, action) => {
 };
 
 
-export {
-    loadOrder,
-    saveShipping,
-    saveBilling,
-    completeCheckout,
-    loadCompletedOrders
-};
-
+export { loadOrder, saveShipping, saveBilling, completeCheckout, loadCompletedOrders };
 export default orderReducer;
 
 

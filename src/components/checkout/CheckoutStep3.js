@@ -21,10 +21,7 @@ class CheckoutStep3 extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-
-
         // Validate the infomation on the client only.
-        console.log(this.state);
 
         const splitExp = this.state.exp.split('-');
         const payment = {

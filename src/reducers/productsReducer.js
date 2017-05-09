@@ -1,12 +1,20 @@
 import axios from 'axios';
-const LOAD_PRODUCTS_SUCCESS = 'LOAD_PRODUCTS_SUCCESS';
-const SELECT_PRODUCT_SUCCESS = 'SELECT_PRODUCT_SUCCESS';
-const DESELECT_PRODUCT_SUCCESS = 'DESELECT_PRODUCT_SUCCESS';
 
-const loadProductsSuccess = (products) => ({
-  type: LOAD_PRODUCTS_SUCCESS,
-  products: products
-});
+/*** Constants ***/
+import {
+  LOAD_PRODUCTS_SUCCESS,
+  SELECT_PRODUCT_SUCCESS,
+  DESELECT_PRODUCT_SUCCESS } from '../constants/'
+
+
+/*** Actions ***/
+import {
+  loadProductsSuccess,
+  selectProductSuccess,
+  deSelectProductSuccess } from '../actions/products'
+
+
+/*** Methods ***/
 
 const loadProducts = () => {
   return (dispatch) => {
@@ -15,22 +23,11 @@ const loadProducts = () => {
   };
 };
 
-
-const selectProductSuccess = (product) => ({
-  type: SELECT_PRODUCT_SUCCESS,
-  product: product
-});
-
 const selectProduct = (product) => {
   return (dispatch) => {
     dispatch(selectProductSuccess(product));
   };
 };
-
-
-const deSelectProductSuccess = () => ({
-  type: SELECT_PRODUCT_SUCCESS
-});
 
 const deSelectProduct = () => {
   return (dispatch) => {
@@ -38,8 +35,7 @@ const deSelectProduct = () => {
   };
 };
 
-
-
+/*** Reducer ***/
 
 const productsReducer = (state = { list: [], selectedProduct: undefined }, action) => {
   switch (action.type) {
@@ -50,7 +46,6 @@ const productsReducer = (state = { list: [], selectedProduct: undefined }, actio
       state = { ...state, selectedProduct: action.product };
       break;
     case DESELECT_PRODUCT_SUCCESS:
-      console.log('we are getting here')
       state = { ...state, selectedProduct: null };
       break;
   }

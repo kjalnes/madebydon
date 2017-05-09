@@ -4,8 +4,8 @@ import { loadOrder, loadCompletedOrders } from './orderReducer';
 import store from '../store';
 
 /*** Constants ***/
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../constants/';
-const CREATE_USER_FAILURE = 'CREATE_USER_FAILURE';
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS, CREATE_USER_FAILURE } from '../constants/';
+
 
 /*** Actions ***/
 import { loginSuccess, logoutSuccess } from '../actions/login';
@@ -26,12 +26,7 @@ const loadUser = (token) => {
                     dispatch(loadCompletedOrders(user.id));
                     dispatch(loadCart(user.orders[0].id));
                     dispatch(loadOrder(user.orders[0].id));
-                    // return user.orders[0].id
                 })
-                // .then( orderId => {
-                    // dispatch(loadCart(orderId));
-                    // dispatch(loadOrder(orderId));
-                // })
                 .catch( err => console.log(err));
         }
     };
@@ -66,9 +61,7 @@ const createUser = (userInfo) => {
               dispatch(login({ email: user.email, password: user.password }))
         })
         .catch(err => {
-            // dispatch({type: CREATE_USER_FAILURE, errMsg: err.message })
-                dispatch({type: CREATE_USER_FAILURE, errMsg: 'Create user failed. Check that the informaiton you have provided is valid' })
-            console.log('login failed, this is the err', err)
+            dispatch({type: CREATE_USER_FAILURE, errMsg: 'Create user failed. Check that the informaiton you have provided is valid' })
         })
     }
 };
