@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectProduct, deSelectProduct } from '../reducers/productsReducer';
-import { addToCart  } from '../reducers/cartReducer';
+import { selectProduct, deSelectProduct } from '../redux/reducers/productsReducer';
+import { addToCart  } from '../redux/reducers/cartReducer';
 import { ProductGrid, ProductRow, Product } from '../components/products/productsList';
 import ProductDetails from '../components/products/productdetails';
 

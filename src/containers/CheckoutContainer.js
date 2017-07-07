@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import CreateUserForm from '../components/user/CreateUserForm';
-import { completeCheckout } from '../reducers/orderReducer';
-import { clearCart } from '../reducers/cartReducer';
+import { completeCheckout } from '../redux/reducers/orderReducer';
+import { clearCart } from '../redux/reducers/cartReducer';
 
 
 const CheckoutContainer = (props) => {

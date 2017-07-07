@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saveShipping } from '../../reducers/orderReducer';
+import { saveShipping } from '../../redux/reducers/orderReducer';
 
 /*** Shipping Form ***/
 class CheckoutStep1 extends Component {

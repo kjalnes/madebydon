@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import App from './App';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './redux/store';
 import LoginContainer from './containers/LoginContainer';
 import ProductContainer from './containers/ProductContainer';
 import CartContainer from './containers/CartContainer';

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CartProducts from '../components/cart/CartProducts';
 import CartTotals from '../components/cart/CartTotals';
-import { loadCart, removeFromCart } from '../reducers/cartReducer';
+import { loadCart, removeFromCart } from '../redux/reducers/cartReducer';
 
 const CartContainer = (props) => {
     const { activeUser, cart, shipping, tax, removeFromCart, cartTotal, router, isFinalStep } = props;

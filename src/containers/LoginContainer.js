@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login, logout } from '../reducers/authReducer';
+import { login, logout } from '../redux/reducers/authReducer';
 import UserAccount from '../components/user/UserAccount';
 
 class LoginContainer extends Component {

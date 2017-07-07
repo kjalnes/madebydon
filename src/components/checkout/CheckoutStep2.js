@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saveBilling } from '../../reducers/orderReducer';
+import { saveBilling } from '../../redux/reducers/orderReducer';
 
 /*** Billing ***/
 class CheckoutStep2 extends Component {
