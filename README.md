@@ -6,3 +6,4 @@ Ecommerce website for 87-year-old friend and neighbor Don, a West Village leathe
 - Basic catalog of products
 - Responsive design 
 - SPA using React/Redux
+- Agile development using waffle.IO
