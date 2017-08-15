@@ -7,7 +7,7 @@ const Product = ({ product, addtoCart, activeUser, selectProduct }) => {
 		<div className="col-md-3">
 			<div className="productItem">
 				<div  onClick={() => selectProduct(product)}>
-					<img src={`./public/assets/images/style_${product.id}.jpg`} />
+					<img src={`./public/assets/images/${product.imgURL}`} />
 				</div>
 				<h3> {product.name} </h3>
 				<button onClick={() => addtoCart((activeUser) ? activeUser.orders[0].id : 0, product, 1)} className="custom-button-1 product-list">Add to Cart</button>
