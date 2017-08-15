@@ -10,7 +10,7 @@ const ProductDetails = ({ selectedProduct, activeUser, addtoCart, deSelectProduc
 	return (
 		<div className="row">
 			<div className="col-md-6">
-				<img onClick={deSelectProduct} src={`./public/assets/images/style_${selectedProduct.id}.jpg`} />
+				<img onClick={deSelectProduct} src={`./public/assets/images/${selectedProduct.imgURL}`} />
 			</div>
 			<div className="col-md-6">
 				<span className="custom-title-1">{selectedProduct.name}</span>
