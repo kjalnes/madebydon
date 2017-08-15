@@ -140,11 +140,11 @@ app.post('/:orderId/payment', (req, res, next) => {
     })
         .then(_order => {
             order = _order;
-            let amount = order[0].orderlines.reduce( (total, line) => {
-                return total+= (line.product.price * line.qty)
-            },0)*1;
+            let amount = order[0].orderlines.reduce((total, line) => {
+                return total += (line.product.price * line.qty)
+            }, 0) * 1;
             const tax = amount * 0.08875;
-            const stripeAmount = (amount*1 + tax*1 + order[0].shippingCost*1).toFixed(2)
+            const stripeAmount = (amount * 1 + tax * 1 + order[0].shippingCost * 1).toFixed(2)
 
             //sk = secret key
             const stripe = require('stripe')('sk_test_R10qlCsOK5ECIlbM6geYGHIR')
@@ -170,11 +170,11 @@ app.post('/:orderId/payment', (req, res, next) => {
         .then(_order => {
             order = _order;
             // create new empty order for user
-            return models.Order.create({ userId: _order.userId })
+            return models.Order.create({ userId: _order.userId });
         })
         .then(newOrder => {
             // Order confirmation via email
-            // sendEmail();
+            sendEmail();
 
             res.send({ order: order, newOrder: newOrder });
         })
@@ -183,13 +183,14 @@ app.post('/:orderId/payment', (req, res, next) => {
 
 
 function sendEmail() {
-    console.log('sendemail');
+    console.info('SendEmail');
     var helper = require('sendgrid').mail;
     var fromEmail = new helper.Email('thanks@madebydon.com');
     var toEmail = new helper.Email('mrestuccia@mac.com');
-    var subject = 'Sending with SendGrid is Fun';
-    var content = new helper.Content('text/plain', 'and easy to do anywhere, even with Node.js');
+    var subject = 'Thank you for your purchase at Made By Don';
+    var content = new helper.Content('text/html', 'hellou world');
     var mail = new helper.Mail(fromEmail, subject, toEmail, content);
+    mail.setTemplateId("ca974586-4763-4af1-bd32-9ee36eb5add8");
 
     var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
     var request = sg.emptyRequest({
