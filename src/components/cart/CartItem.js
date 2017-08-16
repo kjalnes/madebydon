@@ -16,7 +16,7 @@ const CartItem = ({ orderLine, removeFromCart, isFinalStep }) => {
         }
         </td>
         <td className="product-thumbnail">
-          <img src={`./public/assets/images/style_${orderLine.product.id}.jpg`} style={{width: '60px'}} />
+          <img src={`./public/assets/images/${orderLine.product.imgURL}`} style={{width: '60px'}} />
         </td>
         <td>
           {orderLine.product.name}
