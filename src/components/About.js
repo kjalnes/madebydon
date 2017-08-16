@@ -2,7 +2,7 @@ import React from 'react';
 
 const About = () => {
     return (
-        <div className='container don'>
+        <div className='container about-container'>
             <img className='don-img center-block' src='/public/assets/images/dontheman.jpg' />
             <hr />
             <div className="container center-block">

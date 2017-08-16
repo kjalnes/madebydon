@@ -15,7 +15,7 @@ class ProductContainer extends React.Component {
 		return (
 			(!this.props.selectedProduct) ?
 				<div className="">
-					<div className='text-center'>
+					<div className='text-center sub-heading'>
 	           			<span className='custom-title-2'>DON MAKES HANDMADE LEATHER BAGS AND NOBODY HELPS HIM.</span>
 	       			</div>
 					<ProductGrid
