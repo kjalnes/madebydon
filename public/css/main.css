@@ -156,6 +156,21 @@ button.custom-button-1.product-detail {
     width: 60%;
 }
 
+.productItem img {
+    cursor: pointer;
+}
+
+img.x-icon {
+    width: 55%;
+    margin-top: -33px;
+    cursor: pointer;
+    transition: width 0.5s ease;
+}
+
+img.x-icon:hover {
+    width: 65%;
+    transition: width 0.5s ease;
+}
 
 span.gift-message {
     padding-bottom: 35px;
