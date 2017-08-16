@@ -4,13 +4,11 @@ const ProductDetails = ({ selectedProduct, activeUser, addtoCart, deSelectProduc
 	if (!selectedProduct) return null;
 
 	function listHelper(text) {
-		return text.split('\n').map((detail, key) => {
-			return <span key={key}>{detail}<br /></span>
-		})
+		return text.split('\n').map((detail, key) => <span key={key}>{detail}<br /></span>)
 	}
 
 	return (
-		<div className="row">
+		<div className="row selectedProduct">
 			<div className="col-md-6">
 				<img src={`./public/assets/images/${selectedProduct.imgURL}`} />
 			</div>
