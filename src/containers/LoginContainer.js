@@ -33,7 +33,7 @@ class LoginContainer extends Component {
 
     render() {
         return (
-            <div className='container'>
+            <div className='container account-container'>
                 { this.props.activeUser && this.props.order ?
                     <UserAccount
                         activeUser={ this.props.activeUser }

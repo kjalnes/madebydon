@@ -29,10 +29,15 @@ hr {
     font-weight: 300;
 }
 
+.sub-heading {
+    margin: 30px auto;
+}
+
 img.don-img {
     width: 80%;
 }
-.don {
+.about-container {
+    margin: 30px auto;
     text-align: center;
 }
 
@@ -50,14 +55,6 @@ a.logo-link:hover {
 
 .navigation a{
     color: black;
-}
-
-.container {
-    margin-top: 40px;
-}
-
-.content-container {
-    margin-top: 40px;
 }
 
 img:hover {
@@ -113,6 +110,9 @@ form.checkout-form {
 }
 
 /* MY PROFILE PAGE */
+.account-container {
+    margin: 30px auto;
+}
 
 ul.list-group {
     list-style: none;
@@ -160,20 +160,25 @@ button.custom-button-1.product-detail {
     cursor: pointer;
 }
 
+.x-icon-containers {
+    height: 60px;
+}
+
 img.x-icon {
-    width: 55%;
-    margin-top: -33px;
+    width: 40px;
+    float: right;
     cursor: pointer;
     transition: width 0.5s ease;
 }
 
 img.x-icon:hover {
-    width: 65%;
+    width: 50px;
     transition: width 0.5s ease;
 }
 
 span.gift-message {
-    padding-bottom: 35px;
+    /*padding-bottom: 35px;*/
+    padding: 55px 0;
     display: block;
 }
 
